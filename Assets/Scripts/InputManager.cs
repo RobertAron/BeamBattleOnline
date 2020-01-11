@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class BoolEvent: UnityEvent<bool>{}
 
-public class InputManager : MonoBehaviour
+[System.Obsolete]
+public class InputManager : NetworkBehaviour
 {
-    public UnityEvent turnLeft;
-    public UnityEvent turnRight;
+    [SerializeField] BoolEvent turnPlayer;
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.LeftArrow)) turnLeft.Invoke();
-        if(Input.GetKeyDown(KeyCode.RightArrow)) turnRight.Invoke();
+        if(!isLocalPlayer) return;
+        if(Input.GetKeyDown(KeyCode.LeftArrow)) turnPlayer.Invoke(true);
+        if(Input.GetKeyDown(KeyCode.RightArrow)) turnPlayer.Invoke(false);
     }
 }

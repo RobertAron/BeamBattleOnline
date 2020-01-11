@@ -1,22 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerMovement : MonoBehaviour
+[System.Obsolete]
+public class PlayerMovement : NetworkBehaviour
 {
     public float speed;
-
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        UpdatePosition();
+    }
+
+    void UpdatePosition(){
         transform.position += transform.forward*speed*Time.deltaTime;
     }
 
-    public void TurnLeft(){
-        transform.rotation *= Quaternion.Euler(0,-90,0);
-    }
-
-    public void TurnRight(){
-        transform.rotation *= Quaternion.Euler(0,90,0);
+    public void Turn(bool left){
+        float direction = left?-1:1;
+        transform.rotation = transform.rotation*Quaternion.Euler(0,90*direction,0);
     }
 }

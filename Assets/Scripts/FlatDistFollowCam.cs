@@ -6,7 +6,7 @@ public class FlatDistFollowCam : MonoBehaviour
     [SerializeField] Vector3 distanceOffset = new Vector3(0,3,-10);
     [SerializeField] float flatSpeed = 100;
     [SerializeField] float lerpSpeed = 10;
-    [SerializeField] Transform objectToFollow = default;
+    public Transform objectToFollow = default;
 
     void Start()
     {
