@@ -8,7 +8,7 @@ public class BoolEvent: UnityEvent<bool>{}
 [System.Obsolete]
 public class InputManager : NetworkBehaviour
 {
-    [SerializeField] BoolEvent turnPlayer;
+    [SerializeField] BoolEvent turnPlayer = default;
 
     void Update(){
         if(!isLocalPlayer) return;

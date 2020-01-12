@@ -81,7 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3320230508080c46a10919df33c1ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
 --- !u!114 &1289776620464104977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  trailPrefab: {fileID: 6549881863489476302, guid: 69a79b55ba50b724b964d06c544a01fe,
+    type: 3}
 --- !u!114 &3413034397118228445
 MonoBehaviour:
   m_ObjectHideFlags: 0

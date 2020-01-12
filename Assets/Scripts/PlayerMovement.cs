@@ -7,7 +7,8 @@ using UnityEngine.Networking;
 public class PlayerMovement : NetworkBehaviour
 {
     public float speed;
-    // Update is called once per frame
+    [SerializeField] GameObject trailPrefab;
+    TrailStream currentStream = null;
     void FixedUpdate()
     {
         UpdatePosition();
@@ -20,5 +21,15 @@ public class PlayerMovement : NetworkBehaviour
     public void Turn(bool left){
         float direction = left?-1:1;
         transform.rotation = transform.rotation*Quaternion.Euler(0,90*direction,0);
+        CmdStartNewTrail(transform.rotation);
+    }
+
+    [Command]
+    void CmdStartNewTrail(Quaternion t){
+        if(currentStream!=null) currentStream.BreakStream();
+        GameObject go = Instantiate(trailPrefab,transform.position,t);
+        currentStream = go.GetComponent<TrailStream>();
+        currentStream.StartStream(transform.gameObject);
+        NetworkServer.Spawn(go);
     }
 }

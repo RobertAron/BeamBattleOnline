@@ -7773,7 +7773,7 @@ GameObject:
   - component: {fileID: 358163536}
   - component: {fileID: 358163535}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Start Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35876,7 +35876,8 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 6549881863489476302, guid: 69a79b55ba50b724b964d06c544a01fe, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
