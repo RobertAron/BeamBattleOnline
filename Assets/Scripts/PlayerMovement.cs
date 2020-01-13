@@ -21,15 +21,15 @@ public class PlayerMovement : NetworkBehaviour
     public void Turn(bool left){
         float direction = left?-1:1;
         transform.rotation = transform.rotation*Quaternion.Euler(0,90*direction,0);
-        CmdStartNewTrail(transform.rotation);
+        CmdStartNewTrail(transform.position, transform.rotation );
     }
 
     [Command]
-    void CmdStartNewTrail(Quaternion t){
-        if(currentStream!=null) currentStream.BreakStream();
+    void CmdStartNewTrail(Vector3 startPosition, Quaternion t){
+        if(currentStream!=null) currentStream.BreakStream(startPosition);
         GameObject go = Instantiate(trailPrefab,transform.position,t);
         currentStream = go.GetComponent<TrailStream>();
-        currentStream.StartStream(transform.gameObject);
+        currentStream.StartStream(startPosition, transform.gameObject);
         NetworkServer.Spawn(go);
     }
 }

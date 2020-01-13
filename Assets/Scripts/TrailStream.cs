@@ -9,9 +9,9 @@ public class TrailStream : NetworkBehaviour
     [SyncVar] Vector3 startingPos;
     [SyncVar] Vector3 endingPos;
     [SerializeField] GameObject trackedPlayer;
-    public void StartStream(GameObject playerGameObject){
+    public void StartStream(Vector3 startPosition, GameObject playerGameObject){
         trackedPlayer = playerGameObject;
-        startingPos = playerGameObject.transform.position;
+        startingPos = startPosition;
         endingPos = playerGameObject.transform.position;
     }
 
@@ -25,8 +25,9 @@ public class TrailStream : NetworkBehaviour
         transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, length);
     }
 
-    public void BreakStream()
+    public void BreakStream(Vector3 endPosition)
     {
+        endingPos = endPosition;
         trackedPlayer = null;
     }
 }
