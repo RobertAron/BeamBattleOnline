@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Obsolete]
 public class ComputerPlayer : MonoBehaviour
 {
-    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] PlayerMovement playerMovement = default;
     bool turnLeft = false;
 
     private void Update() {

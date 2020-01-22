@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class PlayerMovement : NetworkBehaviour
 {
     public float speed;
-    [SerializeField] GameObject trailPrefab;
+    [SerializeField] GameObject trailPrefab = default;
     TrailStream currentStream = null;
     void FixedUpdate()
     {

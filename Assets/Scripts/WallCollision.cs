@@ -21,7 +21,6 @@ public class WallCollision : NetworkBehaviour
     }
 
     private void DestroyPlayer(GameObject obj){
-        Debug.Log(obj.name);
         if(obj.tag == "Player"){
             NetworkAnimator.Destroy(obj);
         }
