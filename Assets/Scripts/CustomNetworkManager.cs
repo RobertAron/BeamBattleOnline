@@ -10,7 +10,18 @@ public class CustomNetworkManager : NetworkManager
     
     List<Tuple<short,NetworkConnection>> playerConnections = new List<Tuple<short,NetworkConnection>>(); 
     [SerializeField] float timeTillPlayersSpawn = 15;
+    [SerializeField] bool isServer;
     bool hasSpawned = false;
+
+    private void Start() {
+        #if SERVER_BUILD
+            StartServer();
+        #elif CLIENT_BUILD
+            StartClient();
+        #else
+            GetComponent<UnityEngine.Networking.NetworkManagerHUD>().showGUI = true;
+        #endif
+    }
 
     void FixedUpdate() {
         timeTillPlayersSpawn -= Time.deltaTime;

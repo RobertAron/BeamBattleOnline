@@ -36195,6 +36195,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   timeTillPlayersSpawn: 15
+  isServer: 0
 --- !u!1001 &1547557938
 PrefabInstance:
   m_ObjectHideFlags: 0
