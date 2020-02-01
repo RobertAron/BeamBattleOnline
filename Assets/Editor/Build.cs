@@ -4,7 +4,29 @@ using UnityEditor.Build.Reporting;
 
 public class Build
 {
-    [MenuItem("MyBuildMenu/Build Server")]
+    [MenuItem("MyBuildMenu/Build All")]
+    public static void BuildAll(){
+        // TODO logging ins't working in headless....
+        BuildServer();
+        BuildClient();
+        if (Application.isBatchMode){
+            EditorApplication.Exit(0);
+        }
+    }
+
+    static void BuildGame(BuildPlayerOptions buildPlayerOptions){
+        BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
+        Debug.Log($"Build result: {report.summary.result}, {report.summary.totalErrors} errors");
+    }
+
+    [MenuItem("MyBuildMenu/Set Server Directives")]
+    public static void SetPlayerSettingsServer(){
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(
+            EditorUserBuildSettings.selectedBuildTargetGroup,
+            "UNITY_POST_PROCESSING_STACK_V2;SERVER_BUILD"
+        );
+    }
+
     public static void BuildServer()
     {
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
@@ -13,15 +35,19 @@ public class Build
         buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/SampleScene.unity"
         };
-        buildPlayerOptions.options = BuildOptions.None;
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(
-            EditorUserBuildSettings.selectedBuildTargetGroup,
-            "UNITY_POST_PROCESSING_STACK_V2;SERVER_BUILD"
-        );
+        buildPlayerOptions.options = BuildOptions.EnableHeadlessMode;
+        SetPlayerSettingsServer();
         BuildGame(buildPlayerOptions);
     }
 
-    [MenuItem("MyBuildMenu/Build Client")]
+    [MenuItem("MyBuildMenu/Set Client Directives")]
+    public static void SetPlayerSettingsClient(){
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(
+            EditorUserBuildSettings.selectedBuildTargetGroup,
+            "UNITY_POST_PROCESSING_STACK_V2;CLIENT_BUILD"
+        );
+    }
+
     public static void BuildClient()
     {
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
@@ -31,26 +57,15 @@ public class Build
             "Assets/Scenes/SampleScene.unity"
         };
         buildPlayerOptions.options = BuildOptions.None;
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(
-            EditorUserBuildSettings.selectedBuildTargetGroup,
-            "UNITY_POST_PROCESSING_STACK_V2;CLIENT_BUILD"
-        );
+        SetPlayerSettingsClient();
         BuildGame(buildPlayerOptions);
     }
 
-
-    static void BuildGame(BuildPlayerOptions buildPlayerOptions){
-        BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
-        BuildSummary summary = report.summary;
-
-        if (summary.result == BuildResult.Succeeded)
-        {
-            Debug.Log("Build succeeded: " + summary.totalSize + " bytes");
-        }
-
-        if (summary.result == BuildResult.Failed)
-        {
-            Debug.Log("Build failed");
-        }
+    [MenuItem("MyBuildMenu/Set Editor Directives")]
+    public static void SetPlayerSettingsEditor(){
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(
+            EditorUserBuildSettings.selectedBuildTargetGroup,
+            "UNITY_POST_PROCESSING_STACK_V2"
+        );
     }
 }

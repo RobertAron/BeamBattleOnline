@@ -15,8 +15,10 @@ public class CustomNetworkManager : NetworkManager
 
     private void Start() {
         #if SERVER_BUILD
+            Debug.Log("SERVER!");
             StartServer();
         #elif CLIENT_BUILD
+            Debug.Log("Client!");
             StartClient();
         #else
             GetComponent<UnityEngine.Networking.NetworkManagerHUD>().showGUI = true;
