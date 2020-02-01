@@ -10,23 +10,38 @@ public class CustomNetworkManager : NetworkManager
     
     List<Tuple<short,NetworkConnection>> playerConnections = new List<Tuple<short,NetworkConnection>>(); 
     [SerializeField] float timeTillPlayersSpawn = 15;
-    [SerializeField] bool isServer;
+    [SerializeField] bool isServer = true;
+    float nextCountdownToLog;
     bool hasSpawned = false;
 
     private void Start() {
+        nextCountdownToLog = timeTillPlayersSpawn;
         #if SERVER_BUILD
-            Debug.Log("SERVER!");
+            Debug.Log("Server Directives!");
             StartServer();
         #elif CLIENT_BUILD
-            Debug.Log("Client!");
+            Debug.Log("Client Directives!");
             StartClient();
         #else
+            Debug.Log("Editor Directives!");
             GetComponent<UnityEngine.Networking.NetworkManagerHUD>().showGUI = true;
         #endif
     }
 
+    override public void OnStartServer(){
+        isServer = true;
+    }
+
     void FixedUpdate() {
+        if(isServer)ServerManagerUpdate();
+    }
+
+    void ServerManagerUpdate(){
         timeTillPlayersSpawn -= Time.deltaTime;
+        if(timeTillPlayersSpawn<=nextCountdownToLog && nextCountdownToLog>=0){
+            Debug.Log($"{nextCountdownToLog} seconds to spawn");
+            nextCountdownToLog-=1;
+        }
         if(timeTillPlayersSpawn<0 && !hasSpawned) SpawnLoggedInPlayers();
     }
 
