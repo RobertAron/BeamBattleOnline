@@ -14,7 +14,7 @@ public class GameManager : NetworkBehaviour
   Dictionary<NetworkConnection, short> playerConnections = new Dictionary<NetworkConnection, short>();
 
   public static GameManager instance;
-  bool isCountingDown = false;
+  bool isRestartingGame = false;
 
   #region  Singleton
   private void Awake()
@@ -37,18 +37,22 @@ public class GameManager : NetworkBehaviour
     if (
       playerConnections.Count > 0 &&
       !ArePlayersLeft() &&
-      !isCountingDown
+      !isRestartingGame
     )
     {
-      StartCoroutine(SpawnCountDown());
+      StartCoroutine(ResetGameCountdown());
     }
   }
 
-  IEnumerator SpawnCountDown()
+  IEnumerator ResetGameCountdown()
   {
-    isCountingDown = true;
+    isRestartingGame = true;
     float timeRemaining = timeTillPlayersSpawn;
     float nextTimeToLog = timeRemaining;
+    var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame");
+    foreach(var go in gosToClear){
+      NetworkServer.Destroy(go);
+    }
     while (timeRemaining >= 0)
     {
       timeRemaining -= Time.fixedDeltaTime;
@@ -60,7 +64,7 @@ public class GameManager : NetworkBehaviour
       yield return new WaitForFixedUpdate();
     }
     SpawnConnectedPlayers();
-    isCountingDown = false;
+    isRestartingGame = false;
   }
 
   bool ArePlayersLeft()

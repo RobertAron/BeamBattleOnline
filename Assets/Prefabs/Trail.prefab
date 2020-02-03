@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4085564246309756362}
   m_Layer: 0
   m_Name: Trail
-  m_TagString: Untagged
+  m_TagString: ClearAfterGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb03bb44568e0894aa26a6ad7ce50806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnExit: 0
 --- !u!1 &8637202394534200224
 GameObject:
   m_ObjectHideFlags: 0
