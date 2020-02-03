@@ -8,22 +8,25 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ForceField
-  m_Shader: {fileID: -6465566751694194690, guid: 0cb38dc0950ffba4fb715bf3fe07fd99,
+  m_Shader: {fileID: -6465566751694194690, guid: 1518d31b62d30e2468a669ada521faf6,
     type: 3}
   m_ShaderKeywords: _BLENDMODE_ALPHA _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
-    RenderType: Transparent
   disabledShaderPasses:
   - TransparentBackface
   - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_3B516DC6:
+        m_Texture: {fileID: 2800000, guid: 29a001f6446ec3844b64be0473433ead, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_AE91E7D7:
         m_Texture: {fileID: 2800000, guid: 29a001f6446ec3844b64be0473433ead, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -57,6 +60,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ForceFieldAlpha_674855C0_Texture2DF3DBC0E6_3718067542:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -113,16 +120,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_21D3431F: 5.08
     - Vector1_27A72AB7: -5.15
     - Vector1_3C4E7459: 20
+    - Vector1_57E34596: 5.6
+    - Vector1_58BED383: -0.41
     - Vector1_7D7CD1D4: 10
     - Vector1_8E7E5A1E: 10.62
     - Vector1_8EE041F5: 10
     - Vector1_90738F56: 0.05
     - Vector1_96E1FD66: 1
+    - Vector1_A64F512D: 0.01
     - Vector1_A6E6F863: 1
+    - Vector1_A7309148: 2.68
     - Vector1_AA48F0E9: 2.67
     - Vector1_CDC1D509: 29.75
+    - Vector1_CF66B988: 80
     - Vector1_E553723E: 0.3
     - Vector1_E874F19B: 0.05
     - Vector1_F8652B22: 0
@@ -141,8 +154,8 @@ Material:
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
-    - _CullMode: 1
-    - _CullModeForward: 1
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
@@ -168,7 +181,7 @@ Material:
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 0
-    - _DoubleSidedNormalMode: 1
+    - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
@@ -233,7 +246,7 @@ Material:
     - _ThicknessMultiplier: 1
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
-    - _TransparentCullMode: 1
+    - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
     - _TransparentSortPriority: 0
@@ -250,6 +263,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_61C591C2: {r: 0.5019608, g: 23.717648, b: 23.968628, a: 0}
+    - Color_7F8156C: {r: 0.4528302, g: 0, b: 0, a: 0}
     - Color_D9B6794C: {r: 0, g: 0.27486908, b: 0.49999994, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
@@ -267,3 +281,16 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+--- !u!114 &5136994817845896682
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
