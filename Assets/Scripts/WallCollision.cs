@@ -7,22 +7,27 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class WallCollision : NetworkBehaviour
 {
-    [SerializeField] bool destroyOnExit = false;
-    private void OnTriggerEnter(Collider other) {
-        if(destroyOnExit) return;
-        DestroyPlayer(other.gameObject);
+  [SerializeField] bool destroyOnExit = false;
+  private void OnTriggerEnter(Collider other)
+  {
+    if (destroyOnExit) return;
+    DestroyPlayer(other.gameObject);
 
-    }
+  }
 
-    private void OnTriggerExit(Collider other) {
-        if(!destroyOnExit) return;
-        DestroyPlayer(other.gameObject);
-        
-    }
+  private void OnTriggerExit(Collider other)
+  {
+    if (!destroyOnExit) return;
+    DestroyPlayer(other.gameObject);
 
-    private void DestroyPlayer(GameObject obj){
-        if(obj.tag == "Player"){
-            NetworkAnimator.Destroy(obj);
-        }
+  }
+
+  [ServerCallback]
+  private void DestroyPlayer(GameObject obj)
+  {
+    if (obj.tag == "Player")
+    {
+      NetworkServer.Destroy(obj);
     }
+  }
 }

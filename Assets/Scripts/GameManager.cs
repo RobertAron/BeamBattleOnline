@@ -7,48 +7,89 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class GameManager : NetworkBehaviour
 {
-    Dictionary<NetworkConnection,short> playerConnections = new Dictionary<NetworkConnection,short>(); 
-    bool hasSpawned = false;
-    [SerializeField] float timeTillPlayersSpawn = 15;
-    [SerializeField] GameObject playerPrefab;
-    float nextCountdownToLog;
+  [SerializeField] float timeTillPlayersSpawn = 15;
+  [SerializeField] GameObject playerPrefab = default;
 
-    void Awake(){
-        nextCountdownToLog = timeTillPlayersSpawn;
+  List<GameObject> remainingPlayers = new List<GameObject>();
+  Dictionary<NetworkConnection, short> playerConnections = new Dictionary<NetworkConnection, short>();
+
+  public static GameManager instance;
+  bool isCountingDown = false;
+
+  #region  Singleton
+  private void Awake()
+  {
+    if (instance == null)
+    {
+      instance = this;
     }
+  }
+  #endregion
 
+  void FixedUpdate()
+  {
+    if (isServer) ServerFixedUpdate();
+  }
 
-    void FixedUpdate() {
-        if(isServer) ServerManagerUpdate();
+  [ServerCallback]
+  void ServerFixedUpdate()
+  {
+    if (
+      playerConnections.Count > 0 &&
+      !ArePlayersLeft() &&
+      !isCountingDown
+    )
+    {
+      StartCoroutine(SpawnCountDown());
     }
+  }
 
-    public void AddPlayer(NetworkConnection playerConnection,short playerId){
-        playerConnections.Add(playerConnection,playerId);
+  IEnumerator SpawnCountDown()
+  {
+    isCountingDown = true;
+    float timeRemaining = timeTillPlayersSpawn;
+    float nextTimeToLog = timeRemaining;
+    while (timeRemaining >= 0)
+    {
+      timeRemaining -= Time.fixedDeltaTime;
+      if (timeRemaining <= nextTimeToLog)
+      {
+        Debug.Log($"{nextTimeToLog} seconds till spawn");
+        nextTimeToLog -= 1;
+      }
+      yield return new WaitForFixedUpdate();
     }
+    SpawnConnectedPlayers();
+    isCountingDown = false;
+  }
 
-    public void RemovePlayer(NetworkConnection connection){
-        playerConnections.Remove(connection);
-    }
+  bool ArePlayersLeft()
+  {
+    bool noPlayersLeft = GameObject.FindGameObjectWithTag("Player") == null;
+    return !noPlayersLeft;
+  }
 
-    [ServerCallback]
-    void ServerManagerUpdate(){
-        timeTillPlayersSpawn -= Time.deltaTime;
-        if(timeTillPlayersSpawn<=nextCountdownToLog && nextCountdownToLog>=0){
-            Debug.Log($"{nextCountdownToLog} seconds to spawn");
-            nextCountdownToLog-=1;
-        }
-        if(timeTillPlayersSpawn<0 && !hasSpawned) SpawnLoggedInPlayers();
-    }
+  public void AddPlayer(NetworkConnection playerConnection, short playerId)
+  {
+    playerConnections.Add(playerConnection, playerId);
+  }
 
-    [ServerCallback]
-    void SpawnLoggedInPlayers(){
-        hasSpawned = !hasSpawned;
-        foreach(var ele in playerConnections){
-            
-            Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-450f,450f),1,UnityEngine.Random.RandomRange(-450,450));
-            Vector3 rotation = new Vector3(0,UnityEngine.Random.RandomRange(0,3)*90,0);
-            var player = (GameObject)Instantiate(playerPrefab, position, Quaternion.Euler(rotation));
-            NetworkServer.AddPlayerForConnection(ele.Key, player, ele.Value);
-        }
+  public void RemovePlayer(NetworkConnection connection)
+  {
+    playerConnections.Remove(connection);
+  }
+
+
+  [ServerCallback]
+  void SpawnConnectedPlayers()
+  {
+    foreach (var ele in playerConnections)
+    {
+      Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
+      Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
+      var player = (GameObject)Instantiate(playerPrefab, position, Quaternion.Euler(rotation));
+      remainingPlayers.Add(player);
+      NetworkServer.AddPlayerForConnection(ele.Key, player, ele.Value);
     }
+  }
 }

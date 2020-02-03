@@ -7,7 +7,8 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class CustomNetworkManager : NetworkManager
 {
-    [SerializeField] GameManager gameManager;
+    GameManager gameManager;
+
 
     private void Start() {
         #if SERVER_BUILD
@@ -20,6 +21,7 @@ public class CustomNetworkManager : NetworkManager
             Debug.Log("Editor Directives! Showing network UI.");
             GetComponent<UnityEngine.Networking.NetworkManagerHUD>().showGUI = true;
         #endif
+        gameManager = GameManager.instance;
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
