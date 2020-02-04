@@ -23,7 +23,7 @@ public class Build
     public static void SetPlayerSettingsServer(){
         PlayerSettings.SetScriptingDefineSymbolsForGroup(
             EditorUserBuildSettings.selectedBuildTargetGroup,
-            "UNITY_POST_PROCESSING_STACK_V2;SERVER_BUILD"
+            "SERVER_BUILD"
         );
     }
 
@@ -33,7 +33,7 @@ public class Build
         buildPlayerOptions.locationPathName = "Builds/Server/main.exe";
         buildPlayerOptions.target = BuildTarget.StandaloneWindows;
         buildPlayerOptions.scenes = new[] {
-            "Assets/Scenes/SampleScene.unity"
+            "Assets/Scenes/GameScene.unity"
         };
         buildPlayerOptions.options = BuildOptions.EnableHeadlessMode;
         SetPlayerSettingsServer();
@@ -44,7 +44,7 @@ public class Build
     public static void SetPlayerSettingsClient(){
         PlayerSettings.SetScriptingDefineSymbolsForGroup(
             EditorUserBuildSettings.selectedBuildTargetGroup,
-            "UNITY_POST_PROCESSING_STACK_V2;CLIENT_BUILD"
+            "CLIENT_BUILD"
         );
     }
 
@@ -54,7 +54,7 @@ public class Build
         buildPlayerOptions.locationPathName = "Builds/Client/main.exe";
         buildPlayerOptions.target = BuildTarget.StandaloneWindows;
         buildPlayerOptions.scenes = new[] {
-            "Assets/Scenes/SampleScene.unity"
+            "Assets/Scenes/GameScene.unity"
         };
         buildPlayerOptions.options = BuildOptions.None;
         SetPlayerSettingsClient();
@@ -65,7 +65,7 @@ public class Build
     public static void SetPlayerSettingsEditor(){
         PlayerSettings.SetScriptingDefineSymbolsForGroup(
             EditorUserBuildSettings.selectedBuildTargetGroup,
-            "UNITY_POST_PROCESSING_STACK_V2"
+            ""
         );
     }
 }
