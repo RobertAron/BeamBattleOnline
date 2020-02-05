@@ -11,14 +11,19 @@ public class CustomNetworkManager : NetworkManager
 
 
     private void Start() {
+        #if WEB
+            useWebSockets = true;
+        #else
+            useWebSockets = false;
+        #endif
         #if SERVER_BUILD
             Debug.Log("Server Directives! Hosting Game.");
+            Debug.Log($"Using web sockets: {useWebSockets}");
             StartServer();
         #elif CLIENT_BUILD
             Debug.Log("Client Directives! Connecting to Game.");
             StartClient();
         #else
-            Debug.Log("Editor Directives! Showing network UI.");
             GetComponent<UnityEngine.Networking.NetworkManagerHUD>().showGUI = true;
         #endif
         gameManager = GameManager.instance;

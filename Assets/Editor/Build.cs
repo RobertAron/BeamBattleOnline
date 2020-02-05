@@ -4,68 +4,89 @@ using UnityEditor.Build.Reporting;
 
 public class Build
 {
-    [MenuItem("MyBuildMenu/Build All")]
-    public static void BuildAll(){
-        // TODO logging ins't working in headless....
-        BuildServer();
-        BuildClient();
-        if (Application.isBatchMode){
-            EditorApplication.Exit(0);
-        }
-    }
-
-    static void BuildGame(BuildPlayerOptions buildPlayerOptions){
-        BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
-        Debug.Log($"Build result: {report.summary.result}, {report.summary.totalErrors} errors");
-    }
-
-    [MenuItem("MyBuildMenu/Set Server Directives")]
-    public static void SetPlayerSettingsServer(){
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(
-            EditorUserBuildSettings.selectedBuildTargetGroup,
-            "SERVER_BUILD"
-        );
-    }
-
-    public static void BuildServer()
+  [MenuItem("MyBuildMenu/Build Web")]
+  public static void BuildWebGL()
+  {
+    BuildServer(true);
+    BuildClientWeb();
+    if (Application.isBatchMode)
     {
-        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-        buildPlayerOptions.locationPathName = "Builds/Server/main.exe";
-        buildPlayerOptions.target = BuildTarget.StandaloneWindows;
-        buildPlayerOptions.scenes = new[] {
+      EditorApplication.Exit(0);
+    }
+    else SetDirectives(false, false, false);
+  }
+  [MenuItem("MyBuildMenu/Build Native")]
+  public static void BuildNative()
+  {
+    BuildServer(false);
+    BuildDesktopClient();
+    if (Application.isBatchMode)
+    {
+      EditorApplication.Exit(0);
+    }
+    else SetDirectives(false, false, false);
+  }
+
+  static void SetDirectives(bool isClient, bool isServer, bool isWeb)
+  {
+    PlayerSettings.SetScriptingDefineSymbolsForGroup(
+        EditorUserBuildSettings.selectedBuildTargetGroup,
+        (isClient ? "CLIENT_BUILD;" : "") + (isServer ? "SERVER_BUILD;" : "") + (isWeb ? "WEB" : "")
+    );
+  }
+  [MenuItem("MyBuildMenu/Set Server")] static void a() { SetDirectives(false, true, false); }
+  [MenuItem("MyBuildMenu/Set Client")] static void b() { SetDirectives(true, false, false); }
+  [MenuItem("MyBuildMenu/Set Editor")] static void c() { SetDirectives(false, false, false); }
+  [MenuItem("MyBuildMenu/Build Web Server")] static void d() { BuildServer(true); }
+  [MenuItem("MyBuildMenu/Build Web Client")] static void e() { BuildWebGL(); }
+  [MenuItem("MyBuildMenu/Build Desktop Server")] static void f() { BuildServer(false); }
+  [MenuItem("MyBuildMenu/Build Desktop Client")] static void g() { BuildDesktopClient(); }
+
+
+  static void BuildGame(BuildPlayerOptions buildPlayerOptions)
+  {
+    BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
+    Debug.Log($"Build result: {report.summary.result}, {report.summary.totalErrors} errors");
+  }
+
+  public static void BuildServer(bool isWeb)
+  {
+    BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+    string pathNameOption = isWeb ? "Web" : "Local";
+    buildPlayerOptions.locationPathName = $"Builds/Server-{pathNameOption}/main.exe";
+    buildPlayerOptions.target = BuildTarget.StandaloneWindows;
+    buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"
         };
-        buildPlayerOptions.options = BuildOptions.EnableHeadlessMode;
-        SetPlayerSettingsServer();
-        BuildGame(buildPlayerOptions);
-    }
+    buildPlayerOptions.options = BuildOptions.EnableHeadlessMode;
+    SetDirectives(false, true, isWeb);
+    BuildGame(buildPlayerOptions);
+  }
 
-    [MenuItem("MyBuildMenu/Set Client Directives")]
-    public static void SetPlayerSettingsClient(){
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(
-            EditorUserBuildSettings.selectedBuildTargetGroup,
-            "CLIENT_BUILD"
-        );
-    }
-
-    public static void BuildClient()
-    {
-        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-        buildPlayerOptions.locationPathName = "Builds/Client/main.exe";
-        buildPlayerOptions.target = BuildTarget.StandaloneWindows;
-        buildPlayerOptions.scenes = new[] {
+  public static void BuildDesktopClient()
+  {
+    BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+    buildPlayerOptions.locationPathName = "Builds/DesktopClient/main.exe";
+    buildPlayerOptions.target = BuildTarget.StandaloneWindows;
+    buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"
         };
-        buildPlayerOptions.options = BuildOptions.None;
-        SetPlayerSettingsClient();
-        BuildGame(buildPlayerOptions);
-    }
+    buildPlayerOptions.options = BuildOptions.None;
+    SetDirectives(true, false, false);
+    BuildGame(buildPlayerOptions);
+  }
 
-    [MenuItem("MyBuildMenu/Set Editor Directives")]
-    public static void SetPlayerSettingsEditor(){
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(
-            EditorUserBuildSettings.selectedBuildTargetGroup,
-            ""
-        );
-    }
+  public static void BuildClientWeb()
+  {
+    BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+    buildPlayerOptions.locationPathName = "Builds/WebClient/";
+    buildPlayerOptions.target = BuildTarget.WebGL;
+    buildPlayerOptions.scenes = new[] {
+            "Assets/Scenes/GameScene.unity"
+        };
+    buildPlayerOptions.options = BuildOptions.None;
+    SetDirectives(true, false, true);
+    BuildGame(buildPlayerOptions);
+  }
 }
+
