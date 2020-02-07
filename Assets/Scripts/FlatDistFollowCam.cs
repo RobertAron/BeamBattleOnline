@@ -13,8 +13,7 @@ public class FlatDistFollowCam : MonoBehaviour
         SnapToTargetPosition();
     }
 
-
-    void Update()
+    void LateUpdate()
     {
         if(objectToFollow==null) return;
         if(!Application.IsPlaying(gameObject)) SnapToTargetPosition();

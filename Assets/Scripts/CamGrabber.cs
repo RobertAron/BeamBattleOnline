@@ -6,9 +6,9 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class CamGrabber : NetworkBehaviour
 {
-  void Start()
-  {
-    if (!isLocalPlayer) return;
-    Camera.main.transform.GetComponent<FlatDistFollowCam>().objectToFollow = transform;
+
+  [ClientRpc]
+  public void RpcSetPlayersBike(GameObject playersBike){
+    Camera.main.transform.GetComponent<FlatDistFollowCam>().objectToFollow = playersBike.transform;
   }
 }

@@ -4,7 +4,7 @@ using UnityEditor.Build.Reporting;
 
 public class Build
 {
-  [MenuItem("MyBuildMenu/Build Web")]
+  [MenuItem("MyBuildMenu/Web/Build Web")]
   public static void BuildWebGL()
   {
     BuildServer(true);
@@ -34,11 +34,11 @@ public class Build
         (isClient ? "CLIENT_BUILD;" : "") + (isServer ? "SERVER_BUILD;" : "") + (isWeb ? "WEB" : "")
     );
   }
-  [MenuItem("MyBuildMenu/Set Server")] static void a() { SetDirectives(false, true, false); }
-  [MenuItem("MyBuildMenu/Set Client")] static void b() { SetDirectives(true, false, false); }
-  [MenuItem("MyBuildMenu/Set Editor")] static void c() { SetDirectives(false, false, false); }
-  [MenuItem("MyBuildMenu/Build Web Server")] static void d() { BuildServer(true); }
-  [MenuItem("MyBuildMenu/Build Web Client")] static void e() { BuildWebGL(); }
+  [MenuItem("MyBuildMenu/Directives/Set Server")] static void a() { SetDirectives(false, true, false); }
+  [MenuItem("MyBuildMenu/Directives/Set Client")] static void b() { SetDirectives(true, false, false); }
+  [MenuItem("MyBuildMenu/Directives/Set Editor")] static void c() { SetDirectives(false, false, false); }
+  [MenuItem("MyBuildMenu/Web/Build Web Server")] static void d() { BuildServer(true); }
+  [MenuItem("MyBuildMenu/Web/Build Web Client")] static void e() { BuildWebGL(); }
   [MenuItem("MyBuildMenu/Build Desktop Server")] static void f() { BuildServer(false); }
   [MenuItem("MyBuildMenu/Build Desktop Client")] static void g() { BuildDesktopClient(); }
 

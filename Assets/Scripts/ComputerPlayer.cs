@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Obsolete]
 public class ComputerPlayer : MonoBehaviour
 {
-    [SerializeField] PlayerMovement playerMovement = default;
+    [SerializeField] BikeMovement playerMovement = default;
     bool turnLeft = false;
 
     private void Update() {

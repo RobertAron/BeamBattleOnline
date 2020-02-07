@@ -8,10 +8,11 @@ using UnityEngine.Networking;
 public class GameManager : NetworkBehaviour
 {
   [SerializeField] float timeTillPlayersSpawn = 15;
-  [SerializeField] GameObject playerPrefab = default;
+  [SerializeField] GameObject bikePrefab = default;
+  [SerializeField] GameObject playerControllerPrefab = default;
 
-  List<GameObject> remainingPlayers = new List<GameObject>();
-  Dictionary<NetworkConnection, short> playerConnections = new Dictionary<NetworkConnection, short>();
+  List<GameObject> remainingPlayerBikes = new List<GameObject>();
+  Dictionary<NetworkConnection, GameObject> playerConnections = new Dictionary<NetworkConnection, GameObject>();
 
   public static GameManager instance;
   bool isRestartingGame = false;
@@ -27,12 +28,6 @@ public class GameManager : NetworkBehaviour
   #endregion
 
   void FixedUpdate()
-  {
-    if (isServer) ServerFixedUpdate();
-  }
-
-  [ServerCallback]
-  void ServerFixedUpdate()
   {
     if (
       playerConnections.Count > 0 &&
@@ -50,7 +45,8 @@ public class GameManager : NetworkBehaviour
     float timeRemaining = timeTillPlayersSpawn;
     float nextTimeToLog = timeRemaining;
     var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame");
-    foreach(var go in gosToClear){
+    foreach (var go in gosToClear)
+    {
       NetworkServer.Destroy(go);
     }
     while (timeRemaining >= 0)
@@ -75,7 +71,9 @@ public class GameManager : NetworkBehaviour
 
   public void AddPlayer(NetworkConnection playerConnection, short playerId)
   {
-    playerConnections.Add(playerConnection, playerId);
+    var playerController = (GameObject)Instantiate(playerControllerPrefab);
+    NetworkServer.AddPlayerForConnection(playerConnection, playerController, playerId);
+    playerConnections.Add(playerConnection, playerController);
   }
 
   public void RemovePlayer(NetworkConnection connection)
@@ -89,11 +87,20 @@ public class GameManager : NetworkBehaviour
   {
     foreach (var ele in playerConnections)
     {
+      // Create the players bike
       Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
       Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
-      var player = (GameObject)Instantiate(playerPrefab, position, Quaternion.Euler(rotation));
-      remainingPlayers.Add(player);
-      NetworkServer.AddPlayerForConnection(ele.Key, player, ele.Value);
+      var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
+      NetworkServer.Spawn(playerBike);
+      // Set player to link to that bike
+      var bikeMovement = playerBike.GetComponent<BikeMovement>();
+      var pic = ele.Value.GetComponent<PlayerInputCommunicator>();
+      Debug.Log("setting player bike");
+      pic.SetBike(bikeMovement);
+      var camGrabber = ele.Value.GetComponent<CamGrabber>();
+      camGrabber.RpcSetPlayersBike(playerBike);
+      // Update bikes left for game state purposes
+      remainingPlayerBikes.Add(playerBike);
     }
   }
 }

@@ -85,14 +85,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1471095800014418057}
   - component: {fileID: 8371001089170926518}
-  - component: {fileID: 1982833510533648993}
   - component: {fileID: 1289776620464104977}
   - component: {fileID: 3413034397118228445}
-  - component: {fileID: 5999187748384978779}
   - component: {fileID: 235441559314113325}
   - component: {fileID: -3874933588250074730}
   m_Layer: 0
-  m_Name: Player
+  m_Name: BikePrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,19 +144,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &1982833510533648993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471095800014418058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddf3ab81639c4cc42947bf7171cc7eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_LocalPlayerAuthority: 0
 --- !u!114 &1289776620464104977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,42 +172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d6c522af31447398568cc65334232b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.04
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &5999187748384978779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471095800014418058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc629f4f12fc7f44d80b2cc1e94cb3c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnPlayer:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1289776620464104977}
-        m_MethodName: Turn
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  m_SnapThreshold: 100
+  m_InterpolateRotation: 0
+  m_InterpolateMovement: 1.7
 --- !u!65 &235441559314113325
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -245,9 +205,9 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
