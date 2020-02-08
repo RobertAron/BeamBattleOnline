@@ -10,8 +10,7 @@ public class GameManager : NetworkBehaviour
   [SerializeField] float timeTillPlayersSpawn = 15;
   [SerializeField] GameObject bikePrefab = default;
   [SerializeField] GameObject playerControllerPrefab = default;
-
-  List<GameObject> remainingPlayerBikes = new List<GameObject>();
+  [SerializeField] GameObject dangerSpherePrefab = default;
   Dictionary<NetworkConnection, GameObject> playerConnections = new Dictionary<NetworkConnection, GameObject>();
 
   public static GameManager instance;
@@ -59,7 +58,7 @@ public class GameManager : NetworkBehaviour
       }
       yield return new WaitForFixedUpdate();
     }
-    SpawnConnectedPlayers();
+    SpawnGameObjects();
     isRestartingGame = false;
   }
 
@@ -83,8 +82,10 @@ public class GameManager : NetworkBehaviour
 
 
   [ServerCallback]
-  void SpawnConnectedPlayers()
+  void SpawnGameObjects()
   {
+    var dangerSphere = (GameObject)Instantiate(dangerSpherePrefab);
+    NetworkServer.Spawn(dangerSphere);
     foreach (var ele in playerConnections)
     {
       // Create the players bike
@@ -95,12 +96,9 @@ public class GameManager : NetworkBehaviour
       // Set player to link to that bike
       var bikeMovement = playerBike.GetComponent<BikeMovement>();
       var pic = ele.Value.GetComponent<PlayerInputCommunicator>();
-      Debug.Log("setting player bike");
-      pic.SetBike(bikeMovement);
       var camGrabber = ele.Value.GetComponent<CamGrabber>();
-      camGrabber.RpcSetPlayersBike(playerBike);
-      // Update bikes left for game state purposes
-      remainingPlayerBikes.Add(playerBike);
+      pic.SetBike(bikeMovement);
+      camGrabber.TargetSetPlayersBike(ele.Key,playerBike);
     }
   }
 }
