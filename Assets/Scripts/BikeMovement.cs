@@ -13,6 +13,7 @@ public class BikeMovement : NetworkBehaviour
 
     void Start(){
         rb = GetComponent<Rigidbody>();
+        StartNewTrail();
     }
 
     void FixedUpdate()
@@ -29,14 +30,14 @@ public class BikeMovement : NetworkBehaviour
     public void Turn(bool left){
         float direction = left?-1:1;
         transform.rotation = transform.rotation*Quaternion.Euler(0,90*direction,0);
-        StartNewTrail(transform.position, transform.rotation );
+        StartNewTrail();
     }
     
-    void StartNewTrail(Vector3 startPosition, Quaternion t){
-        if(currentStream!=null) currentStream.BreakStream(startPosition);
-        GameObject go = Instantiate(trailPrefab,transform.position,t);
+    void StartNewTrail(){
+        if(currentStream!=null) currentStream.BreakStream(transform.position);
+        GameObject go = Instantiate(trailPrefab,transform.position,transform.rotation);
         currentStream = go.GetComponent<TrailStream>();
-        currentStream.StartStream(startPosition, transform.gameObject);
+        currentStream.StartStream(transform.position, transform.gameObject);
         NetworkServer.Spawn(go);
     }
 }

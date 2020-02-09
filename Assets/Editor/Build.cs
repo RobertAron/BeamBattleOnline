@@ -29,10 +29,13 @@ public class Build
 
   static void SetDirectives(bool isClient, bool isServer, bool isWeb)
   {
+    var directives = (isClient ? "CLIENT_BUILD;" : "") + (isServer ? "SERVER_BUILD;" : "") + (isWeb ? "WEB;" : "") + "Hmm;";
     PlayerSettings.SetScriptingDefineSymbolsForGroup(
         EditorUserBuildSettings.selectedBuildTargetGroup,
-        (isClient ? "CLIENT_BUILD;" : "") + (isServer ? "SERVER_BUILD;" : "") + (isWeb ? "WEB" : "")
+        directives
     );
+
+    Debug.Log($"set directives : {directives}");
   }
   [MenuItem("MyBuildMenu/Directives/Set Server")] static void a() { SetDirectives(false, true, false); }
   [MenuItem("MyBuildMenu/Directives/Set Client")] static void b() { SetDirectives(true, false, false); }
@@ -53,7 +56,7 @@ public class Build
   {
     BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
     string pathNameOption = isWeb ? "Web" : "Local";
-    buildPlayerOptions.locationPathName = $"Builds/Server-{pathNameOption}/main.exe";
+    buildPlayerOptions.locationPathName = $"Builds/Server{pathNameOption}/main.exe";
     buildPlayerOptions.target = BuildTarget.StandaloneWindows;
     buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"
@@ -66,7 +69,7 @@ public class Build
   public static void BuildDesktopClient()
   {
     BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-    buildPlayerOptions.locationPathName = "Builds/DesktopClient/main.exe";
+    buildPlayerOptions.locationPathName = "Builds/ClientDesktop/main.exe";
     buildPlayerOptions.target = BuildTarget.StandaloneWindows;
     buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"
@@ -79,7 +82,7 @@ public class Build
   public static void BuildClientWeb()
   {
     BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-    buildPlayerOptions.locationPathName = "Builds/WebClient/";
+    buildPlayerOptions.locationPathName = "Builds/ClientWeb/";
     buildPlayerOptions.target = BuildTarget.WebGL;
     buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"

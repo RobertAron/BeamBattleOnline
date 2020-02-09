@@ -88,17 +88,27 @@ public class GameManager : NetworkBehaviour
     NetworkServer.Spawn(dangerSphere);
     foreach (var ele in playerConnections)
     {
-      // Create the players bike
-      Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
-      Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
-      var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
-      NetworkServer.Spawn(playerBike);
       // Set player to link to that bike
+      var playerBike = SpawnBike();
       var bikeMovement = playerBike.GetComponent<BikeMovement>();
       var pic = ele.Value.GetComponent<PlayerInputCommunicator>();
       var camGrabber = ele.Value.GetComponent<CamGrabber>();
       pic.SetBike(bikeMovement);
       camGrabber.TargetSetPlayersBike(ele.Key,playerBike);
     }
+    int computersToSpawn = 30 - playerConnections.Count;
+    for(var i=0;i<computersToSpawn;++i){
+      var playerBike = SpawnBike();
+      playerBike.GetComponentInChildren<ComputerPlayer>().enabled = true;
+    } 
+  }
+
+  GameObject SpawnBike(){
+      // Create the players bike
+      Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
+      Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
+      var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
+      NetworkServer.Spawn(playerBike);
+      return playerBike;
   }
 }

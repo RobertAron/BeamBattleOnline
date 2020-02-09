@@ -14,6 +14,13 @@ public class ComputerPlayer : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        playerMovement.Turn(turnLeft);
+        if(!enabled) return;
+        WallCollision wallCollision = other.GetComponent<WallCollision>();
+        if(wallCollision!=null && wallCollision.KillOnEnter()) playerMovement.Turn(turnLeft);
+    }
+    private void OnTriggerExit(Collider other){
+        if(!enabled) return;
+        WallCollision wallCollision = other.GetComponent<WallCollision>();
+        if(wallCollision!=null && wallCollision.KillOnExit()) playerMovement.Turn(turnLeft);
     }
 }

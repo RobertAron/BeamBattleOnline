@@ -30,4 +30,13 @@ public class WallCollision : NetworkBehaviour
       NetworkServer.Destroy(obj);
     }
   }
+
+  public bool KillOnEnter()
+  {
+    return !destroyOnExit;
+  }
+  public bool KillOnExit()
+  {
+    return destroyOnExit;
+  }
 }
