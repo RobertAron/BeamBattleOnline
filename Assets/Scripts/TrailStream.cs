@@ -9,10 +9,13 @@ public class TrailStream : NetworkBehaviour
     [SyncVar] Vector3 startingPos;
     [SyncVar] Vector3 endingPos;
     [SerializeField] GameObject trackedPlayer;
-    public void StartStream(Vector3 startPosition, GameObject playerGameObject){
-        trackedPlayer = playerGameObject;
-        startingPos = startPosition;
-        endingPos = playerGameObject.transform.position;
+    BikeMovement originator;
+    public void StartStream(Vector3 startPosition, BikeMovement bikeMovement, float liftTime,float playerSpeed){
+        originator = bikeMovement;
+        trackedPlayer = bikeMovement.gameObject;
+        startingPos = bikeMovement.transform.position;
+        endingPos = startingPos;
+        StartCoroutine(DelayClearStream(liftTime,playerSpeed));
     }
 
     void FixedUpdate() {
@@ -29,5 +32,20 @@ public class TrailStream : NetworkBehaviour
     {
         endingPos = endPosition;
         trackedPlayer = null;
+    }
+
+    void OnTriggerEnter(Collider other){
+        if(other.tag!="Player" || originator==null) return;
+        // todo get the players name and stuff to make killfeed
+        originator.IncraseStreamSize();
+    }
+
+    IEnumerator DelayClearStream(float lifeTime,float playerSpeed){
+        yield return new WaitForSeconds(lifeTime);
+        while((startingPos-endingPos).magnitude>float.Epsilon){
+            startingPos = Vector3.MoveTowards(startingPos,endingPos,playerSpeed*Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        Destroy(this.gameObject);
     }
 }

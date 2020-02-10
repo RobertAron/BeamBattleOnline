@@ -6,38 +6,47 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class BikeMovement : NetworkBehaviour
 {
-    Rigidbody rb;
-    public float speed;
-    [SerializeField] GameObject trailPrefab = default;
-    TrailStream currentStream = null;
+  Rigidbody rb;
+  public float speed;
+  [SerializeField] GameObject trailPrefab = default;
+  TrailStream currentStream = null;
+  [SerializeField] float streamLifetime = 4;
+  void Start()
+  {
+    rb = GetComponent<Rigidbody>();
+    StartNewTrail();
+  }
 
-    void Start(){
-        rb = GetComponent<Rigidbody>();
-        StartNewTrail();
-    }
+  void FixedUpdate()
+  {
+    UpdatePosition();
+  }
 
-    void FixedUpdate()
-    {
-        UpdatePosition();
-    }
+  [ServerCallback]
+  void UpdatePosition()
+  {
+    // transform.position += transform.forward*speed*Time.deltaTime;
+    rb.velocity = transform.forward * speed;
+  }
 
-    [ServerCallback]
-    void UpdatePosition(){
-        // transform.position += transform.forward*speed*Time.deltaTime;
-        rb.velocity = transform.forward*speed;
-    }
+  public void Turn(bool left)
+  {
+    float direction = left ? -1 : 1;
+    transform.rotation = transform.rotation * Quaternion.Euler(0, 90 * direction, 0);
+    StartNewTrail();
+  }
 
-    public void Turn(bool left){
-        float direction = left?-1:1;
-        transform.rotation = transform.rotation*Quaternion.Euler(0,90*direction,0);
-        StartNewTrail();
-    }
-    
-    void StartNewTrail(){
-        if(currentStream!=null) currentStream.BreakStream(transform.position);
-        GameObject go = Instantiate(trailPrefab,transform.position,transform.rotation);
-        currentStream = go.GetComponent<TrailStream>();
-        currentStream.StartStream(transform.position, transform.gameObject);
-        NetworkServer.Spawn(go);
-    }
+  void StartNewTrail()
+  {
+    if (currentStream != null) currentStream.BreakStream(transform.position);
+    GameObject go = Instantiate(trailPrefab, transform.position, transform.rotation);
+    currentStream = go.GetComponent<TrailStream>();
+    currentStream.StartStream(transform.position, this, streamLifetime, speed);
+    NetworkServer.Spawn(go);
+  }
+
+  public void IncraseStreamSize()
+  {
+    ++streamLifetime;
+  }
 }
