@@ -16,6 +16,7 @@ public class CustomNetworkManager : NetworkManager
         #else
             useWebSockets = false;
         #endif
+        
         #if SERVER_BUILD
             Debug.Log("Server Directives! Hosting Game.");
             Debug.Log($"Using web sockets: {useWebSockets}");

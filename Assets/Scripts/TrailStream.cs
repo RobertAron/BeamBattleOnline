@@ -19,10 +19,7 @@ public class TrailStream : NetworkBehaviour
     }
 
     void FixedUpdate() {
-        if(isServer){
-            if(trackedPlayer==null) return;
-            endingPos = trackedPlayer.transform.position;
-        }
+        if(isServer && trackedPlayer!=null) endingPos = trackedPlayer.transform.position;
         transform.position = (startingPos + endingPos)/2;
         float length = (startingPos-endingPos).magnitude;
         transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, length);
@@ -42,6 +39,7 @@ public class TrailStream : NetworkBehaviour
 
     IEnumerator DelayClearStream(float lifeTime,float playerSpeed){
         yield return new WaitForSeconds(lifeTime);
+        Debug.Log((startingPos-endingPos).magnitude);
         while((startingPos-endingPos).magnitude>float.Epsilon){
             startingPos = Vector3.MoveTowards(startingPos,endingPos,playerSpeed*Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();

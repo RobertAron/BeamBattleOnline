@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using UnityEditor.Build.Reporting;
+using System.Collections.Generic;
 
 public class Build
 {
@@ -29,13 +30,17 @@ public class Build
 
   static void SetDirectives(bool isClient, bool isServer, bool isWeb)
   {
-    var directives = (isClient ? "CLIENT_BUILD;" : "") + (isServer ? "SERVER_BUILD;" : "") + (isWeb ? "WEB;" : "") + "Hmm;";
+    List<string> allDefines = new List<string>();
+    if(isClient) allDefines.Add("CLIENT_BUILD");
+    if(isServer) allDefines.Add("SERVER_BUILD");
+    if(isWeb) allDefines.Add("WEB");
+    string directives = string.Join(";",allDefines.ToArray());
     PlayerSettings.SetScriptingDefineSymbolsForGroup(
         EditorUserBuildSettings.selectedBuildTargetGroup,
         directives
     );
-
     Debug.Log($"set directives : {directives}");
+    AssetDatabase.Refresh();
   }
   [MenuItem("MyBuildMenu/Directives/Set Server")] static void a() { SetDirectives(false, true, false); }
   [MenuItem("MyBuildMenu/Directives/Set Client")] static void b() { SetDirectives(true, false, false); }
