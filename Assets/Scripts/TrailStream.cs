@@ -8,13 +8,17 @@ public class TrailStream : NetworkBehaviour
 {
     [SyncVar] Vector3 startingPos;
     [SyncVar] Vector3 endingPos;
+    [SyncVar] string createdBy;
     [SerializeField] GameObject trackedPlayer;
     BikeMovement originator;
-    public void StartStream(Vector3 startPosition, BikeMovement bikeMovement, float liftTime,float playerSpeed){
+    public void StartStream(Vector3 startPosition, BikeMovement bikeMovement, float liftTime,float playerSpeed,string createdBy){
         originator = bikeMovement;
         trackedPlayer = bikeMovement.gameObject;
         startingPos = bikeMovement.transform.position;
         endingPos = startingPos;
+        this.createdBy = createdBy;
+        var wc = GetComponent<WallCollision>();
+        if(wc!=null) wc.SetKillfeedName(createdBy);
         StartCoroutine(DelayClearStream(liftTime,playerSpeed));
     }
 
@@ -32,14 +36,14 @@ public class TrailStream : NetworkBehaviour
     }
 
     void OnTriggerEnter(Collider other){
-        if(other.tag!="Player" || originator==null) return;
+        var otherBike = other.GetComponent<BikeMovement>();
+        if(otherBike==null) return;
         // todo get the players name and stuff to make killfeed
-        originator.IncraseStreamSize();
+        if(originator!=null) originator.IncraseStreamSize();
     }
 
     IEnumerator DelayClearStream(float lifeTime,float playerSpeed){
         yield return new WaitForSeconds(lifeTime);
-        Debug.Log((startingPos-endingPos).magnitude);
         while((startingPos-endingPos).magnitude>float.Epsilon){
             startingPos = Vector3.MoveTowards(startingPos,endingPos,playerSpeed*Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();

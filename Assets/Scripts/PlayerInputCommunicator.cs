@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class PlayerInputCommunicator : NetworkBehaviour
 {
   BikeMovement bikeMovement;
+  [SyncVar] string playerName;
 
   void Update(){
       if(!isLocalPlayer) return;
@@ -22,8 +23,19 @@ public class PlayerInputCommunicator : NetworkBehaviour
 
 
   [Command]
-  public void CmdTurnPlayer(bool left)
+  void CmdTurnPlayer(bool left)
   {
     if (bikeMovement != null) bikeMovement.Turn(left);
   }
+
+  [Command]
+  void CmdSetPlayerName(string newPlayerName){
+    playerName = newPlayerName;
+  }
+
+  public string GetPlayerName(){
+    return playerName;
+  }
+
+
 }

@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnExit: 0
+  killfeedName: THE WALL
 --- !u!114 &259645957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,6 +1258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnExit: 0
+  killfeedName: THE WALL
 --- !u!114 &1491433030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1398,6 +1400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnExit: 0
+  killfeedName: THE WALL
 --- !u!114 &1542403634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1603,7 +1606,7 @@ MonoBehaviour:
     type: 3}
   dangerSpherePrefab: {fileID: 8047021995568503146, guid: d8834a1dbb3fd0a4c8dab76ce001eb0e,
     type: 3}
-  targetPlayerCount: 0
+  targetPlayerCount: 30
 --- !u!114 &1935685451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,6 +1854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnExit: 0
+  killfeedName: THE WALL
 --- !u!114 &2054615375
 MonoBehaviour:
   m_ObjectHideFlags: 0

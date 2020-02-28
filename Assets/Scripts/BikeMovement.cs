@@ -9,6 +9,7 @@ public class BikeMovement : NetworkBehaviour
   Rigidbody rb;
   public float speed;
   [SerializeField] GameObject trailPrefab = default;
+  [SerializeField] string playerName;
   TrailStream currentStream = null;
   [SerializeField] float streamLifetime = 4;
   void Start()
@@ -41,12 +42,19 @@ public class BikeMovement : NetworkBehaviour
     if (currentStream != null) currentStream.BreakStream(transform.position);
     GameObject go = Instantiate(trailPrefab, transform.position, transform.rotation);
     currentStream = go.GetComponent<TrailStream>();
-    currentStream.StartStream(transform.position, this, streamLifetime, speed);
+    currentStream.StartStream(transform.position, this, streamLifetime, speed, playerName);
     NetworkServer.Spawn(go);
   }
 
   public void IncraseStreamSize()
   {
     ++streamLifetime;
+  }
+
+  public void SetPlayerName(string newPlayerName){
+    playerName = newPlayerName;
+  }
+  public string GetPlayerName(){
+    return playerName;
   }
 }

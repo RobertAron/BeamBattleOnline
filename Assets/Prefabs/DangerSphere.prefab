@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnExit: 1
+  killfeedName: THE SPHERE
 --- !u!114 &8047021995568503136
 MonoBehaviour:
   m_ObjectHideFlags: 0

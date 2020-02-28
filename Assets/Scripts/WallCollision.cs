@@ -8,6 +8,12 @@ using UnityEngine.Networking;
 public class WallCollision : NetworkBehaviour
 {
   [SerializeField] bool destroyOnExit = false;
+  [SyncVar][SerializeField] string killfeedName = "";
+
+  public void SetKillfeedName(string newKillfeedName){
+    killfeedName = newKillfeedName;
+  }
+
   private void OnTriggerEnter(Collider other)
   {
     if (destroyOnExit) return;
@@ -25,10 +31,11 @@ public class WallCollision : NetworkBehaviour
   [ServerCallback]
   private void DestroyPlayer(GameObject obj)
   {
-    if (obj.tag == "Player")
-    {
-      NetworkServer.Destroy(obj);
-    }
+    var bm = obj.GetComponent<BikeMovement>();
+    if (bm == null) return;
+    string killedPlayer = bm.GetPlayerName();
+    Debug.Log($"{killfeedName} has killed {killedPlayer}");
+    NetworkServer.Destroy(obj);
   }
 
   public bool KillOnEnter()
