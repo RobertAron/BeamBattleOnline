@@ -107,6 +107,7 @@ public class GameManager : NetworkBehaviour
     }
   }
 
+  [ServerCallback]
   GameObject SpawnBike()
   {
     // Create the players bike

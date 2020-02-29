@@ -37,6 +37,7 @@ public class BikeMovement : NetworkBehaviour
     StartNewTrail();
   }
 
+  [ServerCallback]
   void StartNewTrail()
   {
     if (currentStream != null) currentStream.BreakStream(transform.position);

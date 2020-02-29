@@ -5,22 +5,22 @@ using System.Collections.Generic;
 
 public class Build
 {
-  [MenuItem("MyBuildMenu/Web/Build Web")]
-  public static void BuildWebGL()
+  [MenuItem("MyBuildMenu/Build Native")]
+  public static void BuildNative()
   {
-    BuildServer(true);
-    BuildClientWeb();
+    BuildServer(false);
+    BuildDesktopClient();
     if (Application.isBatchMode)
     {
       EditorApplication.Exit(0);
     }
     else SetDirectives(false, false, false);
   }
-  [MenuItem("MyBuildMenu/Build Native")]
-  public static void BuildNative()
+  [MenuItem("MyBuildMenu/Web/Build Web")]
+  public static void BuildWebGL()
   {
-    BuildServer(false);
-    BuildDesktopClient();
+    BuildServer(true);
+    BuildClientWeb();
     if (Application.isBatchMode)
     {
       EditorApplication.Exit(0);

@@ -9,7 +9,7 @@ public class TrailStream : NetworkBehaviour
     [SyncVar] Vector3 startingPos;
     [SyncVar] Vector3 endingPos;
     [SyncVar] string createdBy;
-    [SerializeField] GameObject trackedPlayer;
+    [SerializeField][SyncVar] GameObject trackedPlayer;
     BikeMovement originator;
     public void StartStream(Vector3 startPosition, BikeMovement bikeMovement, float liftTime,float playerSpeed,string createdBy){
         originator = bikeMovement;
@@ -29,6 +29,7 @@ public class TrailStream : NetworkBehaviour
         transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, length);
     }
 
+    [ServerCallback]
     public void BreakStream(Vector3 endPosition)
     {
         endingPos = endPosition;
