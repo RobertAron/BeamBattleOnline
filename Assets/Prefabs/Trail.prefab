@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6549881863489476302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.071, y: 1, z: 0}
-  m_LocalScale: {x: 0.01, y: 1, z: 0.1}
+  m_LocalScale: {x: 0.02, y: 1, z: 0.1}
   m_Children:
   - {fileID: 5625442733017978408}
   m_Father: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnExit: 0
+  killfeedName: 
 --- !u!1 &6667555209475797759
 GameObject:
   m_ObjectHideFlags: 0

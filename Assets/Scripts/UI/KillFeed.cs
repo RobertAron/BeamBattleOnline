@@ -16,7 +16,7 @@ public class KillFeed : MonoBehaviour
   }
   #endregion
 
-  [SerializeField] GameObject killFeedItem;
+  [SerializeField] GameObject killFeedItem = default;
 
   public void AddKillFeedItem(string slayer, string victim)
   {
