@@ -7,8 +7,13 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class WallCollision : NetworkBehaviour
 {
+  KillFeed killFeed;
   [SerializeField] bool destroyOnExit = false;
   [SyncVar][SerializeField] string killfeedName = "";
+
+  private void Start() {
+    killFeed = KillFeed.instance;
+  }
 
   public void SetKillfeedName(string newKillfeedName){
     killfeedName = newKillfeedName;
@@ -33,9 +38,15 @@ public class WallCollision : NetworkBehaviour
   {
     var bm = obj.GetComponent<BikeMovement>();
     if (bm == null) return;
-    string killedPlayer = bm.GetPlayerName();
-    Debug.Log($"{killfeedName} has killed {killedPlayer}");
+    string victim = bm.GetPlayerName();
+    RpcUIKIllFeed(victim);
     NetworkServer.Destroy(obj);
+  }
+
+  [ClientRpc]
+  void RpcUIKIllFeed(string victim){
+    killFeed.AddKillFeedItem(killfeedName,victim);
+    Debug.Log($"{killfeedName} has killed {victim}");
   }
 
   public bool KillOnEnter()

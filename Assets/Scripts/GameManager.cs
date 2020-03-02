@@ -14,10 +14,10 @@ public class GameManager : NetworkBehaviour
   [SerializeField] int targetPlayerCount = 30;
   Dictionary<NetworkConnection, GameObject> playerConnections = new Dictionary<NetworkConnection, GameObject>();
 
-  public static GameManager instance;
   bool isRestartingGame = false;
 
   #region  Singleton
+  public static GameManager instance;
   private void Awake()
   {
     if (instance == null)
