@@ -19,7 +19,8 @@ public class CustomNetworkManager : NetworkManager
         
         #if SERVER_BUILD
             Debug.Log("Server Directives! Hosting Game.");
-            Debug.Log($"Using web sockets: {useWebSockets}");
+            string serverType = useWebSockets?"Web Sockets":"TLC Connection";
+            Debug.Log($"Using Connection type {serverType}");
             StartServer();
         #elif CLIENT_BUILD
             Debug.Log("Client Directives! Connecting to Game.");
