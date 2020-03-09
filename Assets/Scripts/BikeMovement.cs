@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Obsolete]
+[NetworkSettings(sendInterval=0.025f)]
 public class BikeMovement : NetworkBehaviour
 {
   Rigidbody rb;

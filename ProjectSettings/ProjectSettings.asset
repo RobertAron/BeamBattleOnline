@@ -581,7 +581,7 @@ PlayerSettings:
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
     1: CLIENT_BUILD;WEB
-    13: CLIENT_BUILD
+    13: 
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
