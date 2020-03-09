@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: THE SPHERE defeated by A COMPUTER
+  m_text: Placement text defeated by Placement text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dbcea40fa802794458a3b121ac592532, type: 2}
   m_sharedMaterial: {fileID: 7679923260354571220, guid: dbcea40fa802794458a3b121ac592532,

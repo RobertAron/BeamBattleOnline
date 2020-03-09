@@ -61,7 +61,7 @@ public class Build
   {
     BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
     string pathNameOption = isWeb ? "Web" : "Local";
-    buildPlayerOptions.locationPathName = $"Builds/Server{pathNameOption}/main.exe";
+    buildPlayerOptions.locationPathName = $"Builds/{pathNameOption}/Server/main.exe";
     buildPlayerOptions.target = BuildTarget.StandaloneWindows;
     buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"
@@ -74,7 +74,7 @@ public class Build
   public static void BuildDesktopClient()
   {
     BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-    buildPlayerOptions.locationPathName = "Builds/ClientDesktop/main.exe";
+    buildPlayerOptions.locationPathName = "Builds/Local/Client/main.exe";
     buildPlayerOptions.target = BuildTarget.StandaloneWindows;
     buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"
@@ -87,7 +87,7 @@ public class Build
   public static void BuildClientWeb()
   {
     BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-    buildPlayerOptions.locationPathName = "Builds/ClientWeb/";
+    buildPlayerOptions.locationPathName = "Builds/Web/Client/";
     buildPlayerOptions.target = BuildTarget.WebGL;
     buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"

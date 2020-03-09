@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Obsolete]
+[NetworkSettings(sendInterval=0.05f)]
 public class TrailStream : NetworkBehaviour
 {
     [SyncVar] Vector3 startingPos;
     [SyncVar] Vector3 endingPos;
     [SyncVar] string createdBy;
-    [SerializeField][SyncVar] GameObject trackedPlayer;
+    
+    [SyncVar][SerializeField] Transform trackedPlayerPosition;
     BikeMovement originator;
+
     public void StartStream(Vector3 startPosition, BikeMovement bikeMovement, float liftTime,float playerSpeed,string createdBy){
         originator = bikeMovement;
-        trackedPlayer = bikeMovement.gameObject;
+        trackedPlayerPosition = bikeMovement.transform;
         startingPos = bikeMovement.transform.position;
         endingPos = startingPos;
         this.createdBy = createdBy;
@@ -23,7 +26,7 @@ public class TrailStream : NetworkBehaviour
     }
 
     void FixedUpdate() {
-        if(isServer && trackedPlayer!=null) endingPos = trackedPlayer.transform.position;
+        if(isServer && trackedPlayerPosition!=null) endingPos = trackedPlayerPosition.position;
         transform.position = (startingPos + endingPos)/2;
         float length = (startingPos-endingPos).magnitude;
         transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, length);
@@ -33,7 +36,7 @@ public class TrailStream : NetworkBehaviour
     public void BreakStream(Vector3 endPosition)
     {
         endingPos = endPosition;
-        trackedPlayer = null;
+        trackedPlayerPosition = null;
     }
 
     void OnTriggerEnter(Collider other){
@@ -47,6 +50,7 @@ public class TrailStream : NetworkBehaviour
         yield return new WaitForSeconds(lifeTime);
         while((startingPos-endingPos).magnitude>float.Epsilon){
             startingPos = Vector3.MoveTowards(startingPos,endingPos,playerSpeed*Time.fixedDeltaTime);
+
             yield return new WaitForFixedUpdate();
         }
         Destroy(this.gameObject);

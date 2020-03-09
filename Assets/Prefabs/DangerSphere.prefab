@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8047021995568503150}
   - component: {fileID: 8047021995568503149}
   - component: {fileID: 8047021995568503148}
-  - component: {fileID: 8047021995568503136}
   - component: {fileID: 8047021995568503137}
   m_Layer: 0
   m_Name: DangerSphere
@@ -97,28 +96,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnExit: 1
   killfeedName: THE SPHERE
---- !u!114 &8047021995568503136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8047021995568503146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13d6c522af31447398568cc65334232b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.05
-  m_SyncRotationAxis: 0
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &8047021995568503137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +187,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f46f535a5962b8846a68fb90c456ffb2,
         type: 3}
       propertyPath: m_Name
-      value: reverseSphereModel
+      value: Field Render
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f46f535a5962b8846a68fb90c456ffb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f46f535a5962b8846a68fb90c456ffb2, type: 3}
@@ -255,12 +237,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
@@ -270,7 +252,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
@@ -284,13 +266,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 0fad4fbae9435db4b9df888c78a88b97,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b865572ed9b6d241819942300aed80f, type: 2}
+    - target: {fileID: -1504981713932161579, guid: 0fad4fbae9435db4b9df888c78a88b97,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 0fad4fbae9435db4b9df888c78a88b97,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 3b865572ed9b6d241819942300aed80f, type: 2}
     - target: {fileID: -927199367670048503, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
       propertyPath: m_Name
-      value: reverseSphere
+      value: Minimap Render
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 0fad4fbae9435db4b9df888c78a88b97,
         type: 3}
