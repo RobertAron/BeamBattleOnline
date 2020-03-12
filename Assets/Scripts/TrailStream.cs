@@ -9,7 +9,7 @@ public class TrailStream : NetworkBehaviour
 {
     [SyncVar] Vector3 startingPos;
     [SyncVar] Vector3 endingPos;
-    [SyncVar] string createdBy;
+    string createdBy;
     
     [SyncVar][SerializeField] Transform trackedPlayerPosition;
     BikeMovement originator;

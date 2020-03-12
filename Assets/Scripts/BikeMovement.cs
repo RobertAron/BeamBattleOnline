@@ -10,7 +10,7 @@ public class BikeMovement : NetworkBehaviour
   Rigidbody rb;
   public float speed;
   [SerializeField] GameObject trailPrefab = default;
-  [SerializeField] string playerName;
+  string playerName;
   TrailStream currentStream = null;
   [SerializeField] float streamLifetime = 4;
   void Start()

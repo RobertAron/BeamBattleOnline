@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class PlayerInputCommunicator : NetworkBehaviour
 {
   BikeMovement bikeMovement;
-  [SyncVar] string playerName;
+  [SerializeField] string playerName;
 
   void Update(){
       if(!isLocalPlayer) return;
@@ -19,6 +19,11 @@ public class PlayerInputCommunicator : NetworkBehaviour
   public void SetBike(BikeMovement bikeMovement)
   {
     this.bikeMovement = bikeMovement;
+  }
+
+  void SetPlayerName(string newName){
+    playerName = newName;
+    CmdSetPlayerName(playerName);
   }
 
 
@@ -36,6 +41,4 @@ public class PlayerInputCommunicator : NetworkBehaviour
   public string GetPlayerName(){
     return playerName;
   }
-
-
 }

@@ -160,6 +160,8 @@ MonoBehaviour:
   speed: 15
   trailPrefab: {fileID: 6549881863489476302, guid: ec7619e1cb5572543b350faaa7ec6d3f,
     type: 3}
+  playerName: DEFAULT PLAYER NAME
+  streamLifetime: 4
 --- !u!114 &3413034397118228445
 MonoBehaviour:
   m_ObjectHideFlags: 0
