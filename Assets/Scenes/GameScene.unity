@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44261286, g: 0.49172258, b: 0.57153654, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4fe905ed299e84941929508bd0bebe3e,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &32171614
 Light:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c35c2bcef88ffa240875aff5eac2b472, type: 2}
+  - {fileID: 2100000, guid: bea8181f3f573af40b02b02df15d2940, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -946,7 +946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &742845407
 Transform:
   m_ObjectHideFlags: 0
@@ -1698,13 +1698,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021576050}
-  m_LocalRotation: {x: 0.101549104, y: -0.7635203, z: 0.43985873, w: -0.46178886}
+  m_LocalRotation: {x: -0.06909151, y: -0.6670292, z: 0.6130612, w: -0.41767746}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 323975995}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 35.303, y: -256.786, z: -43.455}
+  m_LocalEulerAnglesHint: {x: 61.113003, y: -282.01898, z: -60.379}
 --- !u!108 &2021576052
 Light:
   m_ObjectHideFlags: 0
@@ -1716,8 +1716,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.8674424, b: 0.740566, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 0.29799998, g: 0.27493063, b: 0.2544245, a: 1}
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
