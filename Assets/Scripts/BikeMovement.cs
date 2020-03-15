@@ -42,7 +42,11 @@ public class BikeMovement : NetworkBehaviour
   void StartNewTrail()
   {
     if (currentStream != null) currentStream.BreakStream(transform.position);
-    GameObject go = Instantiate(trailPrefab, transform.position, transform.rotation);
+    GameObject go = Instantiate(
+      trailPrefab,
+      transform.position,
+      transform.rotation * trailPrefab.transform.rotation
+    );
     currentStream = go.GetComponent<TrailStream>();
     currentStream.StartStream(transform.position, this, streamLifetime, speed, playerName);
     NetworkServer.Spawn(go);

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ForceField
-  m_Shader: {fileID: -6465566751694194690, guid: 1a00eb394df604346af8e8ba87722ec4,
+  m_Name: ShipMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 799db6d53da5869429fc51c4984a4a1e,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,8 +20,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_3B516DC6:
-        m_Texture: {fileID: 2800000, guid: 80b2f969abd91254eaf26fd181c0d787, type: 3}
+    - Texture2D_4ED42DC9:
+        m_Texture: {fileID: 2800000, guid: 974c2f61efa21144a8f88749c5ca14f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -53,13 +53,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1D841DA5: 0.3
-    - Vector1_21D3431F: 0.32
-    - Vector1_58BED383: 0.1
-    - Vector1_A64F512D: 0.05
-    - Vector1_A7309148: 11.15
-    - Vector1_AAE8B4B: 1
-    - Vector1_CF66B988: 50
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -82,13 +75,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_7F8156C: {r: 0.9607843, g: 0.23529412, b: 0.20392157, a: 0}
-    - Vector2_C3EA69F2: {r: 24, g: 48, b: 0, a: 0}
+    - Color_20255E37: {r: 0.047169805, g: 0.019422865, b: 0, a: 0}
+    - Color_F190189D: {r: 0.7735849, g: 0, b: 0.008443896, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
---- !u!114 &6892480324443761475
+--- !u!114 &3841610661495979335
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

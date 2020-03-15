@@ -17,7 +17,7 @@ public class TrailStream : NetworkBehaviour
     public void StartStream(Vector3 startPosition, BikeMovement bikeMovement, float liftTime,float playerSpeed,string createdBy){
         originator = bikeMovement;
         trackedPlayerPosition = bikeMovement.transform;
-        startingPos = bikeMovement.transform.position;
+        startingPos = trackedPlayerPosition.position  - trackedPlayerPosition.forward * .5f;
         endingPos = startingPos;
         this.createdBy = createdBy;
         var wc = GetComponent<WallCollision>();
@@ -35,7 +35,8 @@ public class TrailStream : NetworkBehaviour
     [ServerCallback]
     public void BreakStream(Vector3 endPosition)
     {
-        endingPos = endPosition;
+        Vector3 additional = (endPosition - startingPos).normalized * .5f;
+        endingPos = endPosition + additional;
         trackedPlayerPosition = null;
     }
 
