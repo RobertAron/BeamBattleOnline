@@ -7,6 +7,7 @@ public class FlatDistFollowCam : MonoBehaviour
     [SerializeField] float flatSpeed = 100;
     [SerializeField] float lerpSpeed = 10;
     public Transform objectToFollow = default;
+    [SerializeField] float xRotation = 0;
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class FlatDistFollowCam : MonoBehaviour
         Quaternion targetRotation = GetTargetRotation();
         Quaternion nextFrameRotation = Quaternion.Lerp(transform.rotation,targetRotation,Time.deltaTime*lerpSpeed);
         nextFrameRotation = Quaternion.RotateTowards(nextFrameRotation,targetRotation,Time.deltaTime*flatSpeed);
-        transform.rotation = nextFrameRotation;
+        transform.rotation = Quaternion.Euler(xRotation,nextFrameRotation.eulerAngles.y,nextFrameRotation.eulerAngles.z);;
         UpdatePosition();
     }
 
