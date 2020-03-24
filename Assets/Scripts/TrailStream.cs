@@ -4,56 +4,78 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Obsolete]
-[NetworkSettings(sendInterval=0.05f)]
-public class TrailStream : NetworkBehaviour
+[NetworkSettings(sendInterval = 0.05f)]
+public class TrailStream : NetworkBehaviour, Attachable
 {
-    [SyncVar] Vector3 startingPos;
-    [SyncVar] Vector3 endingPos;
-    string createdBy;
-    
-    [SyncVar][SerializeField] Transform trackedPlayerPosition;
-    BikeMovement originator;
+  [SerializeField] [SyncVar] Vector3 startingPosition;
+  // Must have BikeMovement or TrailStream on GO
+  [SerializeField] [SyncVar] public GameObject attachedTo;
+  [SerializeField] float maxLength = 20;
 
-    public void StartStream(Vector3 startPosition, BikeMovement bikeMovement, float liftTime,float playerSpeed,string createdBy){
-        originator = bikeMovement;
-        trackedPlayerPosition = bikeMovement.transform;
-        startingPos = trackedPlayerPosition.position  - trackedPlayerPosition.forward * .5f;
-        endingPos = startingPos;
-        this.createdBy = createdBy;
-        var wc = GetComponent<WallCollision>();
-        if(wc!=null) wc.SetKillfeedName(createdBy);
-        StartCoroutine(DelayClearStream(liftTime,playerSpeed));
-    }
+  public void StartStream(BikeMovement bikeGO)
+  {
+    startingPosition = transform.position;
+    this.attachedTo = bikeGO.gameObject;
+    var createdBy = bikeGO.GetPlayerName();
+    GetComponent<WallCollision>()?.SetKillfeedName(createdBy);
+  }
 
-    void FixedUpdate() {
-        if(isServer && trackedPlayerPosition!=null) endingPos = trackedPlayerPosition.position;
-        transform.position = (startingPos + endingPos)/2;
-        float length = (startingPos-endingPos).magnitude;
-        transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, length);
-    }
+  public void SetAttachment(GameObject attachedTo)
+  {
+    this.attachedTo = attachedTo;
+  }
 
-    [ServerCallback]
-    public void BreakStream(Vector3 endPosition)
-    {
-        Vector3 additional = (endPosition - startingPos).normalized * .5f;
-        endingPos = endPosition + additional;
-        trackedPlayerPosition = null;
-    }
+  void FixedUpdate()
+  {
+    var endingPosition = GetEndingPosition();
+    float totalLength = GetTotalLength();
+    float extraLength = Mathf.Max(totalLength - maxLength, 0);
+    startingPosition = Vector3.MoveTowards(startingPosition, endingPosition, extraLength);
+    if (
+      extraLength > 0 &&
+      Vector3.Distance(endingPosition, startingPosition) < float.Epsilon &&
+      isServer
+    ) NetworkServer.Destroy(this.gameObject);
+    transform.position = (startingPosition + endingPosition) / 2;
+    float length = GetSegmentLength();
+    float additionalForCoverage = transform.localScale.x;
+    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, length + additionalForCoverage);
+  }
 
-    void OnTriggerEnter(Collider other){
-        var otherBike = other.GetComponent<BikeMovement>();
-        if(otherBike==null) return;
-        // todo get the players name and stuff to make killfeed
-        if(originator!=null) originator.IncraseStreamSize();
-    }
+  Vector3 GetEndingPosition()
+  {
+    if(attachedTo==null) return transform.forward * (transform.localScale.z - transform.localScale.x);
+    Attachable potentialBikeMovement = attachedTo?.GetComponent<BikeMovement>();
+    Attachable potentialTrailStream = attachedTo?.GetComponent<TrailStream>();
+    Attachable attachment = potentialBikeMovement ?? potentialTrailStream;
+    return attachment.GetAttachPoint();
+  }
 
-    IEnumerator DelayClearStream(float lifeTime,float playerSpeed){
-        yield return new WaitForSeconds(lifeTime);
-        while((startingPos-endingPos).magnitude>float.Epsilon){
-            startingPos = Vector3.MoveTowards(startingPos,endingPos,playerSpeed*Time.fixedDeltaTime);
+  float GetSegmentLength()
+  {
+    var endingPosition = GetEndingPosition();
+    return (startingPosition - endingPosition).magnitude;
+  }
 
-            yield return new WaitForFixedUpdate();
-        }
-        Destroy(this.gameObject);
-    }
+  public float GetTotalLength()
+  {
+    GetEndingPosition();
+    float selfLength = GetSegmentLength();
+    if(attachedTo == null) return selfLength;
+    TrailStream attachedTrail = attachedTo.GetComponent<TrailStream>();
+    float forwardLength = attachedTrail?.GetTotalLength() ?? 0;
+    return forwardLength + selfLength;
+  }
+
+  void OnTriggerEnter(Collider other)
+  {
+    // var otherBike = other.GetComponent<BikeMovement>();
+    // if(otherBike==null) return;
+    // // todo get the players name and stuff to make killfeed
+    // if(originator!=null) originator.IncraseStreamSize();
+  }
+  public Vector3 GetAttachPoint()
+  {
+    return startingPosition;
+  }
 }

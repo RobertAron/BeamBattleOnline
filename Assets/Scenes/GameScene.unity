@@ -1516,7 +1516,7 @@ MonoBehaviour:
     type: 3}
   dangerSpherePrefab: {fileID: 8047021995568503146, guid: d8834a1dbb3fd0a4c8dab76ce001eb0e,
     type: 3}
-  targetPlayerCount: 0
+  targetPlayerCount: 1
 --- !u!114 &1935685451
 MonoBehaviour:
   m_ObjectHideFlags: 0

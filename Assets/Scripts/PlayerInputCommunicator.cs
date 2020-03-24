@@ -13,6 +13,9 @@ public class PlayerInputCommunicator : NetworkBehaviour
       if(!isLocalPlayer) return;
       if(Input.GetKeyDown(KeyCode.LeftArrow)) CmdTurnPlayer(true);
       if(Input.GetKeyDown(KeyCode.RightArrow)) CmdTurnPlayer(false);
+      if(Input.GetKeyDown(KeyCode.Z)) CmdSetPlayerBoost(true);
+      if(Input.GetKeyUp(KeyCode.Z)) CmdSetPlayerBoost(false);
+
   }
 
   [ServerCallback]
@@ -36,6 +39,11 @@ public class PlayerInputCommunicator : NetworkBehaviour
   [Command]
   void CmdSetPlayerName(string newPlayerName){
     playerName = newPlayerName;
+  }
+
+  [Command]
+  void CmdSetPlayerBoost(bool boost){
+    if (bikeMovement != null)  bikeMovement.SetBoost(boost);
   }
 
   public string GetPlayerName(){

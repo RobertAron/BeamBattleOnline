@@ -4,31 +4,39 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Obsolete]
-[NetworkSettings(sendInterval=0.025f)]
-public class BikeMovement : NetworkBehaviour
+[NetworkSettings(sendInterval = 0.01f)]
+public class BikeMovement : NetworkBehaviour, Attachable
 {
   Rigidbody rb;
-  public float speed;
+  bool isBoosting = false;
+  [SerializeField] float lowSpeed = 5;
+  [SerializeField] float boostSpeed = 10;
+  [SerializeField] float maxBoostTimeAvailable = 3;
+  [SerializeField] float currentBoostTimeAvailable = 3;
   [SerializeField] GameObject trailPrefab = default;
   string playerName;
   TrailStream currentStream = null;
-  [SerializeField] float streamLifetime = 4;
+
+  override public void OnStartServer()
+  {
+    StartNewTrail();
+  }
+
   void Start()
   {
     rb = GetComponent<Rigidbody>();
-    StartNewTrail();
   }
 
   void FixedUpdate()
   {
-    UpdatePosition();
+    UpdateRigidBody();
   }
 
-  [ServerCallback]
-  void UpdatePosition()
+  void UpdateRigidBody()
   {
-    // transform.position += transform.forward*speed*Time.deltaTime;
-    rb.velocity = transform.forward * speed;
+    if(currentBoostTimeAvailable<=0) SetBoost(false);
+    currentBoostTimeAvailable -= isBoosting?Time.fixedDeltaTime:0;
+    rb.velocity = transform.forward * (isBoosting ? boostSpeed : lowSpeed);
   }
 
   public void Turn(bool left)
@@ -38,29 +46,53 @@ public class BikeMovement : NetworkBehaviour
     StartNewTrail();
   }
 
-  [ServerCallback]
   void StartNewTrail()
   {
-    if (currentStream != null) currentStream.BreakStream(transform.position);
-    GameObject go = Instantiate(
-      trailPrefab,
-      transform.position,
-      transform.rotation * trailPrefab.transform.rotation
-    );
-    currentStream = go.GetComponent<TrailStream>();
-    currentStream.StartStream(transform.position, this, streamLifetime, speed, playerName);
+    GameObject go = Instantiate(trailPrefab, transform.position, transform.rotation);
     NetworkServer.Spawn(go);
+    TrailStream newStream = go.GetComponent<TrailStream>();
+    newStream.StartStream(this);
+    currentStream?.SetAttachment(go);
+    currentStream = newStream;
   }
 
-  public void IncraseStreamSize()
+  public void SetPlayerName(string newPlayerName)
   {
-    ++streamLifetime;
-  }
-
-  public void SetPlayerName(string newPlayerName){
     playerName = newPlayerName;
   }
-  public string GetPlayerName(){
+  public string GetPlayerName()
+  {
     return playerName;
+  }
+
+  Coroutine boostAvailableCoroutine;
+  public void SetBoost(bool shouldBoost)
+  {
+    isBoosting = shouldBoost;
+    if(
+      shouldBoost &&
+      boostAvailableCoroutine!=null
+    ) {
+      StopCoroutine(boostAvailableCoroutine);
+      boostAvailableCoroutine = null;
+    }
+    if(
+      !shouldBoost &&
+      boostAvailableCoroutine==null
+    ) boostAvailableCoroutine = StartCoroutine(RefillBoost());
+  }
+
+  IEnumerator RefillBoost(){
+    yield return new WaitForSeconds(2);
+    while(currentBoostTimeAvailable<maxBoostTimeAvailable){
+      currentBoostTimeAvailable+= Time.fixedDeltaTime;
+      yield return new WaitForFixedUpdate();
+    }
+    boostAvailableCoroutine = null;
+  }
+
+  public Vector3 GetAttachPoint()
+  {
+    return transform.position;
   }
 }
