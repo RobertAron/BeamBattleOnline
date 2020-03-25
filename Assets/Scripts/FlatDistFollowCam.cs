@@ -8,13 +8,14 @@ public class FlatDistFollowCam : MonoBehaviour
     [SerializeField] float lerpSpeed = 10;
     public Transform objectToFollow = default;
     [SerializeField] float xRotation = 0;
+    [SerializeField] float followPositionalSpeed = 5;
 
     void Start()
     {
         SnapToTargetPosition();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if(objectToFollow==null) return;
         if(!Application.IsPlaying(gameObject)) SnapToTargetPosition();
@@ -35,6 +36,7 @@ public class FlatDistFollowCam : MonoBehaviour
     }
 
     void UpdatePosition(){
-        transform.position = transform.rotation*distanceOffset+objectToFollow.position;
+        Vector3 targetPosition = transform.rotation*distanceOffset+objectToFollow.position;
+        transform.position = Vector3.Lerp(transform.position,targetPosition,Time.deltaTime*followPositionalSpeed);
     }
 }
