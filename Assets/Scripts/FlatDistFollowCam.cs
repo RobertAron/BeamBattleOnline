@@ -20,23 +20,34 @@ public class FlatDistFollowCam : MonoBehaviour
         if(objectToFollow==null) return;
         if(!Application.IsPlaying(gameObject)) SnapToTargetPosition();
         Quaternion targetRotation = GetTargetRotation();
-        Quaternion nextFrameRotation = Quaternion.Lerp(transform.rotation,targetRotation,Time.deltaTime*lerpSpeed);
-        nextFrameRotation = Quaternion.RotateTowards(nextFrameRotation,targetRotation,Time.deltaTime*flatSpeed);
+        Quaternion nextFrameRotation = Quaternion.Lerp(transform.rotation,targetRotation,Time.fixedDeltaTime*lerpSpeed);
+        nextFrameRotation = Quaternion.RotateTowards(nextFrameRotation,targetRotation,Time.fixedDeltaTime*flatSpeed);
         transform.rotation = Quaternion.Euler(xRotation,nextFrameRotation.eulerAngles.y,nextFrameRotation.eulerAngles.z);;
         UpdatePosition();
     }
 
     void SnapToTargetPosition(){
         transform.rotation = GetTargetRotation();
-        UpdatePosition();
+        transform.position = GetTargetPosition();
     }
 
     Quaternion GetTargetRotation(){
         return objectToFollow.rotation;
     }
 
-    void UpdatePosition(){
+    Vector3 GetTargetPosition(){
         Vector3 targetPosition = transform.rotation*distanceOffset+objectToFollow.position;
-        transform.position = Vector3.Lerp(transform.position,targetPosition,Time.deltaTime*followPositionalSpeed);
+        return targetPosition;
     }
+
+    private void Update() {
+        
+    }
+
+    void UpdatePosition(){
+        Vector3 targetPosition = GetTargetPosition();
+        transform.position = Vector3.Lerp(transform.position,targetPosition,Time.fixedDeltaTime*followPositionalSpeed);
+        // transform.position = GetTargetPosition();
+    }
+
 }
