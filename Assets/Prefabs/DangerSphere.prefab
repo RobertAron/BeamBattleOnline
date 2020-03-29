@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementPauseTime: 0
-  movementTime: 10
+  movementTime: 600
   safeCircleRenderPrefab: {fileID: 6704402754689636691, guid: d7f9d712066cbc044ac52e47db9e53d1,
     type: 3}
 --- !u!1001 &8047021996721669050

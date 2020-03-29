@@ -8,16 +8,30 @@ public class CamGrabber : NetworkBehaviour
 {
   GameObject currentTarget;
   bool swappingCam = false;
+  FlatDistFollowCam mainCamera;
+  FlatDistFollowCam minimapCamera;
+  BoostGaugeUiController boostUI;
+
+
+
   [TargetRpc]
   public void TargetSetPlayersBike(NetworkConnection networkConnection,GameObject playersBike){
-    SetCameraToBike(playersBike);
+    ChangeFocus(playersBike);
   }
 
-  public void SetCameraToBike(GameObject bike){
+  void Start() {
+    mainCamera = Camera.main.transform.GetComponent<FlatDistFollowCam>();
+    minimapCamera = GameObject.FindGameObjectWithTag("MinimapCamera")?.GetComponent<FlatDistFollowCam>();
+    boostUI = BoostGaugeUiController.instance;
+  }
+
+  public void ChangeFocus(GameObject bike){
     currentTarget = bike;
-    Camera.main.transform.GetComponent<FlatDistFollowCam>().objectToFollow = bike.transform;
-    var minimapCamera = GameObject.FindGameObjectWithTag("MinimapCamera");
-    minimapCamera.GetComponent<FlatDistFollowCam>().objectToFollow = bike.transform;
+    mainCamera.objectToFollow = bike.transform;
+    minimapCamera.objectToFollow = bike.transform;
+    BikeMovement newBikeMovement = bike.GetComponent<BikeMovement>();
+    boostUI.SubscribeToBike(newBikeMovement);
+
   }
 
   void Update(){
@@ -30,7 +44,7 @@ public class CamGrabber : NetworkBehaviour
     swappingCam = false;
     var go = GameObject.FindGameObjectWithTag("Player");
     // check we haven't assigned to a bike aready, and a new bike exists
-    if(currentTarget==null && go!=null) SetCameraToBike(go);
+    if(currentTarget==null && go!=null) ChangeFocus(go);
   }
 
 }

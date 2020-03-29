@@ -33,6 +33,7 @@ public class WallCollision : NetworkBehaviour
 
   }
 
+  [ServerCallback]
   private void DestroyPlayer(GameObject obj)
   {
     var bm = obj.GetComponent<BikeMovement>();

@@ -8,11 +8,30 @@ using UnityEngine.Networking;
 public class BikeMovement : NetworkBehaviour, Attachable
 {
   Rigidbody rb;
-  bool isBoosting = false;
+  // ==== BOOSTING =====
+  [SyncVar] bool isBoosting = false;
   [SerializeField] float lowSpeed = 5;
   [SerializeField] float boostSpeed = 10;
-  [SerializeField] float maxBoostTimeAvailable = 3;
-  [SerializeField] float currentBoostTimeAvailable = 3;
+
+  public delegate void OnVariableChangeDelegate(float newVal);
+  public event OnVariableChangeDelegate OnMaxBoostChange;
+  [SerializeField]
+  [SyncVar(hook="CallMaxBoostChangeDelegate")]
+  public float maxBoostTimeAvailable = 3;
+  void CallMaxBoostChangeDelegate(float newMaxBoostTime){
+    if(OnMaxBoostChange!=null) OnMaxBoostChange(newMaxBoostTime);
+  }
+  //
+  public event OnVariableChangeDelegate OnBoostChange;
+  [SyncVar(hook="CallCurrentBoostDelegate")]
+  public float currentBoostTimeAvailable = 3;
+  void CallCurrentBoostDelegate(float newCurrentBoostTime){
+    if(OnBoostChange!=null) OnBoostChange(newCurrentBoostTime);
+  }
+  // ====================
+
+
+  
   [SerializeField] GameObject trailPrefab = default;
   string playerName;
   TrailStream currentStream = null;
@@ -27,18 +46,21 @@ public class BikeMovement : NetworkBehaviour, Attachable
     rb = GetComponent<Rigidbody>();
   }
 
+  [ServerCallback]
   void FixedUpdate()
   {
     UpdateRigidBody();
   }
 
+  [Server]
   void UpdateRigidBody()
   {
-    if(currentBoostTimeAvailable<=0) SetBoost(false);
-    currentBoostTimeAvailable -= isBoosting?Time.fixedDeltaTime:0;
+    if(currentBoostTimeAvailable <= 0) SetBoost(false);
+    if(isBoosting) currentBoostTimeAvailable -= Time.fixedDeltaTime;
     rb.velocity = transform.forward * (isBoosting ? boostSpeed : lowSpeed);
   }
 
+  [Server]
   public void Turn(bool left)
   {
     float direction = left ? -1 : 1;
@@ -46,6 +68,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
     StartNewTrail();
   }
 
+  [Server]
   void StartNewTrail()
   {
     GameObject go = Instantiate(trailPrefab, transform.position, transform.rotation);
@@ -56,6 +79,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
     currentStream = newStream;
   }
 
+  [Server]
   public void SetPlayerName(string newPlayerName)
   {
     playerName = newPlayerName;
@@ -66,6 +90,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
   }
 
   Coroutine boostAvailableCoroutine;
+  [Server]
   public void SetBoost(bool shouldBoost)
   {
     isBoosting = shouldBoost;
@@ -82,14 +107,16 @@ public class BikeMovement : NetworkBehaviour, Attachable
     ) boostAvailableCoroutine = StartCoroutine(RefillBoost());
   }
 
+  [Server]
   IEnumerator RefillBoost(){
-    yield return new WaitForSeconds(2);
-    while(currentBoostTimeAvailable<maxBoostTimeAvailable){
-      currentBoostTimeAvailable+= Time.fixedDeltaTime;
+    yield return new WaitForSeconds(1);
+    while(currentBoostTimeAvailable < maxBoostTimeAvailable){
+      currentBoostTimeAvailable += Time.fixedDeltaTime;
       yield return new WaitForFixedUpdate();
     }
     boostAvailableCoroutine = null;
   }
+
 
   public Vector3 GetAttachPoint()
   {
