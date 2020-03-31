@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 [NetworkSettings(sendInterval = 0.05f)]
 public class TrailStream : NetworkBehaviour, Attachable
 {
-  [SerializeField] [SyncVar] Vector3 startingPosition;
+  [SyncVar] Vector3 startingPosition;
   // Must have BikeMovement or TrailStream on GO
   [SerializeField] [SyncVar] public GameObject attachedTo;
   [SerializeField] float maxLength = 20;
