@@ -159,8 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lowSpeed: 20
   boostSpeed: 40
-  maxBoostTimeAvailable: 2
-  currentBoostTimeAvailable: 2
+  maxBoostTimeAvailable: 0.75
+  currentBoostTimeAvailable: 0.75
   trailPrefab: {fileID: 6549881863489476302, guid: ec7619e1cb5572543b350faaa7ec6d3f,
     type: 3}
 --- !u!65 &235441559314113325

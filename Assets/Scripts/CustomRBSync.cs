@@ -28,6 +28,7 @@ public class CustomRBSync : NetworkBehaviour
         else ClientFixedUpdate();
     }
 
+    [Server]
     void ServerFixedUpdate(){
         if(Vector3.Distance(velocity,rb.velocity)>float.Epsilon) velocity = rb.velocity;
         if(Vector3.Distance(targetPosition,transform.position)>float.Epsilon) targetPosition = transform.position;

@@ -47,7 +47,6 @@ public class FlatDistFollowCam : MonoBehaviour
     void UpdatePosition(){
         Vector3 targetPosition = GetTargetPosition();
         transform.position = Vector3.Lerp(transform.position,targetPosition,Time.fixedDeltaTime*followPositionalSpeed);
-        // transform.position = GetTargetPosition();
     }
 
 }

@@ -17,15 +17,16 @@ public class BikeMovement : NetworkBehaviour, Attachable
   public event OnVariableChangeDelegate OnMaxBoostChange;
   [SerializeField]
   [SyncVar(hook="CallMaxBoostChangeDelegate")]
-  public float maxBoostTimeAvailable = 3;
+  public float maxBoostTimeAvailable = 1;
   void CallMaxBoostChangeDelegate(float newMaxBoostTime){
     if(OnMaxBoostChange!=null) OnMaxBoostChange(newMaxBoostTime);
   }
   //
   public event OnVariableChangeDelegate OnBoostChange;
   [SyncVar(hook="CallCurrentBoostDelegate")]
-  public float currentBoostTimeAvailable = 3;
+  public float currentBoostTimeAvailable = 1;
   void CallCurrentBoostDelegate(float newCurrentBoostTime){
+    currentBoostTimeAvailable = newCurrentBoostTime;
     if(OnBoostChange!=null) OnBoostChange(newCurrentBoostTime);
   }
   // ====================
@@ -56,7 +57,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
   void UpdateRigidBody()
   {
     if(currentBoostTimeAvailable <= 0) SetBoost(false);
-    if(isBoosting) currentBoostTimeAvailable -= Time.fixedDeltaTime;
+    if(isBoosting) CallCurrentBoostDelegate(currentBoostTimeAvailable - Time.fixedDeltaTime);
     rb.velocity = transform.forward * (isBoosting ? boostSpeed : lowSpeed);
   }
 
@@ -111,7 +112,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
   IEnumerator RefillBoost(){
     yield return new WaitForSeconds(1);
     while(currentBoostTimeAvailable < maxBoostTimeAvailable){
-      currentBoostTimeAvailable += Time.fixedDeltaTime;
+      CallCurrentBoostDelegate(currentBoostTimeAvailable + Time.fixedDeltaTime);
       yield return new WaitForFixedUpdate();
     }
     boostAvailableCoroutine = null;
@@ -121,5 +122,10 @@ public class BikeMovement : NetworkBehaviour, Attachable
   public Vector3 GetAttachPoint()
   {
     return transform.position;
+  }
+
+  public void IncreaseBoostSize(){
+    maxBoostTimeAvailable +=.25f;
+    CallCurrentBoostDelegate(maxBoostTimeAvailable);
   }
 }

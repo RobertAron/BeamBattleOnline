@@ -11,13 +11,14 @@ public class TrailStream : NetworkBehaviour, Attachable
   // Must have BikeMovement or TrailStream on GO
   [SerializeField] [SyncVar] public GameObject attachedTo;
   [SerializeField] float maxLength = 20;
-
+  BikeMovement createdBy;
   public void StartStream(BikeMovement bikeGO)
   {
+    createdBy = bikeGO;
     startingPosition = transform.position;
     this.attachedTo = bikeGO.gameObject;
-    var createdBy = bikeGO.GetPlayerName();
-    GetComponent<WallCollision>()?.SetKillfeedName(createdBy);
+    var playerName = bikeGO.GetPlayerName();
+    GetComponent<WallCollision>().SetKillfeedName(playerName);
   }
 
   public void SetAttachment(GameObject attachedTo)
@@ -69,10 +70,9 @@ public class TrailStream : NetworkBehaviour, Attachable
 
   void OnTriggerEnter(Collider other)
   {
-    // var otherBike = other.GetComponent<BikeMovement>();
-    // if(otherBike==null) return;
-    // // todo get the players name and stuff to make killfeed
-    // if(originator!=null) originator.IncraseStreamSize();
+    var otherBike = other.GetComponent<BikeMovement>();
+    // todo get the players name and stuff to make killfeed
+    if(otherBike!=null) createdBy.IncreaseBoostSize();
   }
   public Vector3 GetAttachPoint()
   {
