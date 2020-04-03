@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class MenuBikeColorSelector : MonoBehaviour
 {
-    [SerializeField] Color color;
-    [SerializeField] MeshRenderer shipMR;
-    [SerializeField] MeshRenderer trailMR;
+    [SerializeField] MeshRenderer shipMR = default;
+    [SerializeField] MeshRenderer trailMR = default;
 
     private MaterialPropertyBlock shipMaterialBlock;
     private MaterialPropertyBlock trailMaterialBlock;
@@ -17,12 +16,15 @@ public class MenuBikeColorSelector : MonoBehaviour
         trailMaterialBlock = new MaterialPropertyBlock();
     }
  
-    [ContextMenu("HMMM")]
-    public void ChangePropertyBlock()
-    {
-        shipMaterialBlock.SetColor("_AccentColor", color);
+    public void SetAccentColor(Color color){
+        shipMaterialBlock.SetColor("_PrimaryColor", color);
         shipMR.SetPropertyBlock(shipMaterialBlock);
+    }
+
+    public void SetPrimaryColor(Color color){
         trailMaterialBlock.SetColor("_Color", color);
         trailMR.SetPropertyBlock(trailMaterialBlock);
+        shipMaterialBlock.SetColor("_AccentColor", color);
+        shipMR.SetPropertyBlock(shipMaterialBlock);
     }
 }
