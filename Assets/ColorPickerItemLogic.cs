@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class ColorPickerItemLogic :
     MonoBehaviour,
-    IPointerClickHandler,
     IPointerEnterHandler,
     IPointerExitHandler
 {
@@ -12,10 +11,6 @@ public class ColorPickerItemLogic :
     [SerializeField] TooltipActions tooltip = default;
     [SerializeField] RawImage image = default;
     [SerializeField] MenuBikeColorSelector menuBikeColorSelector = default;
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
