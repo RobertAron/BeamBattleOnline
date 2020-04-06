@@ -79,7 +79,7 @@ Material:
     m_Colors:
     - Color_20255E37: {r: 0.047169805, g: 0.019422865, b: 0, a: 0}
     - Color_F190189D: {r: 0.7735849, g: 0, b: 0.008443896, a: 0}
-    - _AccentColor: {r: 0.7735849, g: 0, b: 0.008443896, a: 1}
+    - _AccentColor: {r: 0.7735849, g: 0, b: 0, a: 1}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

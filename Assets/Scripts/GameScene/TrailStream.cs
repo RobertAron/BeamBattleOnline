@@ -7,17 +7,34 @@ using UnityEngine.Networking;
 [NetworkSettings(sendInterval = 0.05f)]
 public class TrailStream : NetworkBehaviour, Attachable
 {
+  [SerializeField] MeshRenderer trailMR = default;
+  private MaterialPropertyBlock trailMaterialBlock = default;
+  [SerializeField][SyncVar(hook="SetTrailColor")] Color color = PlayerPrefsController.defaultAccentColor;
+  public void SetTrailColor(Color color){
+    this.color = color;
+    trailMaterialBlock.SetColor("_Color", color);
+    Debug.Log("Setting material block");
+    trailMR.SetPropertyBlock(trailMaterialBlock);
+  }
+
+
   [SyncVar] Vector3 startingPosition;
   // Must have BikeMovement or TrailStream on GO
   [SerializeField] [SyncVar] public GameObject attachedTo;
   [SerializeField] float maxLength = 20;
   BikeMovement createdBy;
+
+  private void Awake() {
+    trailMaterialBlock = new MaterialPropertyBlock();
+  }
+
   public void StartStream(BikeMovement bikeGO)
   {
     createdBy = bikeGO;
     startingPosition = transform.position;
     this.attachedTo = bikeGO.gameObject;
     var playerName = bikeGO.GetPlayerName();
+    SetTrailColor(bikeGO.GetAccentColor());
     GetComponent<WallCollision>().SetKillfeedName(playerName);
   }
 

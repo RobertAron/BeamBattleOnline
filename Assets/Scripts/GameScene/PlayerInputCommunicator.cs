@@ -22,10 +22,6 @@ public class PlayerInputCommunicator : NetworkBehaviour
 
   public void Start(){
     if(!isClient) return;
-    Debug.Log("PIC client start called");
-    Debug.Log(playerPrefsController.playerName);
-    Debug.Log(playerPrefsController.primaryColor);
-    Debug.Log(playerPrefsController.accentColor);
     CmdSetPlayerSettings(playerPrefsController.playerName,playerPrefsController.primaryColor,playerPrefsController.accentColor);
   }
 
@@ -44,7 +40,6 @@ public class PlayerInputCommunicator : NetworkBehaviour
 
   [Command]
   void CmdSetPlayerSettings(string name, Color primary, Color accent){
-    Debug.Log("cmd set player called");
     playerName = name;
     primaryColor = primary;
     accentColor = accent;

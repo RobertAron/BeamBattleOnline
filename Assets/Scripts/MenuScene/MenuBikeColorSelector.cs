@@ -19,15 +19,15 @@ public class MenuBikeColorSelector : MonoBehaviour
     }
  
     public void SetAccentColor(Color color){
-        shipMaterialBlock.SetColor("_PrimaryColor", color);
+        shipMaterialBlock.SetColor("_AccentColor", color);
         shipMR.SetPropertyBlock(shipMaterialBlock);
+        trailMaterialBlock.SetColor("_Color", color);
+        trailMR.SetPropertyBlock(trailMaterialBlock);
         playerPrefsController.accentColor = color;
     }
 
     public void SetPrimaryColor(Color color){
-        trailMaterialBlock.SetColor("_Color", color);
-        trailMR.SetPropertyBlock(trailMaterialBlock);
-        shipMaterialBlock.SetColor("_AccentColor", color);
+        shipMaterialBlock.SetColor("_PrimaryColor", color);
         shipMR.SetPropertyBlock(shipMaterialBlock);
         playerPrefsController.primaryColor = color;
     }

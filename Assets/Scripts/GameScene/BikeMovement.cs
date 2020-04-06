@@ -50,6 +50,9 @@ public class BikeMovement : NetworkBehaviour, Attachable
     shipMaterialBlock.SetColor("_AccentColor", color);
     shipMR.SetPropertyBlock(shipMaterialBlock);
   }
+  public Color GetAccentColor(){
+    return accentColor;
+  }
   TrailStream currentStream = null;
 
   override public void OnStartServer()
@@ -102,6 +105,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
     SetPrimaryColor(newPrimaryColor);
     SetAccentColor(newAccentColor);
     playerName = newPlayerName;
+    if(currentStream!=null) currentStream.SetTrailColor(newAccentColor);
   }
 
   public string GetPlayerName()

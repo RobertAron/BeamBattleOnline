@@ -143,7 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caae262a3016b744a9e228bc807df860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailMR: {fileID: 3268211054756077891}
+  color: {r: 0, g: 0, b: 0, a: 0}
   attachedTo: {fileID: 0}
+  maxLength: 20
 --- !u!114 &310840785839031050
 MonoBehaviour:
   m_ObjectHideFlags: 0
