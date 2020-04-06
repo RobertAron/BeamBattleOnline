@@ -7,6 +7,9 @@ using UnityEngine.Networking;
 [NetworkSettings(sendInterval = 0.01f)]
 public class BikeMovement : NetworkBehaviour, Attachable
 {
+  [SerializeField] MeshRenderer shipMR = default;
+  private MaterialPropertyBlock shipMaterialBlock;
+
   Rigidbody rb;
   // ==== BOOSTING =====
   [SyncVar] bool isBoosting = false;
@@ -35,6 +38,18 @@ public class BikeMovement : NetworkBehaviour, Attachable
   
   [SerializeField] GameObject trailPrefab = default;
   string playerName;
+  [SerializeField][SyncVar(hook="SetPrimaryColor")] Color primaryColor = new Color();
+  void SetPrimaryColor(Color color){
+    primaryColor = color;
+    shipMaterialBlock.SetColor("_PrimaryColor", color);
+    shipMR.SetPropertyBlock(shipMaterialBlock);
+  }
+  [SerializeField][SyncVar(hook="SetAccentColor")] Color accentColor = new Color();
+  void SetAccentColor(Color color){
+    accentColor = color;
+    shipMaterialBlock.SetColor("_AccentColor", color);
+    shipMR.SetPropertyBlock(shipMaterialBlock);
+  }
   TrailStream currentStream = null;
 
   override public void OnStartServer()
@@ -42,9 +57,10 @@ public class BikeMovement : NetworkBehaviour, Attachable
     StartNewTrail();
   }
 
-  void Start()
+  void Awake()
   {
     rb = GetComponent<Rigidbody>();
+    shipMaterialBlock = new MaterialPropertyBlock();
   }
 
   [ServerCallback]
@@ -81,10 +97,13 @@ public class BikeMovement : NetworkBehaviour, Attachable
   }
 
   [Server]
-  public void SetPlayerName(string newPlayerName)
+  public void SetPlayerSettings(string newPlayerName,Color newPrimaryColor, Color newAccentColor)
   {
+    SetPrimaryColor(newPrimaryColor);
+    SetAccentColor(newAccentColor);
     playerName = newPlayerName;
   }
+
   public string GetPlayerName()
   {
     return playerName;

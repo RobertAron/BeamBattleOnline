@@ -6,25 +6,22 @@ public class MenuBikeColorSelector : MonoBehaviour
 {
     [SerializeField] MeshRenderer shipMR = default;
     [SerializeField] MeshRenderer trailMR = default;
-    [SerializeField] Color defaultAccent = default;
-    [SerializeField] Color defaultPrimary = default;
     private MaterialPropertyBlock shipMaterialBlock;
     private MaterialPropertyBlock trailMaterialBlock;
+    PlayerPrefsController playerPrefsController = new PlayerPrefsController();
  
     void Start()
     {
         shipMaterialBlock = new MaterialPropertyBlock();
         trailMaterialBlock = new MaterialPropertyBlock();
-        string accentDefault = PlayerPrefs.GetString("accentColor",ColorSerializer.ColorToString(defaultAccent));
-        string primaryDefault = PlayerPrefs.GetString("primaryColor",ColorSerializer.ColorToString(defaultPrimary));
-        SetAccentColor(ColorSerializer.StringToColor(accentDefault));
-        SetPrimaryColor(ColorSerializer.StringToColor(primaryDefault));
+        SetAccentColor(playerPrefsController.accentColor);
+        SetPrimaryColor(playerPrefsController.primaryColor);
     }
  
     public void SetAccentColor(Color color){
         shipMaterialBlock.SetColor("_PrimaryColor", color);
         shipMR.SetPropertyBlock(shipMaterialBlock);
-        PlayerPrefs.SetString("accentColor",ColorSerializer.ColorToString(color));
+        playerPrefsController.accentColor = color;
     }
 
     public void SetPrimaryColor(Color color){
@@ -32,6 +29,6 @@ public class MenuBikeColorSelector : MonoBehaviour
         trailMR.SetPropertyBlock(trailMaterialBlock);
         shipMaterialBlock.SetColor("_AccentColor", color);
         shipMR.SetPropertyBlock(shipMaterialBlock);
-        PlayerPrefs.SetString("primaryColor",ColorSerializer.ColorToString(color));
+        playerPrefsController.primaryColor = color;
     }
 }

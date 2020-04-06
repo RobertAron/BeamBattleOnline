@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518e44e6e37f22144a02d3c519dea127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipMR: {fileID: 1127812183096563801}
   lowSpeed: 20
   boostSpeed: 40
   maxBoostTimeAvailable: 0.75
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpPercent: 0.5
   movePercent: 0.9
-  debugPrediction: 1
+  debugPrediction: 0
 --- !u!1001 &7258659306294834572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -284,6 +285,12 @@ PrefabInstance:
 --- !u!4 &2432301006257708694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ec390b6d20c451d478d30c6ce3d79724,
+    type: 3}
+  m_PrefabInstance: {fileID: 7258659306294834572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1127812183096563801 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: ec390b6d20c451d478d30c6ce3d79724,
     type: 3}
   m_PrefabInstance: {fileID: 7258659306294834572}
   m_PrefabAsset: {fileID: 0}

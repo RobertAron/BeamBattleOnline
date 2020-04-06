@@ -68,6 +68,7 @@ public class TrailStream : NetworkBehaviour, Attachable
     return forwardLength + selfLength;
   }
 
+  [ServerCallback]
   void OnTriggerEnter(Collider other)
   {
     var otherBike = other.GetComponent<BikeMovement>();
