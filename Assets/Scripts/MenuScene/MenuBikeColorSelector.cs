@@ -10,6 +10,18 @@ public class MenuBikeColorSelector : MonoBehaviour
     private MaterialPropertyBlock trailMaterialBlock;
     PlayerPrefsController playerPrefsController = new PlayerPrefsController();
  
+    #region  Singleton
+    public static MenuBikeColorSelector instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+    #endregion
+
+
     void Start()
     {
         shipMaterialBlock = new MaterialPropertyBlock();

@@ -10,7 +10,12 @@ public class ColorPickerItemLogic :
     bool isIn = false;
     [SerializeField] TooltipActions tooltip = default;
     [SerializeField] RawImage image = default;
-    [SerializeField] MenuBikeColorSelector menuBikeColorSelector = default;
+    MenuBikeColorSelector menuBikeColorSelector = default;
+
+
+    private void Start() {
+        menuBikeColorSelector = MenuBikeColorSelector.instance;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -33,4 +38,5 @@ public class ColorPickerItemLogic :
     public void Init(Color color){
         image.color = color;
     }
+    
 }
