@@ -6,23 +6,8 @@ public class PlayerPrefsController
 {
 
     public static string defaultPlayerName = "A Player"; 
-    public static Color defaultPrimaryColor = new Color();
-    public static Color defaultAccentColor = new Color(.77f,0,0); 
+    public static Color defaultAccentColor = Color.HSVToRGB(0,.25f,.75f); 
 
-    // =======================================================
-    public Color primaryColor
-    {
-        get
-        {
-            string prefPrimaryColor = PlayerPrefs.GetString("primaryColor", ColorToString(defaultPrimaryColor));
-            return StringToColor(prefPrimaryColor);
-        }
-        set
-        {
-            PlayerPrefs.SetString("primaryColor", ColorToString(value));
-        }
-    }
-    // =======================================================
     public Color accentColor
     {
         get

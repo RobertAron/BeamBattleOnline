@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColorPickerItemContainerUtil : MonoBehaviour
 {
-    [SerializeField] GameObject colorPickerItemPrefab;
+    [SerializeField] GameObject colorPickerItemPrefab = default;
 
     [ContextMenu("FillColors")]
     void FillWithColorItems()

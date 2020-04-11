@@ -95,7 +95,7 @@ public class GameManager : NetworkBehaviour
       var pic = ele.Value.GetComponent<PlayerInputCommunicator>();
       var camGrabber = ele.Value.GetComponent<CamGrabber>();
       pic.SetBike(bikeMovement);
-      bikeMovement.SetPlayerSettings(pic.GetPlayerName(),pic.primaryColor,pic.accentColor);
+      bikeMovement.SetPlayerSettings(pic.GetPlayerName(),pic.accentColor);
       camGrabber.TargetSetPlayersBike(ele.Key, playerBike);
     }
     int computersToSpawn = targetPlayerCount - playerConnections.Count;
@@ -105,7 +105,6 @@ public class GameManager : NetworkBehaviour
       playerBike.GetComponentInChildren<ComputerPlayer>().enabled = true;
       playerBike.GetComponent<BikeMovement>().SetPlayerSettings(
         PlayerPrefsController.defaultPlayerName,
-        PlayerPrefsController.defaultPrimaryColor,
         PlayerPrefsController.defaultAccentColor
       );
     }

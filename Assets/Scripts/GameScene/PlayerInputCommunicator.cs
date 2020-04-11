@@ -8,7 +8,6 @@ public class PlayerInputCommunicator : NetworkBehaviour
 {
   BikeMovement bikeMovement;
   [SerializeField] string playerName;
-  [SerializeField] public Color primaryColor;
   [SerializeField] public Color accentColor;
   PlayerPrefsController playerPrefsController = new PlayerPrefsController();
 
@@ -22,7 +21,7 @@ public class PlayerInputCommunicator : NetworkBehaviour
 
   public void Start(){
     if(!isClient) return;
-    CmdSetPlayerSettings(playerPrefsController.playerName,playerPrefsController.primaryColor,playerPrefsController.accentColor);
+    CmdSetPlayerSettings(playerPrefsController.playerName,playerPrefsController.accentColor);
   }
 
   [ServerCallback]
@@ -39,10 +38,9 @@ public class PlayerInputCommunicator : NetworkBehaviour
   }
 
   [Command]
-  void CmdSetPlayerSettings(string name, Color primary, Color accent){
+  void CmdSetPlayerSettings(string name, Color accentColor){
     playerName = name;
-    primaryColor = primary;
-    accentColor = accent;
+    this.accentColor = accentColor;
   }
 
   [Command]

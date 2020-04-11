@@ -38,12 +38,6 @@ public class BikeMovement : NetworkBehaviour, Attachable
   
   [SerializeField] GameObject trailPrefab = default;
   string playerName;
-  [SerializeField][SyncVar(hook="SetPrimaryColor")] Color primaryColor = new Color();
-  void SetPrimaryColor(Color color){
-    primaryColor = color;
-    shipMaterialBlock.SetColor("_PrimaryColor", color);
-    shipMR.SetPropertyBlock(shipMaterialBlock);
-  }
   [SerializeField][SyncVar(hook="SetAccentColor")] Color accentColor = new Color();
   void SetAccentColor(Color color){
     accentColor = color;
@@ -100,9 +94,8 @@ public class BikeMovement : NetworkBehaviour, Attachable
   }
 
   [Server]
-  public void SetPlayerSettings(string newPlayerName,Color newPrimaryColor, Color newAccentColor)
+  public void SetPlayerSettings(string newPlayerName, Color newAccentColor)
   {
-    SetPrimaryColor(newPrimaryColor);
     SetAccentColor(newAccentColor);
     playerName = newPlayerName;
     if(currentStream!=null) currentStream.SetTrailColor(newAccentColor);
