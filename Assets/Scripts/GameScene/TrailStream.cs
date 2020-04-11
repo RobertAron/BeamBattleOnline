@@ -13,7 +13,6 @@ public class TrailStream : NetworkBehaviour, Attachable
   public void SetTrailColor(Color color){
     this.color = color;
     trailMaterialBlock.SetColor("_Color", color);
-    Debug.Log("Setting material block");
     trailMR.SetPropertyBlock(trailMaterialBlock);
   }
 

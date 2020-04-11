@@ -30,6 +30,10 @@ public class MenuBikeColorSelector : MonoBehaviour
     }
  
     public void SetAccentColor(Color color){
+        TooltipActions[] tooltipActions = FindObjectsOfType<TooltipActions>();
+        foreach(TooltipActions tooltipAction in tooltipActions){
+            tooltipAction.LerpToColor(color);
+        }
         playerPrefsController.accentColor = color;
         shipMaterialBlock.SetColor("_AccentColor", color);
         shipMR.SetPropertyBlock(shipMaterialBlock);

@@ -15,7 +15,6 @@ public class ColorPickerItemContainerUtil : MonoBehaviour
         {
             for (int row = 0; row < 4; ++row)
             {
-                Debug.Log(hueSpread * column);
                 Color color = Color.HSVToRGB(
                     hueSpread * column,
                     .25f + valueSpread * row,

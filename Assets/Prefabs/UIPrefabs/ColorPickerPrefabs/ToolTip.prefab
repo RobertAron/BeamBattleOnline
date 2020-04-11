@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 5404697188402594545}
   leanTweenType: 1
+  image: {fileID: 5331097776044653416}
 --- !u!225 &5404697188402594545
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -115,9 +116,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2608983875261253914}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &2979696325132106694
 GameObject:
@@ -428,6 +429,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2969760646794891078, guid: 62550fa858d1a8348ae4bc8378c86d8b,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3380309915946335737, guid: 62550fa858d1a8348ae4bc8378c86d8b,
         type: 3}
       propertyPath: m_Name
@@ -538,6 +544,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4655541253419035276, guid: 62550fa858d1a8348ae4bc8378c86d8b,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5353263390993532882, guid: 62550fa858d1a8348ae4bc8378c86d8b,
         type: 3}
       propertyPath: m_FlexibleWidth
@@ -573,6 +584,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6521149863066954824, guid: 62550fa858d1a8348ae4bc8378c86d8b,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9069530894921393621, guid: 62550fa858d1a8348ae4bc8378c86d8b,
         type: 3}
       propertyPath: m_Color.r
@@ -588,6 +604,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.75299627
       objectReference: {fileID: 0}
+    - target: {fileID: 9069530894921393621, guid: 62550fa858d1a8348ae4bc8378c86d8b,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62550fa858d1a8348ae4bc8378c86d8b, type: 3}
 --- !u!224 &15834360670140783 stripped
@@ -596,3 +617,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3757883789347151549}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5331097776044653416 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9069530894921393621, guid: 62550fa858d1a8348ae4bc8378c86d8b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3757883789347151549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

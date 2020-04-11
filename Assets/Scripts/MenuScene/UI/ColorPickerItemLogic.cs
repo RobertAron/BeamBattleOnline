@@ -20,13 +20,13 @@ public class ColorPickerItemLogic :
     public void OnPointerEnter(PointerEventData eventData)
     {
         isIn = true;
-        tooltip.Enable();
+        tooltip.MakeVisible();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isIn = false;
-        tooltip.Disable();
+        tooltip.MakeHidden();
     }
 
     private void Update() {

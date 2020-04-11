@@ -1,20 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TooltipActions : MonoBehaviour
 {
     [SerializeField] CanvasGroup canvasGroup = default;
     [SerializeField] LeanTweenType leanTweenType = default;
+    [SerializeField] Image image = default;
     int ltID;
-    public void Enable(){
-        canvasGroup.alpha = 0;
-        gameObject.SetActive(true);
-        ltID = LeanTween.alphaCanvas(canvasGroup,1,.1f).setEase(leanTweenType).id;
+    int ltColorID;
+    Color targetColor;
+
+    private void Awake() {
+        targetColor = PlayerPrefsController.defaultAccentColor;
+    }
+
+    public void MakeVisible(){
+        LeanTween.cancel(ltID);
+        LeanTween.cancel(ltColorID);
+        UpdateTTColor(targetColor);
+        ltID = LeanTween.alphaCanvas(canvasGroup,1,.05f).setEase(leanTweenType).id;
 
     }
-    public void Disable(){
+
+    public void MakeHidden(){
         LeanTween.cancel(ltID);
-        gameObject.SetActive(false);
+        ltID = LeanTween.alphaCanvas(canvasGroup,0,.05f).setEase(leanTweenType).id;
+
+    }
+
+    public void LerpToColor(Color color){
+        targetColor = color;
+        LeanTween.cancel(ltColorID);
+        ltColorID = LeanTween.value(this.gameObject,UpdateTTColor,image.color,color,.05f).setEase(leanTweenType).id;
+    }
+    void UpdateTTColor(Color color){
+        image.color = color;
     }
 }
