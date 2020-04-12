@@ -15,8 +15,8 @@ public class PlayerInputCommunicator : NetworkBehaviour
       if(!isLocalPlayer) return;
       if(Input.GetKeyDown(KeyCode.LeftArrow)) CmdTurnPlayer(true);
       if(Input.GetKeyDown(KeyCode.RightArrow)) CmdTurnPlayer(false);
-      if(Input.GetKeyDown(KeyCode.Z)) CmdSetPlayerBoost(true);
-      if(Input.GetKeyUp(KeyCode.Z)) CmdSetPlayerBoost(false);
+      if(Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Space)) CmdSetPlayerBoost(true);
+      if(Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.Space)) CmdSetPlayerBoost(false);
   }
 
   public void Start(){

@@ -9,5 +9,6 @@ public class MenuBikeMovement : MonoBehaviour
     void Update()
     {
         transform.position += Time.deltaTime * speed * transform.forward;
+        if(transform.position.z>800) transform.position = transform.position - transform.forward * 800;
     }
 }
