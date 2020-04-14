@@ -39,4 +39,5 @@ public class CustomNetworkManager : NetworkManager
     public override void OnServerDisconnect(NetworkConnection conn){
         gameManager.RemovePlayer(conn);
     }
+
 }

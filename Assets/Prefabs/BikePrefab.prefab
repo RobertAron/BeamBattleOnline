@@ -157,6 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518e44e6e37f22144a02d3c519dea127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fakeAttachmentPrefab: {fileID: 1709443551264836378, guid: d8f11f4556cb40a419b0fc163f3076e0,
+    type: 3}
   shipMR: {fileID: 1127812183096563801}
   lowSpeed: 20
   boostSpeed: 40
@@ -164,6 +166,7 @@ MonoBehaviour:
   currentBoostTimeAvailable: 0.75
   trailPrefab: {fileID: 6549881863489476302, guid: ec7619e1cb5572543b350faaa7ec6d3f,
     type: 3}
+  accentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &235441559314113325
 BoxCollider:
   m_ObjectHideFlags: 0

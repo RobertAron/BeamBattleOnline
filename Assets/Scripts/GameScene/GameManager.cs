@@ -78,7 +78,12 @@ public class GameManager : NetworkBehaviour
 
   public void RemovePlayer(NetworkConnection connection)
   {
+    var go = playerConnections[connection];
+    PlayerInputCommunicator pic = go.GetComponent<PlayerInputCommunicator>();
+    var bikeGo = pic.GetBike();
+    NetworkManager.Destroy(bikeGo);
     playerConnections.Remove(connection);
+    NetworkManager.Destroy(go);
   }
 
 

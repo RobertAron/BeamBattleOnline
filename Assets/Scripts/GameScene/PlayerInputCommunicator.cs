@@ -30,6 +30,11 @@ public class PlayerInputCommunicator : NetworkBehaviour
     this.bikeMovement = bikeMovement;
   }
 
+  [ServerCallback]
+  public GameObject GetBike(){
+    return this.bikeMovement.gameObject;
+  }
+
 
   [Command]
   void CmdTurnPlayer(bool left)
