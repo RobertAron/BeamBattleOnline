@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 [NetworkSettings(sendInterval = 0.02f)]
 public class CustomRBSync : NetworkBehaviour
 {
+    [SerializeField] float snapDistance = 4;
     [SyncVar] Vector3 velocity = new Vector3(0,0,0);
     [SyncVar] Vector3 targetPosition = new Vector3(0,0,0);
     [SyncVar] Quaternion targetRotation = Quaternion.identity;
@@ -44,6 +45,11 @@ public class CustomRBSync : NetworkBehaviour
         targetPosition += velocity * Time.fixedDeltaTime;
 
         transform.rotation = targetRotation;
+        // Sanp to target
+        if(Vector3.Distance(transform.position,targetPosition)>snapDistance){
+            transform.position = targetPosition;
+        }
+        // Lerp to target
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPosition,
