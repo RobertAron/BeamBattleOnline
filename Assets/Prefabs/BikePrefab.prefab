@@ -206,9 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8d9018f698acb4f8c98b7ea5c1d836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapDistance: 4
-  lerpPercent: 0.9
-  movePercent: 0.9
+  snapDistance: 6
+  lerpPercent: 0.8
+  movePercent: 0.8
   debugPrediction: 0
 --- !u!1001 &7258659306294834572
 PrefabInstance:

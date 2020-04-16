@@ -167,5 +167,6 @@ public class BikeMovement : NetworkBehaviour, Attachable
         var go = Instantiate(fakeAttachmentPrefab,transform.position,transform.rotation);
         NetworkServer.Spawn(go);
         currentStream?.SetAttachment(go);
+        GameManager.instance.RemoveBikeFromAlivePlayers(gameObject);
     }
 }

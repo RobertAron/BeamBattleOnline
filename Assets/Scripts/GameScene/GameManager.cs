@@ -12,7 +12,9 @@ public class GameManager : NetworkBehaviour
   [SerializeField] GameObject playerControllerPrefab = default;
   [SerializeField] GameObject dangerSpherePrefab = default;
   [SerializeField] int targetPlayerCount = 30;
+  [SerializeField] RemainingPlayerTextSetter remainingPlayerTextSetter = default;
   Dictionary<NetworkConnection, GameObject> playerConnections = new Dictionary<NetworkConnection, GameObject>();
+  List<GameObject> bikesAlive = new List<GameObject>();
 
   bool isRestartingGame = false;
 
@@ -113,6 +115,7 @@ public class GameManager : NetworkBehaviour
         PlayerPrefsController.defaultAccentColor
       );
     }
+    UpdateRemainingPlayersUI();
   }
 
   [ServerCallback]
@@ -123,6 +126,16 @@ public class GameManager : NetworkBehaviour
     Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
     var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
     NetworkServer.Spawn(playerBike);
+    bikesAlive.Add(playerBike);
     return playerBike;
+  }
+
+  public void RemoveBikeFromAlivePlayers(GameObject bikeToRemove){
+    bikesAlive.Remove(bikeToRemove);
+    UpdateRemainingPlayersUI();
+  }
+
+  void UpdateRemainingPlayersUI(){
+    remainingPlayerTextSetter.RpcUpdatePlayersRemaining(bikesAlive.Count);
   }
 }
