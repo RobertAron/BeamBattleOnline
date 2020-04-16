@@ -160,8 +160,6 @@ MonoBehaviour:
   fakeAttachmentPrefab: {fileID: 1709443551264836378, guid: d8f11f4556cb40a419b0fc163f3076e0,
     type: 3}
   shipMR: {fileID: 1127812183096563801}
-  lowSpeed: 20
-  boostSpeed: 40
   maxBoostTimeAvailable: 0.75
   currentBoostTimeAvailable: 0.75
   trailPrefab: {fileID: 6549881863489476302, guid: ec7619e1cb5572543b350faaa7ec6d3f,
@@ -208,7 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8d9018f698acb4f8c98b7ea5c1d836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpPercent: 0.5
+  snapDistance: 4
+  lerpPercent: 0.9
   movePercent: 0.9
   debugPrediction: 0
 --- !u!1001 &7258659306294834572

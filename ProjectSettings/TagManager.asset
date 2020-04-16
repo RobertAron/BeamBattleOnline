@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ClearAfterGame
   - MinimapCamera
+  - PlayerWaitingUi
   layers:
   - Default
   - TransparentFX
