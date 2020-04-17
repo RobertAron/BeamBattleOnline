@@ -9,6 +9,9 @@ public class SafeCircleRender : NetworkBehaviour
     [SerializeField] LineRenderer lineRenderer = default;
     Transform minimapPos;
     [SyncVar(hook="UpdateScale")] Vector3 scale;
+    void UpdateScale(Vector3 newScale){
+        transform.localScale = newScale;
+    }
 
     [ServerCallback]
     public void UpdateSafeArea(Vector3 position, Vector3 scale){
@@ -16,9 +19,6 @@ public class SafeCircleRender : NetworkBehaviour
         this.scale = scale;
     }
 
-    void UpdateScale(Vector3 newScale){
-        transform.localScale = newScale;
-    }
 
     public override void OnStartClient(){
         minimapPos = GameObject.FindGameObjectWithTag("MinimapCamera").transform;

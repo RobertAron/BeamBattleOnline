@@ -207,8 +207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapDistance: 6
-  lerpPercent: 0.8
-  movePercent: 0.8
+  lerpPercent: 0.95
+  movePercent: 0.95
   debugPrediction: 0
 --- !u!1001 &7258659306294834572
 PrefabInstance:

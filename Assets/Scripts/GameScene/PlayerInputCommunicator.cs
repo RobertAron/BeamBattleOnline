@@ -8,7 +8,7 @@ public class PlayerInputCommunicator : NetworkBehaviour
 {
   BikeMovement bikeMovement;
   [SerializeField][SyncVar] GameObject playerBikeGo;
-  [SerializeField] string playerName;
+  [SerializeField][SyncVar] string playerName;
   [SerializeField] public Color accentColor;
   [SerializeField] GameObject playerWaitingUI;
   PlayerPrefsController playerPrefsController = new PlayerPrefsController();
@@ -23,7 +23,7 @@ public class PlayerInputCommunicator : NetworkBehaviour
   }
 
   public void Start(){
-    if(!isClient) CmdSetPlayerSettings(playerPrefsController.playerName,playerPrefsController.accentColor);
+    if(isLocalPlayer) CmdSetPlayerSettings(playerPrefsController.playerName,playerPrefsController.accentColor);
     playerWaitingUI = GameObject.FindGameObjectWithTag("PlayerWaitingUi");
   }
 

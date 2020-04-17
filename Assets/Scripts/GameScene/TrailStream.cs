@@ -24,6 +24,10 @@ public class TrailStream : NetworkBehaviour, Attachable
     [SerializeField] float maxLength = 20;
     BikeMovement createdBy;
 
+    private void Start() {
+        SetTrailColor(color);
+    }
+
     private void Awake()
     {
         trailMaterialBlock = new MaterialPropertyBlock();

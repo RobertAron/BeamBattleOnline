@@ -6,7 +6,7 @@ public class PlayerPrefsController
 {
 
     public static string defaultPlayerName = "A Player"; 
-    public static Color defaultAccentColor = Color.HSVToRGB(0,.25f,.75f); 
+    public static Color defaultAccentColor = Color.HSVToRGB(0,1f,.75f); 
 
     public Color accentColor
     {
