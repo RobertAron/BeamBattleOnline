@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4fe905ed299e84941929508bd0bebe3e,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5880,7 +5880,6 @@ GameObject:
   - component: {fileID: 1294988283}
   - component: {fileID: 1294988282}
   - component: {fileID: 1294988281}
-  - component: {fileID: 1294988280}
   m_Layer: 0
   m_Name: Color Picker Grid
   m_TagString: Untagged
@@ -5939,20 +5938,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1294988280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294988278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d06582298785ab4d9949c479a82ac1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorPickerItemPrefab: {fileID: 3887634564974421061, guid: 94a035e29d9c82c4a9004aae0b6487b9,
-    type: 3}
 --- !u!114 &1294988281
 MonoBehaviour:
   m_ObjectHideFlags: 0

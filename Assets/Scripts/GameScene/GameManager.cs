@@ -7,135 +7,151 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class GameManager : NetworkBehaviour
 {
-  [SerializeField] float timeTillPlayersSpawn = 15;
-  [SerializeField] GameObject bikePrefab = default;
-  [SerializeField] GameObject playerControllerPrefab = default;
-  [SerializeField] GameObject dangerSpherePrefab = default;
-  [SerializeField] int targetPlayerCount = 30;
-  [SerializeField] RemainingPlayerTextSetter remainingPlayerTextSetter = default;
-  Dictionary<NetworkConnection, GameObject> playerConnections = new Dictionary<NetworkConnection, GameObject>();
-  List<GameObject> bikesAlive = new List<GameObject>();
+    [SerializeField] float timeTillPlayersSpawn = 15;
+    [SerializeField] GameObject bikePrefab = default;
+    [SerializeField] GameObject playerControllerPrefab = default;
+    [SerializeField] GameObject dangerSpherePrefab = default;
+    [SerializeField] int targetPlayerCount = 30;
+    [SerializeField] RemainingPlayerTextSetter remainingPlayerTextSetter = default;
+    Dictionary<NetworkConnection, GameObject> playerConnections = new Dictionary<NetworkConnection, GameObject>();
+    List<GameObject> bikesAlive = new List<GameObject>();
 
-  bool isRestartingGame = false;
+    bool isRestartingGame = false;
 
-  #region  Singleton
-  public static GameManager instance;
-  private void Awake()
-  {
-    if (instance == null)
+    #region  Singleton
+    public static GameManager instance;
+    private void Awake()
     {
-      instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
-  }
-  #endregion
+    #endregion
 
-  void FixedUpdate()
-  {
-    if (
-      playerConnections.Count > 0 &&
-      !ArePlayersLeft() &&
-      !isRestartingGame
-    )
+    void FixedUpdate()
     {
-      StartCoroutine(ResetGameCountdown());
+        if (
+          playerConnections.Count > 0 &&
+          !ArePlayersLeft() &&
+          !isRestartingGame
+        )
+        {
+            StartCoroutine(ResetGameCountdown());
+        }
     }
-  }
 
-  IEnumerator ResetGameCountdown()
-  {
-    isRestartingGame = true;
-    float timeRemaining = timeTillPlayersSpawn;
-    float nextTimeToLog = timeRemaining;
-    var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame");
-    foreach (var go in gosToClear)
+    IEnumerator ResetGameCountdown()
     {
-      NetworkServer.Destroy(go);
+        isRestartingGame = true;
+        float timeRemaining = timeTillPlayersSpawn;
+        float nextTimeToLog = timeRemaining;
+        var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame");
+        foreach (var go in gosToClear)
+        {
+            NetworkServer.Destroy(go);
+        }
+        while (timeRemaining >= 0)
+        {
+            timeRemaining -= Time.fixedDeltaTime;
+            if (timeRemaining <= nextTimeToLog)
+            {
+                Debug.Log($"{nextTimeToLog} seconds till spawn");
+                nextTimeToLog -= 1;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+        SpawnGameObjects();
+        isRestartingGame = false;
     }
-    while (timeRemaining >= 0)
+
+    bool ArePlayersLeft()
     {
-      timeRemaining -= Time.fixedDeltaTime;
-      if (timeRemaining <= nextTimeToLog)
-      {
-        Debug.Log($"{nextTimeToLog} seconds till spawn");
-        nextTimeToLog -= 1;
-      }
-      yield return new WaitForFixedUpdate();
+        bool noPlayersLeft = GameObject.FindGameObjectWithTag("Player") == null;
+        return !noPlayersLeft;
     }
-    SpawnGameObjects();
-    isRestartingGame = false;
-  }
 
-  bool ArePlayersLeft()
-  {
-    bool noPlayersLeft = GameObject.FindGameObjectWithTag("Player") == null;
-    return !noPlayersLeft;
-  }
-
-  public void AddPlayer(NetworkConnection playerConnection, short playerId)
-  {
-    var playerController = (GameObject)Instantiate(playerControllerPrefab);
-    NetworkServer.AddPlayerForConnection(playerConnection, playerController, playerId);
-    playerConnections.Add(playerConnection, playerController);
-  }
-
-  public void RemovePlayer(NetworkConnection connection)
-  {
-    var go = playerConnections[connection];
-    PlayerInputCommunicator pic = go.GetComponent<PlayerInputCommunicator>();
-    var bikeGo = pic.GetBike();
-    NetworkManager.Destroy(bikeGo);
-    playerConnections.Remove(connection);
-    NetworkManager.Destroy(go);
-  }
-
-
-  [ServerCallback]
-  void SpawnGameObjects()
-  {
-    var dangerSphere = (GameObject)Instantiate(dangerSpherePrefab);
-    NetworkServer.Spawn(dangerSphere);
-    foreach (var ele in playerConnections)
+    public void AddPlayer(NetworkConnection playerConnection, short playerId)
     {
-      // Set player to link to that bike
-      var playerBike = SpawnBike();
-      var bikeMovement = playerBike.GetComponent<BikeMovement>();
-      var pic = ele.Value.GetComponent<PlayerInputCommunicator>();
-      var camGrabber = ele.Value.GetComponent<CamGrabber>();
-      pic.SetBike(bikeMovement);
-      bikeMovement.SetPlayerSettings(pic.GetPlayerName(),pic.accentColor);
-      camGrabber.TargetSetPlayersBike(ele.Key, playerBike);
+        var playerController = (GameObject)Instantiate(playerControllerPrefab);
+        NetworkServer.AddPlayerForConnection(playerConnection, playerController, playerId);
+        playerConnections.Add(playerConnection, playerController);
     }
-    int computersToSpawn = targetPlayerCount - playerConnections.Count;
-    for (var i = 0; i < computersToSpawn; ++i)
+
+    public void RemovePlayer(NetworkConnection connection)
     {
-      var playerBike = SpawnBike();
-      playerBike.GetComponentInChildren<ComputerPlayer>().enabled = true;
-      playerBike.GetComponent<BikeMovement>().SetPlayerSettings(
-        PlayerPrefsController.defaultPlayerName,
-        PlayerPrefsController.defaultAccentColor
-      );
+        var go = playerConnections[connection];
+        PlayerInputCommunicator pic = go.GetComponent<PlayerInputCommunicator>();
+        var bikeGo = pic.GetBike();
+        NetworkManager.Destroy(bikeGo);
+        playerConnections.Remove(connection);
+        NetworkManager.Destroy(go);
     }
-    UpdateRemainingPlayersUI();
-  }
 
-  [ServerCallback]
-  GameObject SpawnBike()
-  {
-    // Create the players bike
-    Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
-    Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
-    var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
-    NetworkServer.Spawn(playerBike);
-    bikesAlive.Add(playerBike);
-    return playerBike;
-  }
 
-  public void RemoveBikeFromAlivePlayers(GameObject bikeToRemove){
-    bikesAlive.Remove(bikeToRemove);
-    UpdateRemainingPlayersUI();
-  }
+    [ServerCallback]
+    void SpawnGameObjects()
+    {
+        var dangerSphere = (GameObject)Instantiate(dangerSpherePrefab);
+        NetworkServer.Spawn(dangerSphere);
+        foreach (var ele in playerConnections)
+        {
+            // Set player to link to that bike
+            var playerBike = SpawnBike();
+            var bikeMovement = playerBike.GetComponent<BikeMovement>();
+            var pic = ele.Value.GetComponent<PlayerInputCommunicator>();
+            var camGrabber = ele.Value.GetComponent<CamGrabber>();
+            pic.SetBike(bikeMovement);
+            bikeMovement.SetPlayerSettings(pic.GetPlayerName(), pic.accentColor);
+            camGrabber.TargetSetPlayersBike(ele.Key, playerBike);
+        }
+        int computersToSpawn = targetPlayerCount - playerConnections.Count;
+        for (var i = 0; i < computersToSpawn; ++i)
+        {
+            var playerBike = SpawnBike();
+            playerBike.GetComponentInChildren<ComputerPlayer>().enabled = true;
+            playerBike.GetComponent<BikeMovement>().SetPlayerSettings(
+              PlayerPrefsController.defaultPlayerName,
+              GenerateRandomColor()
+            );
+        }
+        UpdateRemainingPlayersUI();
+    }
 
-  void UpdateRemainingPlayersUI(){
-    remainingPlayerTextSetter.RpcUpdatePlayersRemaining(bikesAlive.Count);
-  }
+    [ServerCallback]
+    GameObject SpawnBike()
+    {
+        // Create the players bike
+        Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
+        Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
+        var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
+        NetworkServer.Spawn(playerBike);
+        bikesAlive.Add(playerBike);
+        return playerBike;
+    }
+
+    public void RemoveBikeFromAlivePlayers(GameObject bikeToRemove)
+    {
+        bikesAlive.Remove(bikeToRemove);
+        UpdateRemainingPlayersUI();
+    }
+
+    void UpdateRemainingPlayersUI()
+    {
+        remainingPlayerTextSetter.RpcUpdatePlayersRemaining(bikesAlive.Count);
+    }
+
+    Color GenerateRandomColor()
+    {
+        float valueSpread = 0.25f;
+        float hueSpread = 1f / 9f;
+
+        int column = (int)Mathf.Floor(UnityEngine.Random.Range(0, 8));
+        int row = (int)Mathf.Floor(UnityEngine.Random.Range(0, 4));
+        return Color.HSVToRGB(
+          hueSpread * column,
+          .25f + valueSpread * row,
+          .75f
+        );
+    }
 }
