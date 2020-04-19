@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Linq;
 
 [System.Obsolete]
 public class GameManager : NetworkBehaviour
 {
-    [SerializeField] float timeTillPlayersSpawn = 15;
+    [SerializeField] int timeTillPlayersSpawn = 4;
     [SerializeField] GameObject bikePrefab = default;
     [SerializeField] GameObject playerControllerPrefab = default;
     [SerializeField] GameObject dangerSpherePrefab = default;
@@ -15,8 +16,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] RemainingPlayerTextSetter remainingPlayerTextSetter = default;
     Dictionary<NetworkConnection, GameObject> playerConnections = new Dictionary<NetworkConnection, GameObject>();
     List<GameObject> bikesAlive = new List<GameObject>();
-
-    bool isRestartingGame = false;
+    bool isGameRunning;
 
     #region  Singleton
     public static GameManager instance;
@@ -31,44 +31,38 @@ public class GameManager : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (
-          playerConnections.Count > 0 &&
-          !ArePlayersLeft() &&
-          !isRestartingGame
-        )
+        if (playerConnections.Count > 0 && !isGameRunning)
         {
-            StartCoroutine(ResetGameCountdown());
+            StartCoroutine(StartGameSequence());
         }
     }
 
-    IEnumerator ResetGameCountdown()
+    IEnumerator StartGameSequence()
     {
-        isRestartingGame = true;
-        float timeRemaining = timeTillPlayersSpawn;
-        float nextTimeToLog = timeRemaining;
-        var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame");
+        isGameRunning = true;
+        for (int timeRemaining = timeTillPlayersSpawn; timeRemaining > 0; timeRemaining--)
+        {
+            Debug.Log($"Time Till Reset {timeRemaining}");
+            yield return new WaitForSeconds(1);
+        }
+        SpawnGameObjects();
+        while (bikesAlive.Count > 1)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        StartCoroutine(VictorySequence());
+    }
+
+    IEnumerator VictorySequence()
+    {
+        yield return new WaitForSeconds(4);
+        var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame").ToList();
+        gosToClear.AddRange(GameObject.FindGameObjectsWithTag("Player").ToList());
         foreach (var go in gosToClear)
         {
             NetworkServer.Destroy(go);
         }
-        while (timeRemaining >= 0)
-        {
-            timeRemaining -= Time.fixedDeltaTime;
-            if (timeRemaining <= nextTimeToLog)
-            {
-                Debug.Log($"{nextTimeToLog} seconds till spawn");
-                nextTimeToLog -= 1;
-            }
-            yield return new WaitForFixedUpdate();
-        }
-        SpawnGameObjects();
-        isRestartingGame = false;
-    }
-
-    bool ArePlayersLeft()
-    {
-        bool noPlayersLeft = GameObject.FindGameObjectWithTag("Player") == null;
-        return !noPlayersLeft;
+        isGameRunning = false;
     }
 
     public void AddPlayer(NetworkConnection playerConnection, short playerId)

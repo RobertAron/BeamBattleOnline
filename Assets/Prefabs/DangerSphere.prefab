@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c241ca3d1a25f64980b2a4021fbe018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementPauseTime: 0
-  movementTime: 600
+  movementPauseTime: 10
+  movementTime: 10
   safeCircleRenderPrefab: {fileID: 6704402754689636691, guid: d7f9d712066cbc044ac52e47db9e53d1,
     type: 3}
 --- !u!1001 &8047021996721669050
