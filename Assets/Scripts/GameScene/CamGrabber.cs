@@ -7,17 +7,9 @@ using UnityEngine.Networking;
 public class CamGrabber : NetworkBehaviour
 {
   GameObject currentTarget;
-  bool swappingCam = false;
   FlatDistFollowCam mainCamera;
   FlatDistFollowCam minimapCamera;
   BoostGaugeUiController boostUI;
-
-
-
-  [TargetRpc]
-  public void TargetSetPlayersBike(NetworkConnection networkConnection,GameObject playersBike){
-    ChangeFocus(playersBike);
-  }
 
   void Start() {
     mainCamera = Camera.main.transform.GetComponent<FlatDistFollowCam>();
@@ -31,20 +23,30 @@ public class CamGrabber : NetworkBehaviour
     minimapCamera.objectToFollow = bike.transform;
     BikeMovement newBikeMovement = bike.GetComponent<BikeMovement>();
     boostUI.SubscribeToBike(newBikeMovement);
+  }
 
+  [TargetRpc]
+  public void TargetSetPlayersBike(NetworkConnection networkConnection,GameObject playersBike){
+    ChangeFocus(playersBike);
+  }
+
+  Coroutine currentSwapCoroutine;
+  IEnumerator FindTargetAndSwitch(int switchTime){
+    yield return new WaitForSeconds(switchTime);
+    // check we haven't assigned to a bike aready, and a new bike exists
+    var go = GameObject.FindGameObjectWithTag("Player");
+    if(go!=null && currentTarget==null) ChangeFocus(go);
+  }
+  
+  [TargetRpc]
+  public void TargetSetVictoryCam(NetworkConnection networkConnection){
+    if(currentSwapCoroutine==null) StopCoroutine(currentSwapCoroutine);
+    StartCoroutine(FindTargetAndSwitch(0));
   }
 
   void Update(){
-    if(currentTarget==null && swappingCam==false) StartCoroutine(PauseThenPickBike());
-  }
-
-  IEnumerator PauseThenPickBike(){
-    swappingCam = true;
-    yield return new WaitForSeconds(4);
-    swappingCam = false;
-    var go = GameObject.FindGameObjectWithTag("Player");
-    // check we haven't assigned to a bike aready, and a new bike exists
-    if(currentTarget==null && go!=null) ChangeFocus(go);
+    if(currentTarget==null && currentSwapCoroutine==null)
+      currentSwapCoroutine = StartCoroutine(FindTargetAndSwitch(2));
   }
 
 }

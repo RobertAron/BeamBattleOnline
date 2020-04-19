@@ -55,6 +55,11 @@ public class GameManager : NetworkBehaviour
 
     IEnumerator VictorySequence()
     {
+        foreach (var ele in playerConnections)
+        {
+            var camGrabber = ele.Value.GetComponent<CamGrabber>();
+            camGrabber.TargetSetVictoryCam(ele.Key);
+        }
         yield return new WaitForSeconds(4);
         var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame").ToList();
         gosToClear.AddRange(GameObject.FindGameObjectsWithTag("Player").ToList());
