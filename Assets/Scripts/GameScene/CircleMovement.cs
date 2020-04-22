@@ -22,7 +22,7 @@ public class CircleMovement : NetworkBehaviour
     public override void OnStartServer(){
         scale = transform.localScale;
         position = transform.position;
-        var safeCircleGameObject = (GameObject)Instantiate(safeCircleRenderPrefab,transform.position,transform.rotation);
+        var safeCircleGameObject = Instantiate(safeCircleRenderPrefab,transform.position,transform.rotation);
         safeCircleRender = safeCircleGameObject.GetComponent<SafeCircleRender>();
         NetworkServer.Spawn(safeCircleGameObject);
         StartCoroutine(MoveCircleIn());

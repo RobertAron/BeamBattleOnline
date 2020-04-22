@@ -22,6 +22,10 @@ public class PlayerInputCommunicator : NetworkBehaviour
       playerWaitingUI.active = playerBikeGo==null;
   }
 
+  public bool HasBike(){
+    return playerBikeGo!=null;
+  }
+
   public void Start(){
     if(isLocalPlayer) CmdSetPlayerSettings(playerPrefsController.playerName,playerPrefsController.accentColor);
     playerWaitingUI = GameObject.FindGameObjectWithTag("PlayerWaitingUi");

@@ -60,6 +60,17 @@ public class GameManager : NetworkBehaviour
             var camGrabber = ele.Value.GetComponent<CamGrabber>();
             camGrabber.TargetSetVictoryCam(ele.Key);
         }
+        if(bikesAlive.Count>0){
+            var winningPlayer = playerConnections.ToList().Where((KeyValuePair<NetworkConnection, GameObject> kv)=>{
+                var pic = kv.Value.GetComponent<PlayerInputCommunicator>();
+                if(pic==null) return false; 
+                return pic.HasBike();
+            });
+            var bikeThatWon = bikesAlive[0];
+            var bikeVictoryStuff = bikeThatWon.GetComponentInChildren<BikeVictoryStuff>();
+            if(winningPlayer.Any()) bikeVictoryStuff.TargetSetWinningPlayer(winningPlayer.First().Key);
+            bikeVictoryStuff.RpcWinAnimationStuff();
+        }
         yield return new WaitForSeconds(4);
         var gosToClear = GameObject.FindGameObjectsWithTag("ClearAfterGame").ToList();
         gosToClear.AddRange(GameObject.FindGameObjectsWithTag("Player").ToList());
