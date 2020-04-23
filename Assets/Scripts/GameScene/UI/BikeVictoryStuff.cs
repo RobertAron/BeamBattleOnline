@@ -14,6 +14,7 @@ public class BikeVictoryStuff : NetworkBehaviour
     [SerializeField] TMP_Text mainText = default;
     [SerializeField] TMP_Text shadowText = default;
     [SerializeField] Canvas canvas = default;
+    [SerializeField] BoxCollider boxCollider = default;
     Material victoryMaterial = default;
 
     private void Awake()
@@ -21,12 +22,19 @@ public class BikeVictoryStuff : NetworkBehaviour
         victoryMaterial = victoryRingRenderer.material;
     }
 
+    private void Start() {
+        var lossGameText = $"{bikeMovement.GetPlayerName()} WINS!";
+        mainText.text = lossGameText;
+        shadowText.text = lossGameText;
+        shadowText.color = bikeMovement.GetAccentColor();
+    }
+
     [ClientRpc]
     public void RpcWinAnimationStuff()
     {
         victoryStuff.active = true;
         CanvasTextMovement();
-        shadowText.color = bikeMovement.GetAccentColor();
+        boxCollider.enabled = false;
     }
 
     [TargetRpc]

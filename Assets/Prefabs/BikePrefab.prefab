@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 3.8810208, y: 1.8}
-  m_SizeDelta: {x: 1000, y: 600}
+  m_SizeDelta: {x: 1200, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4843627239363646253
 Canvas:
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 50
+  m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 2
 --- !u!114 &5958648596238637651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +330,7 @@ MonoBehaviour:
   mainText: {fileID: 3604305431460046836}
   shadowText: {fileID: 4221188876964018558}
   canvas: {fileID: 4843627239363646253}
+  boxCollider: {fileID: 235441559314113325}
 --- !u!1 &2123877854397795875
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ROUND OVER
+  m_text: COMPUTER PLAYER WINS!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dbcea40fa802794458a3b121ac592532, type: 2}
   m_sharedMaterial: {fileID: 7679923260354571220, guid: dbcea40fa802794458a3b121ac592532,
@@ -607,7 +608,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 256
+  m_fontSize: 182.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -648,13 +649,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 4221188876964018558}
-    characterCount: 0
+    characterCount: 21
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 0
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 2
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -767,7 +768,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ROUND OVER
+  m_text: COMPUTER PLAYER WINS!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dbcea40fa802794458a3b121ac592532, type: 2}
   m_sharedMaterial: {fileID: 7679923260354571220, guid: dbcea40fa802794458a3b121ac592532,
@@ -796,7 +797,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 256
+  m_fontSize: 182.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -837,13 +838,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3604305431460046836}
-    characterCount: 0
+    characterCount: 21
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 2
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
