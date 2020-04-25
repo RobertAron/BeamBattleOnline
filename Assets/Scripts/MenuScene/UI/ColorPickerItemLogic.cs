@@ -31,7 +31,7 @@ public class ColorPickerItemLogic :
 
     private void Update() {
         if(!isIn) return;
-        if(Input.GetKeyDown(KeyCode.Z)) menuBikeColorSelector.SetAccentColor(image.color);
+        if(Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Mouse0)) menuBikeColorSelector.SetAccentColor(image.color);
     }
 
     public void Init(Color color){

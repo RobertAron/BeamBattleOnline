@@ -7,10 +7,20 @@ using TMPro;
 [System.Obsolete]
 public class RemainingPlayerTextSetter : NetworkBehaviour
 {
-    [SerializeField] TextMeshProUGUI textMesh = default;
+    [SerializeField] TextMeshProUGUI countTextMesh = default;
+    [SerializeField] TextMeshProUGUI remainTextMesh = default;
+
+    private void Start()
+    {
+        countTextMesh.enabled = false;
+        remainTextMesh.enabled = false;
+    }
 
     [ClientRpc]
-    public void RpcUpdatePlayersRemaining(int playersRemaining){
-        textMesh.text = $"{playersRemaining}";
+    public void RpcUpdatePlayersRemaining(int playersRemaining)
+    {
+        countTextMesh.enabled = true;
+        remainTextMesh.enabled = true;
+        countTextMesh.text = $"{playersRemaining}";
     }
 }

@@ -158,16 +158,16 @@ public class BikeMovement : NetworkBehaviour, Attachable
         CallCurrentBoostDelegate(maxBoostTimeAvailable);
     }
 
-    bool isQuitting = false;
+    bool runOnDestroy = true;
     void OnApplicationQuit()
     {
-        isQuitting = true;
+        runOnDestroy = false;
     }
 
     [ServerCallback]
     void OnDestroy()
     {
-        if (isQuitting) return;
+        if (!runOnDestroy) return;
         var go = Instantiate(fakeAttachmentPrefab,transform.position,transform.rotation);
         NetworkServer.Spawn(go);
         currentStream?.SetAttachment(go);

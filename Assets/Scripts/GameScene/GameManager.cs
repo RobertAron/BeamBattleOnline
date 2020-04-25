@@ -96,6 +96,7 @@ public class GameManager : NetworkBehaviour
         NetworkManager.Destroy(bikeGo);
         playerConnections.Remove(connection);
         NetworkManager.Destroy(go);
+        NetworkServer.DestroyPlayersForConnection(connection);
     }
 
 
