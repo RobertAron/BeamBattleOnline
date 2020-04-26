@@ -6,21 +6,20 @@ using UnityEngine;
 public class ComputerPlayer : MonoBehaviour
 {
     [SerializeField] BikeMovement playerMovement = default;
-    bool turnLeft = false;
-
-    private void Update() {
-        int shouldFlipTurn = Random.Range(0,2);
-        if(shouldFlipTurn==0) turnLeft = !turnLeft;
-    }
 
     private void OnTriggerEnter(Collider other) {
-        if(!enabled) return;
-        WallCollision wallCollision = other.GetComponent<WallCollision>();
-        if(wallCollision!=null && wallCollision.KillOnEnter()) playerMovement.Turn(turnLeft);
+        TurnIfWall(other);
     }
-    private void OnTriggerExit(Collider other){
+    // private void OnTriggerExit(Collider other){
+    //     TurnIfWall(other);
+    // }
+
+    private void TurnIfWall(Collider other){
         if(!enabled) return;
         WallCollision wallCollision = other.GetComponent<WallCollision>();
-        if(wallCollision!=null && wallCollision.KillOnExit()) playerMovement.Turn(turnLeft);
+        if(wallCollision!=null && wallCollision.KillOnEnter()){
+            bool turnLeft = Random.Range(0,2)==0;
+            playerMovement.Turn(turnLeft);
+        }
     }
 }

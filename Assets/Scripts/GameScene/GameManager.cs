@@ -108,34 +108,31 @@ public class GameManager : NetworkBehaviour
         foreach (var ele in playerConnections)
         {
             // Set player to link to that bike
-            var playerBike = SpawnBike();
-            var bikeMovement = playerBike.GetComponent<BikeMovement>();
             var pic = ele.Value.GetComponent<PlayerInputCommunicator>();
+            var playerBike = SpawnBike(pic.GetPlayerName(), pic.accentColor);
+            var bikeMovement = playerBike.GetComponent<BikeMovement>();
             var camGrabber = ele.Value.GetComponent<CamGrabber>();
             pic.SetBike(bikeMovement);
-            bikeMovement.SetPlayerSettings(pic.GetPlayerName(), pic.accentColor);
             camGrabber.TargetSetPlayersBike(ele.Key, playerBike);
         }
         int computersToSpawn = targetPlayerCount - playerConnections.Count;
         for (var i = 0; i < computersToSpawn; ++i)
         {
-            var playerBike = SpawnBike();
+            var playerBike = SpawnBike(PlayerPrefsController.defaultPlayerName,GenerateRandomColor());
             playerBike.GetComponentInChildren<ComputerPlayer>().enabled = true;
-            playerBike.GetComponent<BikeMovement>().SetPlayerSettings(
-              PlayerPrefsController.defaultPlayerName,
-              GenerateRandomColor()
-            );
         }
         UpdateRemainingPlayersUI();
     }
 
     [ServerCallback]
-    GameObject SpawnBike()
+    GameObject SpawnBike(String name,Color color)
     {
         // Create the players bike
         Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
         Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
         var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
+        var bm = playerBike.GetComponent<BikeMovement>();
+        bm.SetPlayerSettings(name,color);
         NetworkServer.Spawn(playerBike);
         bikesAlive.Add(playerBike);
         return playerBike;

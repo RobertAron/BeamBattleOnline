@@ -286,11 +286,11 @@ RectTransform:
   m_Father: {fileID: 1572972425}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 640, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 640, y: -200}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &193572236
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 2
-  m_Spacing: 10
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -3625,7 +3625,7 @@ MonoBehaviour:
     type: 3}
   dangerSpherePrefab: {fileID: 8047021995568503146, guid: d8834a1dbb3fd0a4c8dab76ce001eb0e,
     type: 3}
-  targetPlayerCount: 2
+  targetPlayerCount: 60
   remainingPlayerTextSetter: {fileID: 1259462426}
 --- !u!114 &1935685451
 MonoBehaviour:

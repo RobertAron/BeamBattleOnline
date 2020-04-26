@@ -7,23 +7,17 @@ public class KillFeedText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMesh = default;
     [SerializeField] CanvasGroup canvasGroup = default;
+    [SerializeField] RectTransform rectTransform = default;
+
     void Start(){
-        StartCoroutine(DestroySelf());
+        LeanTween.alphaCanvas(canvasGroup,0,.2f).setDelay(1f).setOnComplete(()=>{
+            rectTransform.LeanSize(new Vector2(rectTransform.rect.width,0),.1f).setOnComplete(()=>{
+                Destroy(gameObject);
+            });
+        });
     }
 
     public void SetActors(string slayer,string victim){
         textMesh.text = $"{slayer} has defeated {victim}";
-    }
-
-    IEnumerator DestroySelf(){
-        yield return new WaitForSeconds(1);
-        float timeTransparent= .5f;
-        float currentTimeTransparent = 0;
-        while(currentTimeTransparent<timeTransparent){
-            currentTimeTransparent+=Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(1,0,currentTimeTransparent/timeTransparent);
-            yield return null;
-        }
-        Destroy(gameObject);
     }
 }

@@ -40,7 +40,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
 
 
     [SerializeField] GameObject trailPrefab = default;
-    string playerName;
+    [SerializeField] string playerName;
     [SerializeField] [SyncVar(hook = "SetAccentColor")] Color accentColor;
     void SetAccentColor(Color color)
     {
