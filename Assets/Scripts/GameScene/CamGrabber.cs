@@ -36,6 +36,7 @@ public class CamGrabber : NetworkBehaviour
     // check we haven't assigned to a bike aready, and a new bike exists
     var go = GameObject.FindGameObjectWithTag("Player");
     if(go!=null && currentTarget==null) ChangeFocus(go);
+    currentSwapCoroutine=null;
   }
   
   [TargetRpc]
@@ -45,6 +46,7 @@ public class CamGrabber : NetworkBehaviour
   }
 
   void Update(){
+    Debug.Log(currentSwapCoroutine==null);
     if(currentTarget==null && currentSwapCoroutine==null)
       currentSwapCoroutine = StartCoroutine(FindTargetAndSwitch(2));
   }
