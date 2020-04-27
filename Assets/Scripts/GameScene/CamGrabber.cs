@@ -46,7 +46,6 @@ public class CamGrabber : NetworkBehaviour
   }
 
   void Update(){
-    Debug.Log(currentSwapCoroutine==null);
     if(currentTarget==null && currentSwapCoroutine==null)
       currentSwapCoroutine = StartCoroutine(FindTargetAndSwitch(2));
   }
