@@ -228,6 +228,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2094203477421494779, guid: c48f27671066bd941b3fdc106b865835,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2608983875261253914, guid: c48f27671066bd941b3fdc106b865835,
         type: 3}
       propertyPath: m_Name
@@ -438,7 +443,7 @@ PrefabInstance:
     - target: {fileID: 2094203477421494779, guid: c48f27671066bd941b3fdc106b865835,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 14
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2094203477421494779, guid: c48f27671066bd941b3fdc106b865835,
         type: 3}
@@ -463,12 +468,17 @@ PrefabInstance:
     - target: {fileID: 2094203477421494779, guid: c48f27671066bd941b3fdc106b865835,
         type: 3}
       propertyPath: m_text
-      value: Kill To Unlock
+      value: Takedown To Unlock
       objectReference: {fileID: 0}
     - target: {fileID: 2094203477421494779, guid: c48f27671066bd941b3fdc106b865835,
         type: 3}
       propertyPath: m_fontSize
-      value: 57.05
+      value: 40.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094203477421494779, guid: c48f27671066bd941b3fdc106b865835,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2608983875261253914, guid: c48f27671066bd941b3fdc106b865835,
         type: 3}
