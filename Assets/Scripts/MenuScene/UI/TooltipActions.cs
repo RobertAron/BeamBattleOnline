@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class TooltipActions : MonoBehaviour
 {
-    [SerializeField] CanvasGroup canvasGroup = default;
     [SerializeField] LeanTweenType leanTweenType = default;
+
+
+    [SerializeField] CanvasGroup canvasGroup = default;
     [SerializeField] Image image = default;
+    
     int ltID;
     int ltColorID;
-    Color targetColor;
+    [SerializeField] Color targetColor;
 
     private void Awake() {
         targetColor = PlayerPrefsController.defaultAccentColor;
@@ -21,7 +24,6 @@ public class TooltipActions : MonoBehaviour
         LeanTween.cancel(ltColorID);
         UpdateTTColor(targetColor);
         ltID = LeanTween.alphaCanvas(canvasGroup,1,.05f).setEase(leanTweenType).id;
-
     }
 
     public void MakeHidden(){
@@ -35,6 +37,7 @@ public class TooltipActions : MonoBehaviour
         LeanTween.cancel(ltColorID);
         ltColorID = LeanTween.value(this.gameObject,UpdateTTColor,image.color,color,.05f).setEase(leanTweenType).id;
     }
+
     void UpdateTTColor(Color color){
         image.color = color;
     }

@@ -8,29 +8,36 @@ public class ColorPickerItemLogic :
     IPointerExitHandler
 {
     bool isIn = false;
-    [SerializeField] TooltipActions tooltip = default;
+    bool isUnlocked = false;
+    [SerializeField] TooltipActions tooltipUnlocked = default;
+    [SerializeField] TooltipActions tooltipLocked = default;
+    [SerializeField]TooltipActions selectedTooltip = default;
     [SerializeField] RawImage image = default;
     MenuBikeColorSelector menuBikeColorSelector = default;
 
 
     private void Start() {
         menuBikeColorSelector = MenuBikeColorSelector.instance;
+        int count = transform.parent.parent.GetSiblingIndex();
+        var ppc = new PlayerPrefsController();
+        isUnlocked = count<=ppc.killCount;
+        selectedTooltip = isUnlocked?tooltipUnlocked:tooltipLocked;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         isIn = true;
-        tooltip.MakeVisible();
+        selectedTooltip.MakeVisible();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isIn = false;
-        tooltip.MakeHidden();
+        selectedTooltip.MakeHidden();
     }
 
     private void Update() {
-        if(!isIn) return;
+        if(!isIn || !isUnlocked) return;
         if(Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Mouse0)) menuBikeColorSelector.SetAccentColor(image.color);
     }
 

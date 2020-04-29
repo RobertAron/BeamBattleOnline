@@ -17,7 +17,7 @@ public class ColorPickerItemContainerUtil : MonoBehaviour
             {
                 Color color = Color.HSVToRGB(
                     hueSpread * column,
-                    .25f + valueSpread * row,
+                    1f - (valueSpread * row),
                     .75f
                 );
                 // var go = Instantiate(colorPickerItemPrefab, this.transform);

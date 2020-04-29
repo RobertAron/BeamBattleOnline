@@ -29,6 +29,11 @@ public class PlayerPrefsController
             PlayerPrefs.SetString("playerName", value);
         }
     }
+    public int killCount
+    {
+        get { return PlayerPrefs.GetInt("playerKillCount", 0);}
+        set { PlayerPrefs.SetInt("playerKillCount",value);}
+    }
 
     string ColorToString(Color color)
     {
