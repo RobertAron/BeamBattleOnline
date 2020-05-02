@@ -10,6 +10,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
     [SerializeField] GameObject fakeAttachmentPrefab = default;
     [SerializeField] MeshRenderer shipMR = default;
     private MaterialPropertyBlock shipMaterialBlock;
+    public NetworkConnection networkConnection;
 
     Rigidbody rb;
     // ==== BOOSTING =====
@@ -172,5 +173,18 @@ public class BikeMovement : NetworkBehaviour, Attachable
         NetworkServer.Spawn(go);
         currentStream?.SetAttachment(go);
         GameManager.instance.RemoveBikeFromAlivePlayers(gameObject);
+    }
+
+    [Server]
+    public void IncreasePlayerTakedownCount(){
+        if(networkConnection!=null)
+            TargetIncreasePlayerTakedownCount(networkConnection);
+    }
+
+    [TargetRpc]
+    void TargetIncreasePlayerTakedownCount(NetworkConnection networkConnection){
+        Debug.Log("CLIENT IPTC");
+        var ppc = new PlayerPrefsController();
+        ppc.killCount += 1;
     }
 }

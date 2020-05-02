@@ -10,9 +10,11 @@ public class WallCollision : NetworkBehaviour
   KillFeed killFeed;
   [SerializeField] bool destroyOnExit = false;
   [SyncVar][SerializeField] string killfeedName = "";
+  TrailStream trailStream = null;
 
   private void Start() {
     killFeed = KillFeed.instance;
+    trailStream = GetComponent<TrailStream>();
   }
 
   public void SetKillfeedName(string newKillfeedName){
@@ -40,6 +42,7 @@ public class WallCollision : NetworkBehaviour
     if (bm == null) return;
     string victim = bm.GetPlayerName();
     RpcUIKIllFeed(victim);
+    if(trailStream) trailStream.IncreasePlayerTakedowns();
     NetworkServer.Destroy(obj);
   }
 

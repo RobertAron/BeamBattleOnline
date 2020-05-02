@@ -103,4 +103,7 @@ public class TrailStream : NetworkBehaviour, Attachable
     {
         return startingPosition;
     }
+    public void IncreasePlayerTakedowns(){
+        createdBy.IncreasePlayerTakedownCount();
+    }
 }

@@ -112,6 +112,7 @@ public class GameManager : NetworkBehaviour
             var playerBike = SpawnBike(pic.GetPlayerName(), pic.accentColor);
             var bikeMovement = playerBike.GetComponent<BikeMovement>();
             var camGrabber = ele.Value.GetComponent<CamGrabber>();
+            bikeMovement.networkConnection = ele.Key;
             pic.SetBike(bikeMovement);
             camGrabber.TargetSetPlayersBike(ele.Key, playerBike);
         }
