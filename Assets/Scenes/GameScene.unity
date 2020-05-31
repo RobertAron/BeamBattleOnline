@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4fe905ed299e84941929508bd0bebe3e,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -849,10 +849,10 @@ RectTransform:
   m_Father: {fileID: 867025805}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -22.5}
-  m_SizeDelta: {x: 0, y: 29.3}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 97.689995, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &443930367
 MonoBehaviour:
@@ -1229,8 +1229,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620851740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -10}
+  m_LocalRotation: {x: 0.1736482, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 7.1789722, z: -8.028846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   lerpSpeed: 10
   objectToFollow: {fileID: 1935685452}
   xRotation: 20
-  followPositionalSpeed: 20
+  followPositionalSpeed: 0.8
 --- !u!1001 &623671324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1352,6 +1352,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 6452210046557519191, guid: 0654b48d9644d844088ea384ef436b2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6463049261048578690, guid: 0654b48d9644d844088ea384ef436b2a,
         type: 3}
       propertyPath: m_IsActive
@@ -1400,10 +1405,10 @@ RectTransform:
   m_Father: {fileID: 867025805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -22.5}
-  m_SizeDelta: {x: 0, y: 29.3}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 78.67, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634328106
 MonoBehaviour:
@@ -1547,6 +1552,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452210046557519191, guid: 0654b48d9644d844088ea384ef436b2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6463049261048578690, guid: 0654b48d9644d844088ea384ef436b2a,
         type: 3}
@@ -1847,6 +1857,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452210046557519191, guid: 0654b48d9644d844088ea384ef436b2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6463049261048578690, guid: 0654b48d9644d844088ea384ef436b2a,
         type: 3}
@@ -2975,7 +2990,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375628767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -10}
+  m_LocalPosition: {x: 0, y: 7.1789722, z: -8.028846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1116484975}
@@ -3383,6 +3398,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LightRing
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 17dd5137eead3404baa6817d1b88e4bb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17dd5137eead3404baa6817d1b88e4bb, type: 3}
@@ -4156,6 +4176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452210046557519191, guid: 0654b48d9644d844088ea384ef436b2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6452210046799235649, guid: 0654b48d9644d844088ea384ef436b2a,
         type: 3}

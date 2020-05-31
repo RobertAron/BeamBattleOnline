@@ -26,8 +26,11 @@ public class CustomNetworkManager : NetworkManager
             Debug.Log("Client Directives! Connecting to Game.");
             StartClient();
         #else
+            Debug.Log("Server and Client directives not set. Running Editor config.");
             GetComponent<UnityEngine.Networking.NetworkManagerHUD>().showGUI = true;
         #endif
+        Debug.Log($"Using Adress:{networkAddress}");
+        Debug.Log($"Using port: {networkPort}");
         gameManager = GameManager.instance;
     }
 

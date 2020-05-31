@@ -266,6 +266,7 @@ MonoBehaviour:
   currentBoostTimeAvailable: 0.75
   trailPrefab: {fileID: 6549881863489476302, guid: ec7619e1cb5572543b350faaa7ec6d3f,
     type: 3}
+  playerName: 
   accentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &235441559314113325
 BoxCollider:
@@ -309,8 +310,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapDistance: 6
-  lerpPercent: 0.95
-  movePercent: 0.95
+  lerpPercent: 0.99
+  movePercent: 0.99
   debugPrediction: 0
 --- !u!114 &6407008444453450714
 MonoBehaviour:
@@ -501,7 +502,6 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_CameraOutput: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
+  m_ClearDepth: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -576,6 +577,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -765,6 +767,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

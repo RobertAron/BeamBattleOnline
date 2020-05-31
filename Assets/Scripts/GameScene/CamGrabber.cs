@@ -41,7 +41,7 @@ public class CamGrabber : NetworkBehaviour
   
   [TargetRpc]
   public void TargetSetVictoryCam(NetworkConnection networkConnection){
-    if(currentSwapCoroutine==null) StopCoroutine(currentSwapCoroutine);
+    if(currentSwapCoroutine!=null) StopCoroutine(currentSwapCoroutine);
     StartCoroutine(FindTargetAndSwitch(0));
   }
 

@@ -48,7 +48,7 @@ public class WallCollision : NetworkBehaviour
 
   [ClientRpc]
   void RpcUIKIllFeed(string victim){
-    killFeed.AddKillFeedItem(killfeedName,victim);
+    if(killFeed) killFeed.AddKillFeedItem(killfeedName,victim);
   }
 
   public bool KillOnEnter()

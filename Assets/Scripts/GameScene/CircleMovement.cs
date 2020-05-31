@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Obsolete]
-[NetworkSettings(sendInterval=0.04f)]
+[NetworkSettings(sendInterval=0.005f)]
 public class CircleMovement : NetworkBehaviour
 {
     [SyncVar] Vector3 scale;

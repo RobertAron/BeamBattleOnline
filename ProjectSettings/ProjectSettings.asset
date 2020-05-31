@@ -583,7 +583,7 @@ PlayerSettings:
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
     1: 
-    13: 
+    13: SERVER_BUILD;WEB
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

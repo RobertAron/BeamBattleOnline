@@ -15,14 +15,14 @@ public class FlatDistFollowCam : MonoBehaviour
         SnapToTargetPosition();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(objectToFollow==null) return;
         if(!Application.IsPlaying(gameObject)) SnapToTargetPosition();
         Quaternion targetRotation = GetTargetRotation();
-        Quaternion nextFrameRotation = Quaternion.Lerp(transform.rotation,targetRotation,Time.fixedDeltaTime*lerpSpeed);
-        nextFrameRotation = Quaternion.RotateTowards(nextFrameRotation,targetRotation,Time.fixedDeltaTime*flatSpeed);
-        transform.rotation = Quaternion.Euler(xRotation,nextFrameRotation.eulerAngles.y,nextFrameRotation.eulerAngles.z);;
+        Quaternion nextFrameRotation = Quaternion.Lerp(transform.rotation,targetRotation,Time.deltaTime*lerpSpeed);
+        nextFrameRotation = Quaternion.RotateTowards(nextFrameRotation,targetRotation,Time.deltaTime*flatSpeed);
+        transform.rotation = Quaternion.Euler(xRotation,nextFrameRotation.eulerAngles.y,nextFrameRotation.eulerAngles.z);
         UpdatePosition();
     }
 
@@ -42,7 +42,8 @@ public class FlatDistFollowCam : MonoBehaviour
 
     void UpdatePosition(){
         Vector3 targetPosition = GetTargetPosition();
-        transform.position = Vector3.Lerp(transform.position,targetPosition,Time.fixedDeltaTime*followPositionalSpeed);
+        // transform.position = Vector3.Lerp(transform.position,targetPosition,followPositionalSpeed);
+        transform.position = targetPosition;
     }
 
 }

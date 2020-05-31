@@ -171,7 +171,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
         if (!runOnDestroy) return;
         var go = Instantiate(fakeAttachmentPrefab,transform.position,transform.rotation);
         NetworkServer.Spawn(go);
-        currentStream?.SetAttachment(go);
+        if(currentStream) currentStream.SetAttachment(go);
         GameManager.instance.RemoveBikeFromAlivePlayers(gameObject);
     }
 
@@ -183,7 +183,6 @@ public class BikeMovement : NetworkBehaviour, Attachable
 
     [TargetRpc]
     void TargetIncreasePlayerTakedownCount(NetworkConnection networkConnection){
-        Debug.Log("CLIENT IPTC");
         var ppc = new PlayerPrefsController();
         ppc.killCount += 1;
     }
