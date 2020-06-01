@@ -40,7 +40,8 @@ public class PlayerInputCommunicator : NetworkBehaviour
 
   [ServerCallback]
   public GameObject GetBike(){
-    return this.bikeMovement.gameObject;
+    
+    return this.bikeMovement == null? null: this.bikeMovement.gameObject;
   }
 
 

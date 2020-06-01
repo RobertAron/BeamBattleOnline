@@ -62,7 +62,6 @@ public class Build
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         string pathNameOption = isWeb ? "Web" : "Local";
         buildPlayerOptions.locationPathName = $"Builds/{pathNameOption}/Server/main.exe";
-        Debug.Log(isWeb);
         buildPlayerOptions.target = isWeb? BuildTarget.StandaloneLinux64:BuildTarget.StandaloneWindows64;
         buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"

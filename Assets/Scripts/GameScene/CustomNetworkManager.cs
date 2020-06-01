@@ -39,6 +39,10 @@ public class CustomNetworkManager : NetworkManager
         gameManager.AddPlayer(conn,playerControllerId);
     }
 
+    public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player){
+        gameManager.RemovePlayer(conn);
+    }
+
     public override void OnServerDisconnect(NetworkConnection conn){
         gameManager.RemovePlayer(conn);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Obsolete]
-[NetworkSettings(sendInterval = 0.05f)]
+[NetworkSettings(sendInterval = 0.01f)]
 public class TrailStream : NetworkBehaviour, Attachable
 {
     [SerializeField] MeshRenderer trailMR = default;
@@ -25,6 +25,8 @@ public class TrailStream : NetworkBehaviour, Attachable
     BikeMovement createdBy;
 
     private void Start() {
+        Debug.Log("Started at...");
+        Debug.Log(transform.position);
         SetTrailColor(color);
     }
 
@@ -33,10 +35,12 @@ public class TrailStream : NetworkBehaviour, Attachable
         trailMaterialBlock = new MaterialPropertyBlock();
     }
 
+    [Server]
     public void StartStream(BikeMovement bikeGO)
     {
         createdBy = bikeGO;
-        startingPosition = transform.position;
+        transform.position = bikeGO.transform.position;
+        startingPosition = bikeGO.transform.position;
         this.attachedTo = bikeGO.gameObject;
         var playerName = bikeGO.GetPlayerName();
         SetTrailColor(bikeGO.GetAccentColor());
@@ -53,12 +57,14 @@ public class TrailStream : NetworkBehaviour, Attachable
         var endingPosition = GetEndingPosition();
         float totalLength = GetTotalLength();
         float extraLength = Mathf.Max(totalLength - maxLength, 0);
-        startingPosition = Vector3.MoveTowards(startingPosition, endingPosition, extraLength);
-        if (
-          extraLength > 0 &&
-          Vector3.Distance(endingPosition, startingPosition) < float.Epsilon &&
-          isServer
-        ) NetworkServer.Destroy(this.gameObject);
+        if(isServer){
+            startingPosition = Vector3.MoveTowards(startingPosition, endingPosition, extraLength);
+            if (
+                extraLength > 0 &&
+                Vector3.Distance(endingPosition, startingPosition) < float.Epsilon &&
+                isServer
+            ) NetworkServer.Destroy(this.gameObject);
+        }
         transform.position = (startingPosition + endingPosition) / 2;
         float length = GetSegmentLength();
         float additionalForCoverage = transform.localScale.x;

@@ -55,13 +55,9 @@ public class BikeMovement : NetworkBehaviour, Attachable
     }
     TrailStream currentStream = null;
 
-    override public void OnStartServer()
-    {
-        StartNewTrail();
-    }
-
     private void Start() {
         SetAccentColor(accentColor);
+        if(isServer) StartNewTrail();
     }
 
     void Awake()
@@ -95,11 +91,12 @@ public class BikeMovement : NetworkBehaviour, Attachable
     [Server]
     void StartNewTrail()
     {
+        
         GameObject go = Instantiate(trailPrefab, transform.position, transform.rotation);
-        NetworkServer.Spawn(go);
         TrailStream newStream = go.GetComponent<TrailStream>();
         newStream.StartStream(this);
-        currentStream?.SetAttachment(go);
+        NetworkServer.Spawn(go);
+        if(currentStream!=null) currentStream.SetAttachment(go);
         currentStream = newStream;
     }
 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1709443551264836382}
   m_Layer: 0
   m_Name: FakeAttachment
-  m_TagString: Untagged
+  m_TagString: ClearAfterGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8d9018f698acb4f8c98b7ea5c1d836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpPercent: 0.5
-  movePercent: 0.9
+  snapDistance: 4
+  lerpPercent: 0.98
+  movePercent: 0.98
   debugPrediction: 0

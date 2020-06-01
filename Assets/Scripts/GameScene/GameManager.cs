@@ -93,9 +93,8 @@ public class GameManager : NetworkBehaviour
         var go = playerConnections[connection];
         PlayerInputCommunicator pic = go.GetComponent<PlayerInputCommunicator>();
         var bikeGo = pic.GetBike();
-        NetworkManager.Destroy(bikeGo);
+        if(bikeGo!=null) NetworkManager.Destroy(bikeGo);
         playerConnections.Remove(connection);
-        NetworkManager.Destroy(go);
         NetworkServer.DestroyPlayersForConnection(connection);
     }
 
@@ -134,8 +133,8 @@ public class GameManager : NetworkBehaviour
         var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
         var bm = playerBike.GetComponent<BikeMovement>();
         bm.SetPlayerSettings(name,color);
-        NetworkServer.Spawn(playerBike);
         bikesAlive.Add(playerBike);
+        NetworkServer.Spawn(playerBike);
         return playerBike;
     }
 
