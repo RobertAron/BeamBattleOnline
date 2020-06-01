@@ -42,7 +42,6 @@ public class GameManager : NetworkBehaviour
         isGameRunning = true;
         for (int timeRemaining = timeTillPlayersSpawn; timeRemaining > 0; timeRemaining--)
         {
-            Debug.Log($"Time Till Reset {timeRemaining}");
             yield return new WaitForSeconds(1);
         }
         SpawnGameObjects();

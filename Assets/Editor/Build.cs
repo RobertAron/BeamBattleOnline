@@ -45,6 +45,8 @@ public class Build
     [MenuItem("MyBuildMenu/Directives/Set Server")] static void a() { SetDirectives(false, true, false); }
     [MenuItem("MyBuildMenu/Directives/Set Client")] static void b() { SetDirectives(true, false, false); }
     [MenuItem("MyBuildMenu/Directives/Set Editor")] static void c() { SetDirectives(false, false, false); }
+    [MenuItem("MyBuildMenu/Directives/Set Web Server")] static void h() { SetDirectives(false, true, true); }
+    [MenuItem("MyBuildMenu/Directives/Set Web Client")] static void i() { SetDirectives(true, false, true); }
     [MenuItem("MyBuildMenu/Web/Build Web Server")] static void d() { BuildServer(true); }
     [MenuItem("MyBuildMenu/Web/Build Web Client")] static void e() { BuildWebGL(); }
     [MenuItem("MyBuildMenu/Build Desktop Server")] static void f() { BuildServer(false); }

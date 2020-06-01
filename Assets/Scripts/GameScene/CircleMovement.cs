@@ -29,7 +29,6 @@ public class CircleMovement : NetworkBehaviour
     }
 
     IEnumerator MoveCircleIn(){
-        Debug.Log("moveing circle in");
         float currentTime = 0;
         Vector3 startingScale = scale;
         Vector3 targetScale = scale/2;

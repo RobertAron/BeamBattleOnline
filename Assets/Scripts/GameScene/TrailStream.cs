@@ -25,8 +25,6 @@ public class TrailStream : NetworkBehaviour, Attachable
     BikeMovement createdBy;
 
     private void Start() {
-        Debug.Log("Started at...");
-        Debug.Log(transform.position);
         SetTrailColor(color);
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Obsolete]
-[NetworkSettings(sendInterval = 0.01f)]
+[NetworkSettings(sendInterval = 0.005f)]
 public class CustomRBSync : NetworkBehaviour
 {
     [SerializeField] float snapDistance = 4;
