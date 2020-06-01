@@ -29,12 +29,16 @@ public class BikeVictoryStuff : NetworkBehaviour
         shadowText.color = bikeMovement.GetAccentColor();
     }
 
+    [Server]
+    public void TurnOffBikeCollider(){
+        boxCollider.enabled = false;
+    }
+
     [ClientRpc]
     public void RpcWinAnimationStuff()
     {
         victoryStuff.active = true;
         CanvasTextMovement();
-        boxCollider.enabled = false;
     }
 
     [TargetRpc]

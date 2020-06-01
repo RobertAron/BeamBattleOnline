@@ -67,6 +67,7 @@ public class GameManager : NetworkBehaviour
             });
             var bikeThatWon = bikesAlive[0];
             var bikeVictoryStuff = bikeThatWon.GetComponentInChildren<BikeVictoryStuff>();
+            bikeVictoryStuff.TurnOffBikeCollider();
             if(winningPlayer.Any()) bikeVictoryStuff.TargetSetWinningPlayer(winningPlayer.First().Key);
             bikeVictoryStuff.RpcWinAnimationStuff();
         }
@@ -117,7 +118,7 @@ public class GameManager : NetworkBehaviour
         int computersToSpawn = targetPlayerCount - playerConnections.Count;
         for (var i = 0; i < computersToSpawn; ++i)
         {
-            var playerBike = SpawnBike(PlayerPrefsController.defaultPlayerName,GenerateRandomColor());
+            var playerBike = SpawnBike("Computer",GenerateRandomColor());
             playerBike.GetComponentInChildren<ComputerPlayer>().enabled = true;
         }
         UpdateRemainingPlayersUI();

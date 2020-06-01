@@ -582,7 +582,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
-    1: CLIENT_BUILD
+    1: 
     13: SERVER_BUILD;WEB
   platformArchitecture: {}
   scriptingBackend: {}

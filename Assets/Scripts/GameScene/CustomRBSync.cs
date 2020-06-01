@@ -53,12 +53,12 @@ public class CustomRBSync : NetworkBehaviour
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPosition,
-            movePercent*velocity.magnitude*Time.fixedDeltaTime
+            movePercent*velocity.magnitude
         ); 
         transform.position = Vector3.Lerp(
             transform.position,
             targetPosition,
-            lerpPercent*Time.fixedDeltaTime
+            lerpPercent
         );
     }
 
