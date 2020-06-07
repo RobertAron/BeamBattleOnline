@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4fe905ed299e84941929508bd0bebe3e,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -849,10 +849,10 @@ RectTransform:
   m_Father: {fileID: 867025805}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -22.5}
-  m_SizeDelta: {x: 0, y: 29.3}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 97.689995, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &443930367
 MonoBehaviour:
@@ -1230,7 +1230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620851740}
   m_LocalRotation: {x: 0.1736482, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 7.1789722, z: -8.028846}
+  m_LocalPosition: {x: 0, y: 6.2392797, z: -8.370866}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1279,12 +1279,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1204e4d8f682a049ab43920057135de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceOffset: {x: 0, y: 4, z: -10}
+  distanceOffsetMin: {x: 0, y: 3, z: -10}
+  distanceOffsetMax: {x: 0, y: 2, z: -12}
   flatSpeed: 100
   lerpSpeed: 10
   objectToFollow: {fileID: 1935685452}
   xRotation: 20
-  followPositionalSpeed: 0.8
+  followPositionalSpeed: 0.5
 --- !u!1001 &623671324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1405,10 +1406,10 @@ RectTransform:
   m_Father: {fileID: 867025805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -22.5}
-  m_SizeDelta: {x: 0, y: 29.3}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 78.67, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634328106
 MonoBehaviour:
@@ -2976,7 +2977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1204e4d8f682a049ab43920057135de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceOffset: {x: 0, y: 0, z: 0}
+  distanceOffsetMin: {x: 0, y: 3, z: -10}
+  distanceOffsetMax: {x: 0, y: 3, z: -13}
   flatSpeed: 100
   lerpSpeed: 10
   objectToFollow: {fileID: 620851743}
@@ -2990,7 +2992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375628767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.1789722, z: -8.028846}
+  m_LocalPosition: {x: 0, y: 9.23928, z: -18.370865}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1116484975}
@@ -3561,7 +3563,7 @@ MonoBehaviour:
   m_NetworkPort: 8080
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
-  m_NetworkAddress: 35.226.107.149
+  m_NetworkAddress: 35.226.107.249
   m_DontDestroyOnLoad: 0
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1

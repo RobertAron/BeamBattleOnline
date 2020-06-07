@@ -310,8 +310,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapDistance: 6
-  lerpPercent: 0.7
-  movePercent: 0.7
+  velocity: {x: 0, y: 0, z: 0}
+  lerpPercent: 0.15
+  movePercent: 0.9
   debugPrediction: 0
 --- !u!114 &6407008444453450714
 MonoBehaviour:

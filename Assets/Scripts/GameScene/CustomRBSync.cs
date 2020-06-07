@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class CustomRBSync : NetworkBehaviour
 {
     [SerializeField] float snapDistance = 4;
-    [SyncVar] Vector3 velocity = new Vector3(0,0,0);
+    [SyncVar] public Vector3 velocity = new Vector3(0,0,0);
     [SyncVar] Vector3 targetPosition = new Vector3(0,0,0);
     [SyncVar] Quaternion targetRotation = Quaternion.identity;
     [Range(0f, 1f)]
@@ -43,7 +43,6 @@ public class CustomRBSync : NetworkBehaviour
         if(isServer) return;
         // simulate predicted movement
         targetPosition += velocity * Time.fixedDeltaTime;
-
         transform.rotation = targetRotation;
         // Sanp to target
         if(Vector3.Distance(transform.position,targetPosition)>snapDistance){
@@ -53,7 +52,7 @@ public class CustomRBSync : NetworkBehaviour
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPosition,
-            movePercent*velocity.magnitude
+            movePercent*velocity.magnitude*Time.fixedDeltaTime
         ); 
         transform.position = Vector3.Lerp(
             transform.position,
