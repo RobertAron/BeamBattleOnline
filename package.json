@@ -1,0 +1,22 @@
+{
+  "name": "lightbikeonlineurp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client-deploy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobertAron/LightCycleOnline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RobertAron/LightCycleOnline/issues"
+  },
+  "homepage": "https://github.com/RobertAron/LightCycleOnline#readme",
+  "dependencies": {
+    "gh-pages": "^3.0.0"
+  }
+}
