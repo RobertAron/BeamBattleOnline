@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
-[System.Obsolete]
-[NetworkSettings(sendInterval = 0.005f)]
 public class CustomRBSync : NetworkBehaviour
 {
     [SerializeField] float snapDistance = 4;
@@ -34,8 +32,8 @@ public class CustomRBSync : NetworkBehaviour
         if(Vector3.Distance(velocity,rb.velocity)>float.Epsilon) velocity = rb.velocity;
         if(Vector3.Distance(targetPosition,transform.position)>float.Epsilon) targetPosition = transform.position;
         if(Vector3.Distance(
-            targetRotation.ToEuler(),
-            transform.rotation.ToEuler()
+            targetRotation.eulerAngles,
+            transform.rotation.eulerAngles
         )>float.Epsilon) targetRotation = transform.rotation;
     }
 

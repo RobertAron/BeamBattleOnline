@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
-[System.Obsolete]
+
 public class SafeCircleRender : NetworkBehaviour
 {
     [SerializeField] LineRenderer lineRenderer = default;
     Transform minimapPos;
-    [SyncVar(hook="UpdateScale")] Vector3 scale;
-    void UpdateScale(Vector3 newScale){
+    [SyncVar(hook= nameof(UpdateScale))] Vector3 scale;
+    void UpdateScale(Vector3 oldScale,Vector3 newScale){
         transform.localScale = newScale;
     }
 

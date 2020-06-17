@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
-[System.Obsolete]
-[NetworkSettings(sendInterval = 0.01f)]
 public class BikeMovement : NetworkBehaviour, Attachable
 {
     [SerializeField] GameObject fakeAttachmentPrefab = default;
@@ -21,17 +19,17 @@ public class BikeMovement : NetworkBehaviour, Attachable
     public delegate void OnVariableChangeDelegate(float newVal);
     public event OnVariableChangeDelegate OnMaxBoostChange;
     [SerializeField]
-    [SyncVar(hook = "CallMaxBoostChangeDelegate")]
+    [SyncVar(hook = nameof(CallMaxBoostChangeDelegate))]
     public float maxBoostTimeAvailable = 1;
-    void CallMaxBoostChangeDelegate(float newMaxBoostTime)
+    void CallMaxBoostChangeDelegate(float oldValue,float newMaxBoostTime)
     {
         if (OnMaxBoostChange != null) OnMaxBoostChange(newMaxBoostTime);
     }
     //
     public event OnVariableChangeDelegate OnBoostChange;
-    [SyncVar(hook = "CallCurrentBoostDelegate")]
+    [SyncVar(hook = nameof(CallCurrentBoostDelegate))]
     public float currentBoostTimeAvailable = 1;
-    void CallCurrentBoostDelegate(float newCurrentBoostTime)
+    void CallCurrentBoostDelegate(float oldBoostTime, float newCurrentBoostTime)
     {
         currentBoostTimeAvailable = newCurrentBoostTime;
         if (OnBoostChange != null) OnBoostChange(newCurrentBoostTime);
@@ -42,8 +40,8 @@ public class BikeMovement : NetworkBehaviour, Attachable
 
     [SerializeField] GameObject trailPrefab = default;
     [SerializeField] [SyncVar] string playerName;
-    [SerializeField] [SyncVar(hook = "SetAccentColor")] Color accentColor;
-    void SetAccentColor(Color color)
+    [SerializeField] [SyncVar(hook = nameof(SetAccentColor))] Color accentColor;
+    void SetAccentColor(Color oldColor, Color color)
     {
         accentColor = color;
         shipMaterialBlock.SetColor("_AccentColor", color);
@@ -56,7 +54,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
     TrailStream currentStream = null;
 
     private void Start() {
-        SetAccentColor(accentColor);
+        SetAccentColor(accentColor,accentColor);
         if(isServer) StartNewTrail();
     }
 
@@ -76,7 +74,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
     void UpdateRigidBody()
     {
         if (currentBoostTimeAvailable <= 0) SetBoost(false);
-        if (isBoosting) CallCurrentBoostDelegate(currentBoostTimeAvailable - Time.fixedDeltaTime);
+        if (isBoosting) CallCurrentBoostDelegate(0,currentBoostTimeAvailable - Time.fixedDeltaTime);
         rb.velocity = transform.forward * (isBoosting ? boostSpeed : lowSpeed);
     }
 
@@ -103,9 +101,9 @@ public class BikeMovement : NetworkBehaviour, Attachable
     [Server]
     public void SetPlayerSettings(string newPlayerName, Color newAccentColor)
     {
-        SetAccentColor(newAccentColor);
+        SetAccentColor(newAccentColor,newAccentColor);
         playerName = newPlayerName;
-        if (currentStream != null) currentStream.SetTrailColor(newAccentColor);
+        if (currentStream != null) currentStream.SetTrailColor(newAccentColor,newAccentColor);
     }
 
     public string GetPlayerName()
@@ -138,7 +136,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
         yield return new WaitForSeconds(1);
         while (currentBoostTimeAvailable < maxBoostTimeAvailable)
         {
-            CallCurrentBoostDelegate(currentBoostTimeAvailable + Time.fixedDeltaTime);
+            CallCurrentBoostDelegate(0,currentBoostTimeAvailable + Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
         boostAvailableCoroutine = null;
@@ -153,7 +151,7 @@ public class BikeMovement : NetworkBehaviour, Attachable
     public void IncreaseBoostSize()
     {
         maxBoostTimeAvailable += .25f;
-        CallCurrentBoostDelegate(maxBoostTimeAvailable);
+        CallCurrentBoostDelegate(maxBoostTimeAvailable,maxBoostTimeAvailable);
     }
 
     bool runOnDestroy = true;

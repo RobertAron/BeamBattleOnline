@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Obsolete]
+
 public class BoostGaugeUiController : MonoBehaviour
 {
 

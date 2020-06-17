@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 using System.Linq;
 
-[System.Obsolete]
+
 public class GameManager : NetworkBehaviour
 {
     [SerializeField] int timeTillPlayersSpawn = 4;
@@ -81,10 +81,10 @@ public class GameManager : NetworkBehaviour
         isGameRunning = false;
     }
 
-    public void AddPlayer(NetworkConnection playerConnection, short playerId)
+    public void AddPlayer(NetworkConnection playerConnection)
     {
         var playerController = (GameObject)Instantiate(playerControllerPrefab);
-        NetworkServer.AddPlayerForConnection(playerConnection, playerController, playerId);
+        NetworkServer.AddPlayerForConnection(playerConnection, playerController);
         playerConnections.Add(playerConnection, playerController);
     }
 
@@ -95,7 +95,7 @@ public class GameManager : NetworkBehaviour
         var bikeGo = pic.GetBike();
         if(bikeGo!=null) NetworkManager.Destroy(bikeGo);
         playerConnections.Remove(connection);
-        NetworkServer.DestroyPlayersForConnection(connection);
+        NetworkServer.DestroyPlayerForConnection(connection);
     }
 
 
@@ -128,8 +128,8 @@ public class GameManager : NetworkBehaviour
     GameObject SpawnBike(String name,Color color)
     {
         // Create the players bike
-        Vector3 position = new Vector3(UnityEngine.Random.RandomRange(-350f, 350f), 1, UnityEngine.Random.RandomRange(-350, 350));
-        Vector3 rotation = new Vector3(0, UnityEngine.Random.RandomRange(0, 3) * 90, 0);
+        Vector3 position = new Vector3(UnityEngine.Random.Range(-350f, 350f), 1, UnityEngine.Random.Range(-350, 350));
+        Vector3 rotation = new Vector3(0, UnityEngine.Random.Range(0, 3) * 90, 0);
         var playerBike = (GameObject)Instantiate(bikePrefab, position, Quaternion.Euler(rotation));
         var bm = playerBike.GetComponent<BikeMovement>();
         bm.SetPlayerSettings(name,color);

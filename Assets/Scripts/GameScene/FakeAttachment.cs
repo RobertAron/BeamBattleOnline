@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
-[System.Obsolete]
+
 public class FakeAttachment : NetworkBehaviour, Attachable
 {
     Rigidbody rb;
