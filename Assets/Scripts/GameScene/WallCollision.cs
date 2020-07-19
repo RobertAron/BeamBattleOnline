@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using UnityEngine.Networking;
 
 
-
+[System.Obsolete]
 public class WallCollision : NetworkBehaviour
 {
   KillFeed killFeed;

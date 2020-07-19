@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8047021995568503147}
   - component: {fileID: 8047021995568503150}
+  - component: {fileID: 8047021995568503149}
   - component: {fileID: 8047021995568503148}
   - component: {fileID: 8047021995568503137}
-  - component: {fileID: -8149305138306331372}
   m_Layer: 0
   m_Name: DangerSphere
   m_TagString: ClearAfterGame
@@ -49,6 +49,39 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8047021995568503149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8047021995568503146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &8047021995568503148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,8 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15a061831f028d4aa7433a993530eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   destroyOnExit: 1
   killfeedName: THE SPHERE
 --- !u!114 &8047021995568503137
@@ -77,28 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c241ca3d1a25f64980b2a4021fbe018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   movementPauseTime: 5
   movementTime: 30
   safeCircleRenderPrefab: {fileID: 6704402754689636691, guid: d7f9d712066cbc044ac52e47db9e53d1,
     type: 3}
---- !u!114 &-8149305138306331372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8047021995568503146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1001 &8047021996721669050
 PrefabInstance:
   m_ObjectHideFlags: 0

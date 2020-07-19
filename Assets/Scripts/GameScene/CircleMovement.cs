@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using UnityEngine.Networking;
 
+[System.Obsolete]
+[NetworkSettings(sendInterval=0.005f)]
 public class CircleMovement : NetworkBehaviour
 {
     [SyncVar] Vector3 scale;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Obsolete]
 public class ComputerPlayer : MonoBehaviour
 {
     [SerializeField] BikeMovement playerMovement = default;

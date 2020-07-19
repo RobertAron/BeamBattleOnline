@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using UnityEngine.Networking;
 using TMPro;
 
-
+[System.Obsolete]
 public class RemainingPlayerTextSetter : NetworkBehaviour
 {
     [SerializeField] TextMeshProUGUI countTextMesh = default;

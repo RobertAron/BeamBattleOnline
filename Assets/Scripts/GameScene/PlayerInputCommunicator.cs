@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using UnityEngine.Networking;
 
-
+[System.Obsolete]
 public class PlayerInputCommunicator : NetworkBehaviour
 {
   BikeMovement bikeMovement;
@@ -19,7 +19,7 @@ public class PlayerInputCommunicator : NetworkBehaviour
       if(Input.GetKeyDown(KeyCode.RightArrow)) CmdTurnPlayer(false);
       if(Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Space)) CmdSetPlayerBoost(true);
       if(Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.Space)) CmdSetPlayerBoost(false);
-      playerWaitingUI.SetActive(playerBikeGo==null);
+      playerWaitingUI.active = playerBikeGo==null;
   }
 
   public bool HasBike(){

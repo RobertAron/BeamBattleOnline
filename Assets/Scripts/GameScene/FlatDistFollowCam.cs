@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-
+[System.Obsolete]
 [ExecuteAlways]
 public class FlatDistFollowCam : MonoBehaviour
 {

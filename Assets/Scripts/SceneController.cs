@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Mirror;
+using UnityEngine.Networking;
 
-
+[System.Obsolete]
 public class SceneController : MonoBehaviour
 {
     public void LoadGameScene(){

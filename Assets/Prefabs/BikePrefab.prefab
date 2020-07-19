@@ -184,12 +184,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1471095800014418057}
+  - component: {fileID: 8371001089170926518}
   - component: {fileID: 1289776620464104977}
   - component: {fileID: 235441559314113325}
   - component: {fileID: -3874933588250074730}
   - component: {fileID: 3874566974838344472}
   - component: {fileID: 6407008444453450714}
-  - component: {fileID: 1863033382982824452}
   m_Layer: 0
   m_Name: BikePrefab
   m_TagString: Player
@@ -214,6 +214,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8371001089170926518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471095800014418058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &1289776620464104977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518e44e6e37f22144a02d3c519dea127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   fakeAttachmentPrefab: {fileID: 1709443551264836378, guid: d8f11f4556cb40a419b0fc163f3076e0,
     type: 3}
   shipMR: {fileID: 1127812183096563801}
@@ -278,8 +309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8d9018f698acb4f8c98b7ea5c1d836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   snapDistance: 6
   velocity: {x: 0, y: 0, z: 0}
   lerpPercent: 0.15
@@ -297,8 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9158ad09ba45584e9e0504afa33716a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   victoryRingRenderer: {fileID: 425524044155742239}
   victoryStuff: {fileID: 5010475473459903486}
   bikeMovement: {fileID: 1289776620464104977}
@@ -306,22 +333,6 @@ MonoBehaviour:
   shadowText: {fileID: 4221188876964018558}
   canvas: {fileID: 4843627239363646253}
   boxCollider: {fileID: 235441559314113325}
---- !u!114 &1863033382982824452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471095800014418058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1 &2123877854397795875
 GameObject:
   m_ObjectHideFlags: 0

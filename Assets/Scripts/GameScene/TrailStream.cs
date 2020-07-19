@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using UnityEngine.Networking;
 
+[System.Obsolete]
+[NetworkSettings(sendInterval = 0.01f)]
 public class TrailStream : NetworkBehaviour, Attachable
 {
     [SerializeField] MeshRenderer trailMR = default;
     private MaterialPropertyBlock trailMaterialBlock = default;
-    [SerializeField] [SyncVar(hook = nameof(SetTrailColor))] Color color = PlayerPrefsController.defaultAccentColor;
-    public void SetTrailColor(Color oldColor, Color color)
+    [SerializeField] [SyncVar(hook = "SetTrailColor")] Color color = PlayerPrefsController.defaultAccentColor;
+    public void SetTrailColor(Color color)
     {
         this.color = color;
         trailMaterialBlock.SetColor("_Color", color);
@@ -23,7 +25,7 @@ public class TrailStream : NetworkBehaviour, Attachable
     BikeMovement createdBy;
 
     private void Start() {
-        SetTrailColor(color, color);
+        SetTrailColor(color);
     }
 
     private void Awake()
@@ -39,7 +41,7 @@ public class TrailStream : NetworkBehaviour, Attachable
         startingPosition = bikeGO.transform.position;
         this.attachedTo = bikeGO.gameObject;
         var playerName = bikeGO.GetPlayerName();
-        SetTrailColor(bikeGO.GetAccentColor(),bikeGO.GetAccentColor());
+        SetTrailColor(bikeGO.GetAccentColor());
         GetComponent<WallCollision>().SetKillfeedName(playerName);
     }
 

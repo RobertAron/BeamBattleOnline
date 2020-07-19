@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using UnityEngine.Networking;
 using TMPro;
 using System;
 
-
+[System.Obsolete]
 public class BikeVictoryStuff : NetworkBehaviour
 {
     [SerializeField] Renderer victoryRingRenderer = default;
@@ -37,7 +37,7 @@ public class BikeVictoryStuff : NetworkBehaviour
     [ClientRpc]
     public void RpcWinAnimationStuff()
     {
-        victoryStuff.SetActive(true);
+        victoryStuff.active = true;
         CanvasTextMovement();
     }
 
