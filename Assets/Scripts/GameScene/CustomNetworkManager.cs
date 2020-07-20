@@ -3,34 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Rendering;
 
 [System.Obsolete]
 public class CustomNetworkManager : NetworkManager
 {
     GameManager gameManager;
-
+    bool isHeadless => SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null;
 
     private void Start() {
-        #if WEB
-            useWebSockets = true;
-        #else
-            useWebSockets = false;
-        #endif
-        
-        #if SERVER_BUILD
-            Debug.Log("Server Directives! Hosting Game.");
-            string serverType = useWebSockets?"Web Sockets":"TLC Connection";
-            Debug.Log($"Using Connection type {serverType}");
-            StartServer();
-        #elif CLIENT_BUILD
-            Debug.Log("Client Directives! Connecting to Game.");
+        if(
+            Application.platform == RuntimePlatform.WindowsEditor ||
+            Application.platform == RuntimePlatform.WindowsPlayer
+        ) useWebSockets = false;
+        else useWebSockets = true;
+        if(Application.platform == RuntimePlatform.WebGLPlayer){
+            var hud = GetComponent<NetworkManagerHUD>();
+            hud.showGUI = false;
+            if(GetURL.GetURLFromPage().Contains("https")) networkPort = 443;
+            else networkPort = 80;
+            Debug.Log($"Auto starting client on port {networkPort}");
             StartClient();
-        #else
-            Debug.Log("Server and Client directives not set. Running Editor config.");
-            GetComponent<UnityEngine.Networking.NetworkManagerHUD>().showGUI = true;
-        #endif
-        Debug.Log($"Using Adress:{networkAddress}");
-        Debug.Log($"Using port: {networkPort}");
+        }
+        if(Application.platform == RuntimePlatform.LinuxPlayer){
+            networkPort = 8080;
+            Debug.Log($"Auto starting server on port {networkPort}");
+            StartServer();
+        }
         gameManager = GameManager.instance;
     }
 

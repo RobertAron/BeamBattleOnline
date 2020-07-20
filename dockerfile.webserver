@@ -1,4 +1,0 @@
-FROM ubuntu:20.10
-EXPOSE 7777
-COPY /Builds/Web/Server /Server
-ENTRYPOINT [ "//Server/main.exe" ]
