@@ -46,14 +46,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
       - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      - run: |
-          ls
-          ls build
-          ls build/StandaloneLinux64
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
           project_id: lightbikeunity
+      - run: |
+          ls
+          ls build
+          ls build/StandaloneLinux64
       - run: gcloud info
       - id: deploy
         uses: GoogleCloudPlatform/github-actions/appengine-deploy@master
