@@ -50,10 +50,8 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
           project_id: lightbikeunity
-      - run: |
-          ls
-          ls build
-          ls build/StandaloneLinux64
+      - run: ls build
+      - run: ls build/StandaloneLinux64
       - run: gcloud info
       - id: deploy
         uses: GoogleCloudPlatform/github-actions/appengine-deploy@master
