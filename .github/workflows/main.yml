@@ -15,10 +15,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        targetPlatform:
+        buildMethod:
           # - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
-          - WebGL # WebGL.
+          - Build.BuildWebGL # WebGL. 
+          - Build.BuildServer # Build a Linux 64-bit standalone.
     steps:
       - uses: actions/checkout@v2
       # Cache
@@ -27,16 +27,15 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build for ${{matrix.targetPlatform}}
+      - name: Build using ${{matrix.buildMethod}}
         uses: webbertakken/unity-builder@v0.10
         with:
-            unityVersion: 2019.3.11f1
-            targetPlatform: ${{matrix.targetPlatform}}
-
+          unityVersion: 2019.3.11f1
+          buildMethod: ${{matrix.buildMethod}}
       - uses: actions/upload-artifact@v1
         with:
-            name: build
-            path: build
+          name: build
+          path: build
   publish-app-engine:
     name: 🐱‍🏍 Gcloud deploy
     runs-on: ubuntu-latest
@@ -65,5 +64,5 @@ jobs:
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/WebGL/WebGL
+          publish_dir: ./build/WebGL
 
