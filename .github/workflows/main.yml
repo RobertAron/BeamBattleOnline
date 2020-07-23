@@ -1,9 +1,11 @@
 name: (⌐■_■) Build & Deploy 
 
 on:
-  create:
-    tags:
-      - v*
+  pull_request: {}
+  push: { branches: [master] }
+  # create:
+  #   tags:
+  #     - v*
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -16,9 +18,10 @@ jobs:
       fail-fast: false
       matrix:
         buildMethod:
-          # - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - Build.BuildWebGL # WebGL. 
-          - Build.BuildServer # Build a Linux 64-bit standalone.
+          - method: EditorNamespace.Build.BuildWebGL
+            Platform: WebGL
+          - method: EditorNamespace.Build.BuildServer
+            targetPlatform: StandaloneLinux64
     steps:
       - uses: actions/checkout@v2
       # Cache
@@ -27,11 +30,12 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build using ${{matrix.buildMethod}}
+      - name: Build using ${{matrix.buildMethod.Platform}}
         uses: webbertakken/unity-builder@v0.10
         with:
           unityVersion: 2019.3.11f1
-          buildMethod: ${{matrix.buildMethod}}
+          targetPlatform: ${{ matrix.buildMethod.targetPlatform }}
+          buildMethod: ${{matrix.buildMethod.Method}}
       - uses: actions/upload-artifact@v1
         with:
           name: build
