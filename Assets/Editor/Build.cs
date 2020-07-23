@@ -8,12 +8,11 @@ public class Build
     public static void BuildWindows(){
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         buildPlayerOptions.locationPathName = $"build/Windows/main.exe";
-        buildPlayerOptions.target = BuildTarget.StandaloneWindows64;	
+        buildPlayerOptions.target = BuildTarget.StandaloneWindows64;
         buildPlayerOptions.scenes = new[] {	
             "Assets/Scenes/MenuScene.unity",
             "Assets/Scenes/GameScene.unity"
         };
-        buildPlayerOptions.targetGroup = BuildTargetGroup.Standalone;
         BuildPipeline.BuildPlayer(buildPlayerOptions);
         
     }
@@ -25,19 +24,17 @@ public class Build
         buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"	
         };
-        buildPlayerOptions.targetGroup = BuildTargetGroup.Standalone;
         BuildPipeline.BuildPlayer(buildPlayerOptions);
     }
     [MenuItem("My Build/WebGL")]
     public static void BuildWebGL(){
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-        buildPlayerOptions.locationPathName = $"build/WebGL/index.html";
+        buildPlayerOptions.locationPathName = $"build/WebGL";
         buildPlayerOptions.target = BuildTarget.WebGL;
         buildPlayerOptions.scenes = new[] {	
             "Assets/Scenes/MenuScene.unity",
             "Assets/Scenes/GameScene.unity"	
         };
-        buildPlayerOptions.targetGroup = BuildTargetGroup.WebGL;
         BuildPipeline.BuildPlayer(buildPlayerOptions);
     }
 }

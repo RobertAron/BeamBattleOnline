@@ -14,16 +14,18 @@ jobs:
   build:
     name: 🔨Builds🔨
     runs-on: ubuntu-latest
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     buildMethod:
-    #       - method: Build.BuildWebGL
-    #         Platform: WebGL
-    #       - method: Build.BuildServer
-    #         targetPlatform: StandaloneLinux64
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform: [WebGL,StandaloneLinux64,StandaloneWindows64]
+        buildMethod:
+          - targetPlatform: WebGL
+            method: Build.BuildWebGL
+          - targetPlatform: StandaloneLinux64
+            method: Build.BuildServer
+          - targetPlatform: StandaloneWindows64
+            method: Build.BuildWindows
     steps:
-      - run: echo ${{ matrix.buildMethod.Platform }}
       - uses: actions/checkout@v2
       # Cache
       - uses: actions/cache@v1.1.0
@@ -31,26 +33,12 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build using Windows
+      - name: Build for ${{ matrix.targetPlatform }}
         uses: webbertakken/unity-builder@v0.10
         with:
           unityVersion: 2019.3.11f1
-          targetPlatform: StandaloneWindows64
-          buildMethod: Build.BuildWindows
-      # Build
-      - name: Build using WEB
-        uses: webbertakken/unity-builder@v0.10
-        with:
-          unityVersion: 2019.3.11f1
-          targetPlatform: WebGL
-          buildMethod: Build.BuildWebGL
-      # Build
-      - name: Build using Linux
-        uses: webbertakken/unity-builder@v0.10
-        with:
-          unityVersion: 2019.3.11f1
-          targetPlatform: StandaloneLinux64
-          buildMethod: Build.BuildServer
+          targetPlatform: ${{ matrix.targetPlatform }}
+          buildMethod: ${{ matrix.method }}
       - uses: actions/upload-artifact@v1
         with:
           name: build
