@@ -18,11 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         buildMethod:
-          - method: EditorNamespace.Build.BuildWebGL
+          - method: Build.BuildWebGL
             Platform: WebGL
-          - method: EditorNamespace.Build.BuildServer
+          - method: Build.BuildServer
             targetPlatform: StandaloneLinux64
     steps:
+      - run: echo ${{ matrix.buildMethod.Platform }}
       - uses: actions/checkout@v2
       # Cache
       - uses: actions/cache@v1.1.0
@@ -30,12 +31,12 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build using ${{matrix.buildMethod.Platform}}
+      - name: Build using ${{ matrix.buildMethod.Platform }}
         uses: webbertakken/unity-builder@v0.10
         with:
           unityVersion: 2019.3.11f1
           targetPlatform: ${{ matrix.buildMethod.targetPlatform }}
-          buildMethod: ${{matrix.buildMethod.Method}}
+          buildMethod: ${{matrix.buildMethod.method}}
       - uses: actions/upload-artifact@v1
         with:
           name: build
