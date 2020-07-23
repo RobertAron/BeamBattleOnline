@@ -13,6 +13,7 @@ public class Build
             "Assets/Scenes/MenuScene.unity",
             "Assets/Scenes/GameScene.unity"
         };
+        buildPlayerOptions.targetGroup = BuildTargetGroup.Standalone;
         BuildPipeline.BuildPlayer(buildPlayerOptions);
         
     }
@@ -24,6 +25,7 @@ public class Build
         buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"	
         };
+        buildPlayerOptions.targetGroup = BuildTargetGroup.Standalone;
         BuildPipeline.BuildPlayer(buildPlayerOptions);
     }
     [MenuItem("My Build/WebGL")]
@@ -35,6 +37,7 @@ public class Build
             "Assets/Scenes/MenuScene.unity",
             "Assets/Scenes/GameScene.unity"	
         };
+        buildPlayerOptions.targetGroup = BuildTargetGroup.WebGL;
         BuildPipeline.BuildPlayer(buildPlayerOptions);
     }
 }
