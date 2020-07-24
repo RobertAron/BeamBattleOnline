@@ -19,7 +19,7 @@ public class Build
     [MenuItem("My Build/Server")]
     public static void BuildServer(){
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-        buildPlayerOptions.locationPathName = $"build/Server/StandaloneLinux64.x86_64";
+        buildPlayerOptions.locationPathName = $"build/StandaloneLinux64/StandaloneLinux64.x86_64";
         buildPlayerOptions.target = BuildTarget.StandaloneLinux64;
         buildPlayerOptions.scenes = new[] {
             "Assets/Scenes/GameScene.unity"	

@@ -1,11 +1,11 @@
 name: (⌐■_■) Build & Deploy
 
 on:
-  pull_request: {}
-  push: { branches: [master] }
-  # create:
-  #   tags:
-  #     - v*
+  # pull_request: {}
+  # push: { branches: [master] }
+  create:
+    tags:
+      - v*
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -32,8 +32,6 @@ jobs:
         with:
           path: Library
           key: Library
-      - run: echo ${{ matrix.targetPlatform }}
-      - run: echo ${{ matrix.method }}
       # Build
       - name: Build for ${{ matrix.targetPlatform }}
         uses: webbertakken/unity-builder@v0.10
@@ -58,9 +56,6 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
           project_id: lightbikeunity
-      - run: ls build
-      - run: ls build/StandaloneLinux64
-      - run: gcloud info
       - id: deploy
         uses: GoogleCloudPlatform/github-actions/appengine-deploy@master
       # Example of using the output
