@@ -38,8 +38,8 @@ jobs:
         uses: webbertakken/unity-builder@v0.10
         with:
           unityVersion: 2019.3.11f1
-          targetPlatform: ${{ matrix.targetPlatform }}
-          buildMethod: ${{ matrix.method }}
+          targetPlatform: StandaloneLinux64
+          buildMethod: Build.BuildServer
       - uses: actions/upload-artifact@v1
         with:
           name: build
