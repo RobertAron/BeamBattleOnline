@@ -812,7 +812,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &443930365
 GameObject:
@@ -1234,7 +1234,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!114 &620851744
 MonoBehaviour:
@@ -2977,8 +2977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1204e4d8f682a049ab43920057135de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceOffsetMin: {x: 0, y: 3, z: -10}
-  distanceOffsetMax: {x: 0, y: 3, z: -13}
+  distanceOffsetMin: {x: 0, y: 0, z: 0}
+  distanceOffsetMax: {x: 0, y: 0, z: 0}
   flatSpeed: 100
   lerpSpeed: 10
   objectToFollow: {fileID: 620851743}
@@ -2992,12 +2992,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375628767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.23928, z: -18.370865}
+  m_LocalPosition: {x: 0, y: 6.2392797, z: -8.370866}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1116484975}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1409394937
 GameObject:
@@ -3089,7 +3089,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1478759029
 GameObject:
@@ -3703,7 +3703,7 @@ MonoBehaviour:
     type: 3}
   dangerSpherePrefab: {fileID: 8047021995568503146, guid: d8834a1dbb3fd0a4c8dab76ce001eb0e,
     type: 3}
-  targetPlayerCount: 2
+  targetPlayerCount: 99
   remainingPlayerTextSetter: {fileID: 1259462426}
 --- !u!114 &1935685451
 MonoBehaviour:
