@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ColorPickerItemLogic :
     MonoBehaviour,
@@ -13,6 +14,7 @@ public class ColorPickerItemLogic :
     [SerializeField] TooltipActions tooltipLocked = default;
     [SerializeField]TooltipActions selectedTooltip = default;
     [SerializeField] RawImage image = default;
+    [SerializeField] TextMeshProUGUI unlockableText = default;
     MenuBikeColorSelector menuBikeColorSelector = default;
 
 
@@ -20,6 +22,8 @@ public class ColorPickerItemLogic :
         menuBikeColorSelector = MenuBikeColorSelector.instance;
         int count = transform.parent.parent.GetSiblingIndex();
         var ppc = new PlayerPrefsController();
+        int killsToUnlock = count-ppc.killCount;
+        unlockableText.text = $"{killsToUnlock} Takedowns to unlock";
         isUnlocked = count<=ppc.killCount;
         selectedTooltip = isUnlocked?tooltipUnlocked:tooltipLocked;
     }

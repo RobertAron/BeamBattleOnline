@@ -88,6 +88,7 @@ MonoBehaviour:
   tooltipLocked: {fileID: 4996325226377269553}
   selectedTooltip: {fileID: 0}
   image: {fileID: 3887634564882250302}
+  unlockableText: {fileID: 8439816533870578582}
 --- !u!1 &3887634564974421061
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +720,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 536a10b5fc3ba9a44a523251f7393da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8439816533870578582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2094203477421494779, guid: c48f27671066bd941b3fdc106b865835,
+    type: 3}
+  m_PrefabInstance: {fileID: 7507600206797183597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4714399508788227323 stripped
