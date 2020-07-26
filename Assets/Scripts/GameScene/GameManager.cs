@@ -113,7 +113,6 @@ public class GameManager : NetworkBehaviour
             var camGrabber = ele.Value.GetComponent<CamGrabber>();
             bikeMovement.networkConnection = ele.Key;
             pic.SetBike(bikeMovement);
-            camGrabber.TargetSetPlayersBike(ele.Key, playerBike);
         }
         int computersToSpawn = targetPlayerCount - playerConnections.Count;
         for (var i = 0; i < computersToSpawn; ++i)

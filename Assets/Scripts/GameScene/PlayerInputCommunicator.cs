@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class PlayerInputCommunicator : NetworkBehaviour
 {
   BikeMovement bikeMovement;
-  [SerializeField][SyncVar] GameObject playerBikeGo;
+  [SerializeField][SyncVar(hook=nameof(SetCamera))] GameObject playerBikeGo;
   [SerializeField][SyncVar] string playerName;
   [SerializeField] public Color accentColor;
   [SerializeField] GameObject playerWaitingUI;
@@ -20,6 +20,11 @@ public class PlayerInputCommunicator : NetworkBehaviour
       if(Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Space)) CmdSetPlayerBoost(true);
       if(Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.Space)) CmdSetPlayerBoost(false);
       playerWaitingUI.active = playerBikeGo==null;
+  }
+
+  void SetCamera(GameObject newPlayerBike){
+    CamGrabber camGrabber = GetComponent<CamGrabber>();
+    camGrabber.ChangeFocus(newPlayerBike);
   }
 
   public bool HasBike(){

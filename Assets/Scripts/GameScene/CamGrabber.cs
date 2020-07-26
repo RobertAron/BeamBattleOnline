@@ -18,16 +18,12 @@ public class CamGrabber : NetworkBehaviour
   }
 
   public void ChangeFocus(GameObject bike){
+    if(!isLocalPlayer) return;
     currentTarget = bike;
-    mainCamera.objectToFollow = bike.transform;
-    minimapCamera.objectToFollow = bike.transform;
+    mainCamera.objectToFollow = currentTarget.transform;
+    minimapCamera.objectToFollow = currentTarget.transform;
     BikeMovement newBikeMovement = bike.GetComponent<BikeMovement>();
     boostUI.SubscribeToBike(newBikeMovement);
-  }
-
-  [TargetRpc]
-  public void TargetSetPlayersBike(NetworkConnection networkConnection,GameObject playersBike){
-    ChangeFocus(playersBike);
   }
 
   Coroutine currentSwapCoroutine;
