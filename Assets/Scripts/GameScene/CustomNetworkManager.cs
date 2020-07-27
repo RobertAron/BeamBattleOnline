@@ -28,6 +28,8 @@ public class CustomNetworkManager : NetworkManager
         if(Application.platform == RuntimePlatform.LinuxPlayer){
             networkPort = 8080;
             Debug.Log($"Auto starting server on port {networkPort}");
+        }
+        if(isHeadless){
             StartServer();
         }
         gameManager = GameManager.instance;

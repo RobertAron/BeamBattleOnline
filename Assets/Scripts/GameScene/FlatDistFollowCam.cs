@@ -10,7 +10,6 @@ public class FlatDistFollowCam : MonoBehaviour
     [SerializeField] float lerpSpeed = 10;
     public Transform objectToFollow = default;
     [SerializeField] float xRotation = 0;
-    [SerializeField] float followPositionalSpeed = 5;
 
     void Start()
     {
