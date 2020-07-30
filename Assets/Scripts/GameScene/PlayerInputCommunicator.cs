@@ -23,6 +23,7 @@ public class PlayerInputCommunicator : NetworkBehaviour
   }
 
   void SetCamera(GameObject newPlayerBike){
+    playerBikeGo = newPlayerBike;
     CamGrabber camGrabber = GetComponent<CamGrabber>();
     camGrabber.ChangeFocus(newPlayerBike);
   }
