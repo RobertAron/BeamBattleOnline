@@ -33,7 +33,6 @@ public class CustomNetworkManager : NetworkManager
             StartServer();
         }
         gameManager = GameManager.instance;
-        Debug.Log(gameManager);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
