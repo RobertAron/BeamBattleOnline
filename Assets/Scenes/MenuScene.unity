@@ -1831,14 +1831,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173062947}
-  m_LocalRotation: {x: 0.92073923, y: -0.19265226, z: -0.0833221, w: 0.32891002}
+  m_LocalRotation: {x: 0.9220618, y: -0.18621962, z: -0.08561629, w: 0.3283203}
   m_LocalPosition: {x: 0, y: 0, z: 0.0012}
   m_LocalScale: {x: 0.0001, y: 0.0001, z: 0.01}
   m_Children:
   - {fileID: 1110977185}
   m_Father: {fileID: 428190806}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 35, y: 200, z: 210}
+  m_LocalEulerAnglesHint: {x: 35, y: 200, z: 209.2}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.00746, y: 0.00367}
@@ -3797,7 +3797,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.879, g: 0.879, b: 0.879, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -14493,10 +14493,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1883929004199204007, guid: 1e3d95805adc5b34da933e38ed0bca10,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1883929004228626918, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883929004228626918, guid: 1e3d95805adc5b34da933e38ed0bca10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1883929004228626938, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
@@ -14603,35 +14613,30 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1883929004404214461, guid: 1e3d95805adc5b34da933e38ed0bca10,
+    - target: {fileID: 1883929004354866053, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004404214461, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004404214461, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004404214461, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004404214461, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004404214461, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_textInfo.materialCount
+      propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883929004354866053, guid: 1e3d95805adc5b34da933e38ed0bca10,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883929004354866053, guid: 1e3d95805adc5b34da933e38ed0bca10,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883929004500728917, guid: 1e3d95805adc5b34da933e38ed0bca10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883929004500728919, guid: 1e3d95805adc5b34da933e38ed0bca10,
+        type: 3}
+      propertyPath: m_SkipOnDrop
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1883929004765697381, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
