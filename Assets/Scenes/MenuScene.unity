@@ -14496,7 +14496,7 @@ PrefabInstance:
     - target: {fileID: 1883929004199204007, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1883929004228626918, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
@@ -14506,7 +14506,7 @@ PrefabInstance:
     - target: {fileID: 1883929004228626918, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1883929004228626938, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
@@ -14615,11 +14615,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1883929004354866053, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004354866053, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
@@ -14628,20 +14623,20 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1883929004500728917, guid: 1e3d95805adc5b34da933e38ed0bca10,
+    - target: {fileID: 1883929004354866053, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004500728919, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_SkipOnDrop
+      propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883929004500728936, guid: 1e3d95805adc5b34da933e38ed0bca10,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1883929004765697381, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -86.4375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d95805adc5b34da933e38ed0bca10, type: 3}

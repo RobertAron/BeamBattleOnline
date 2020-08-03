@@ -10,6 +10,9 @@ public class StreamingAssetVideo : MonoBehaviour
     void Start(){
         videoPlayer.source = VideoSource.Url;
         videoPlayer.url = System.IO.Path.Combine (Application.streamingAssetsPath,"Tutorial_3.webm");
-        videoPlayer.Play();
+        videoPlayer.prepareCompleted += (UnityEngine.Video.VideoPlayer vPlayer) =>{
+            vPlayer.Play();
+        };
+        videoPlayer.Prepare();
     }
 }
