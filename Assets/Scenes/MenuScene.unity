@@ -14493,20 +14493,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1883929004199204007, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1883929004228626918, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004228626918, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1883929004228626938, guid: 1e3d95805adc5b34da933e38ed0bca10,
         type: 3}
@@ -14622,21 +14612,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004354866053, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004500728936, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883929004765697381, guid: 1e3d95805adc5b34da933e38ed0bca10,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -86.4375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d95805adc5b34da933e38ed0bca10, type: 3}
