@@ -12,7 +12,33 @@
 .webgl-content .progress.Dark .full {background-image: url('progressFull.Dark.png');}
 
 .webgl-content .footer {margin-top: 5px; height: 38px; line-height: 38px; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: 18px;}
-.webgl-content .footer .webgl-logo, .title, .fullscreen {height: 100%; display: inline-block; background: transparent center no-repeat;}
+.webgl-content .footer .webgl-logo, .fullscreen {height: 100%; display: inline-block; background: transparent center no-repeat;}
 .webgl-content .footer .webgl-logo {background-image: url('webgl-logo.png'); width: 204px; float: left;}
-.webgl-content .footer .title {margin-right: 10px; float: right;}
+.webgl-content .footer {margin-right: 10px; float: right;}
 .webgl-content .footer .fullscreen {background-image: url('fullscreen.png'); width: 38px; float: right;}
+
+* {
+    font-family: 'Roboto', Helvetica, Verdana, Arial, sans-serif;;
+}
+
+body {
+    background: hsl(204 100% 5%);
+}
+
+.title{
+    font-size: 72px;
+    background: linear-gradient(
+        to right, 
+        hsl(98 100% 62%), 
+        hsl(204 100% 59%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0 auto;
+}
+
+button {
+    cursor: pointer;
+}
