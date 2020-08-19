@@ -3712,7 +3712,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
+  m_fontSize: 77.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6189,7 +6189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Light Cycle Online
+  m_text: Beam Battle Online
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dbcea40fa802794458a3b121ac592532, type: 2}
   m_sharedMaterial: {fileID: 7679923260354571220, guid: dbcea40fa802794458a3b121ac592532,
@@ -6218,7 +6218,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 69.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
