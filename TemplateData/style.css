@@ -42,3 +42,9 @@ body {
 button {
     cursor: pointer;
 }
+
+button:hover {
+    background-color: #ddd4;
+    border-radius: 4px;
+    transition-duration: .1s;
+}
