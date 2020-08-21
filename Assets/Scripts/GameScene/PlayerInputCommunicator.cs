@@ -9,7 +9,7 @@ public class PlayerInputCommunicator : NetworkBehaviour
   BikeMovement bikeMovement;
   [SerializeField][SyncVar(hook=nameof(SetCamera))] GameObject playerBikeGo;
   [SerializeField][SyncVar] string playerName;
-  [SerializeField] public Color accentColor;
+  [SerializeField][SyncVar] public Color accentColor;
   [SerializeField] GameObject playerWaitingUI;
   PlayerPrefsController playerPrefsController = new PlayerPrefsController();
 
