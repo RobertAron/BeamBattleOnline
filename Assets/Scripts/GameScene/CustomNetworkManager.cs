@@ -20,9 +20,13 @@ public class CustomNetworkManager : NetworkManager
         if(Application.platform == RuntimePlatform.WebGLPlayer){
             var hud = GetComponent<NetworkManagerHUD>();
             hud.showGUI = false;
-            if(GetURL.GetURLFromPage().Contains("https")) networkPort = 443;
-            else networkPort = 80;
-            Debug.Log($"Auto starting client on port {networkPort}");
+            try{
+                if(GetURL.GetURLFromPage().Contains("https")) networkPort = 443;
+                else networkPort = 80;
+                Debug.Log($"Auto starting client on port {networkPort}");
+            }catch {
+                networkPort = 443;
+            }
             StartClient();
         }
         if(Application.platform == RuntimePlatform.LinuxPlayer){
