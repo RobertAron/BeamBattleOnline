@@ -19,10 +19,11 @@ public class CustomNetworkManager : NetworkManager
         else useWebSockets = true;
         if(Application.platform == RuntimePlatform.WebGLPlayer){
             var hud = GetComponent<NetworkManagerHUD>();
+            networkPort = 443;
             hud.showGUI = false;
-            var url = GetURL.GetURLFromPage().Contains("https")
-            if(url=="" || url.Contains("https")) networkPort = 443;
-            else networkPort = 80;
+            // var url = GetURL.GetURLFromPage().Contains("https");
+            // if(url=="" || url.Contains("https")) networkPort = 443;
+            // else networkPort = 80;
             Debug.Log($"Auto starting client on port {networkPort}");
             StartClient();
         }
