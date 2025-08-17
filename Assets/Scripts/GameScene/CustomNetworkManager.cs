@@ -15,15 +15,15 @@ public class CustomNetworkManager : NetworkManager
         if(
             Application.platform == RuntimePlatform.WindowsEditor ||
             Application.platform == RuntimePlatform.WindowsPlayer
-        ) useWebSockets = false;
+        ) useWebSockets = true;
         else useWebSockets = true;
         if(Application.platform == RuntimePlatform.WebGLPlayer){
             var hud = GetComponent<NetworkManagerHUD>();
             networkPort = 443;
             hud.showGUI = false;
-            // var url = GetURL.GetURLFromPage().Contains("https");
-            // if(url=="" || url.Contains("https")) networkPort = 443;
-            // else networkPort = 80;
+            var url = GetURL.GetURLFromPage();
+            if(url=="" || url.Contains("https")) networkPort = 443;
+            else networkPort = 80;
             Debug.Log($"Auto starting client on port {networkPort}");
             StartClient();
         }
@@ -34,12 +34,16 @@ public class CustomNetworkManager : NetworkManager
             Debug.Log($"Auto starting server on port {networkPort}");
             StartServer();
         }
+        Debug.Log("use websockets");
+        Debug.Log(useWebSockets);
+        Debug.Log("Network port");
+        Debug.Log(networkPort);
         gameManager = GameManager.instance;
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        Debug.Log(GameManager.instance);
+        Debug.Log(GameManager.instance);    
         GameManager.instance.AddPlayer(conn,playerControllerId);
     }
 
@@ -48,7 +52,14 @@ public class CustomNetworkManager : NetworkManager
     }
 
     public override void OnServerDisconnect(NetworkConnection conn){
-        GameManager.instance.RemovePlayer(conn);
+        try
+        {
+            GameManager.instance.RemovePlayer(conn);
+        }
+        catch (Exception e)  // specify Exception
+        {
+            Debug.Log("On server disconnect err: " + e.Message);
+        }
     }
 
 }
