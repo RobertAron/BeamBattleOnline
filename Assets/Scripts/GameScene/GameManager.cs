@@ -83,6 +83,7 @@ public class GameManager : NetworkBehaviour
 
     public void AddPlayer(NetworkConnection playerConnection, short playerId)
     {
+        Debug.Log("Adding player");
         var playerController = (GameObject)Instantiate(playerControllerPrefab);
         NetworkServer.AddPlayerForConnection(playerConnection, playerController, playerId);
         playerConnections.Add(playerConnection, playerController);
@@ -90,11 +91,12 @@ public class GameManager : NetworkBehaviour
 
     public void RemovePlayer(NetworkConnection connection)
     {
+        Debug.Log("Removing player");
         var go = playerConnections[connection];
         PlayerInputCommunicator pic = go.GetComponent<PlayerInputCommunicator>();
         var bikeGo = pic.GetBike();
         if(bikeGo!=null) NetworkManager.Destroy(bikeGo);
-        playerConnections.Remove(connection);
+        if(playerConnections.ContainsKey(connection)) playerConnections.Remove(connection);
         NetworkServer.DestroyPlayersForConnection(connection);
     }
 
